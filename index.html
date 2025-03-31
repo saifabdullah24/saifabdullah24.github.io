@@ -4,8 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Saif Abdullah – Bewerbung</title>
-  <link rel="icon" href="SaifAbdullah.png" type="image/png">
-  <meta name="description" content="Online-Bewerbung von Saif Abdullah – Informatiker EFZ">
   <style>
     @font-face {
       font-family: 'Philosopher';
@@ -35,63 +33,69 @@
       z-index: 1000;
     }
 
-    .menu-toggle {
-      display: none;
-      cursor: pointer;
-      font-size: 1.5rem;
-      color: white;
-    }
-
-    nav {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-
     nav a {
-      margin: 0.5rem 1rem;
+      margin: 0 1rem;
       text-decoration: none;
       color: white;
       font-size: 1rem;
       font-weight: 600;
-      transition: color 0.3s, text-shadow 0.3s;
+      transition: color 0.3s, transform 0.3s;
       cursor: pointer;
     }
 
     nav a:hover {
       color: #4f8df5;
-      text-shadow: 0 0 10px #4f8df5;
+      transform: scale(1.1);
     }
 
     .hero {
       height: 100vh;
       padding: 3rem 2rem;
-      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       position: relative;
       z-index: 10;
+      color: white;
+      animation: fadeIn 1.5s ease forwards;
     }
 
-    .hero h1 {
-      margin-top: 6rem;
+    .hero::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.6);
+      z-index: -1;
+    }
+
+    .hero-text {
+      max-width: 60%;
+      margin-left: 3rem;
+      animation: slideInLeft 1s ease forwards;
+    }
+
+    .hero-text h1 {
       font-size: 3.5rem;
       font-weight: bold;
+      margin-bottom: 1rem;
     }
 
-    .contact {
-      margin-top: 1rem;
-      font-size: 1rem;
+    .hero-text .contact {
+      font-size: 1.2rem;
+      line-height: 2rem;
     }
 
     .profile-pic {
-      position: absolute;
-      top: 1rem;
-      right: 2rem;
-      width: 180px;
-      height: 180px;
+      width: 300px;
+      height: 300px;
       border-radius: 50%;
       object-fit: cover;
-      border: 3px solid white;
-      z-index: 1001;
+      margin-right: 4rem;
+      animation: fadeIn 3s ease forwards;
+      z-index: 1;
     }
 
     video.bg-video {
@@ -101,8 +105,8 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      z-index: -1;
-      opacity: 0.2;
+      z-index: -2;
+      opacity: 0.4;
     }
 
     .content-section {
@@ -112,13 +116,7 @@
       margin: auto;
       background-color: #111;
       text-align: justify;
-      opacity: 0;
-      transition: opacity 0.6s ease;
-    }
-
-    .content-section.show {
-      display: block;
-      opacity: 1;
+      animation: fadeIn 1s ease forwards;
     }
 
     .content-section h2 {
@@ -142,6 +140,7 @@
       background-color: #222;
       padding: 1.5rem;
       border-radius: 10px;
+      animation: fadeInUp 1s ease forwards;
     }
 
     .cv-box h3 {
@@ -162,54 +161,19 @@
       border: none;
     }
 
-    .signature {
-      width: 100px;
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
 
-    @media (max-width: 768px) {
-      .menu-toggle {
-        display: block;
-        position: absolute;
-        top: 1rem;
-        left: 1rem;
-        z-index: 1002;
-      }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
 
-      nav {
-        display: none;
-        flex-direction: column;
-        align-items: center;
-        background-color: rgba(0, 0, 0, 0.95);
-        position: absolute;
-        top: 60px;
-        left: 0;
-        width: 100%;
-        padding: 1rem 0;
-      }
-
-      nav.show {
-        display: flex;
-      }
-
-      nav a {
-        font-size: 1rem;
-        margin: 0.7rem 0;
-      }
-
-      .cv-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .hero h1 {
-        font-size: 2.2rem;
-      }
-
-      .profile-pic {
-        width: 120px;
-        height: 120px;
-        top: 1rem;
-        right: 1rem;
-      }
+    @keyframes slideInLeft {
+      from { transform: translateX(-50px); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
     }
   </style>
 </head>
@@ -217,11 +181,10 @@
   <video class="bg-video" autoplay muted loop id="bg-video">
     <source src="VideoInformatik.mp4" type="video/mp4">
   </video>
-  <img src="SaifAbdullah.png" alt="Profilbild" class="profile-pic">
+
   <header>
-    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
-    <nav id="mainNav">
-      <a onclick="goHome()">🏠 Home</a>
+    <nav>
+      <a onclick="goHome()">Home</a>
       <a onclick="showSection('bewerbung')">Bewerbung</a>
       <a onclick="showSection('motivation')">Motivationsschreiben</a>
       <a onclick="showSection('lebenslauf')">Lebenslauf</a>
@@ -229,47 +192,107 @@
       <a onclick="showSection('zeugnisse')">Zeugnisse</a>
     </nav>
   </header>
+
   <div class="hero" id="startseite">
-    <h1>SAIF ABDULLAH</h1>
-    <div class="contact">
-      📞 +41 78 268 38 22 &nbsp; ✉️ saifabdullah2411@gmail.com &nbsp; 📍 Furttalstrasse 45, 8046 Zürich
+    <div class="hero-text">
+      <h1>SAIF ABDULLAH</h1>
+      <div class="contact">
+        📞 +41 78 268 38 22<br>
+        ✉️ saifabdullah2411@gmail.com<br>
+        📍 Furttalstrasse 45, 8046 Zürich
+      </div>
     </div>
+    <img src="SaifAbdullah.png" alt="Profilbild" class="profile-pic">
   </div>
+
+  <section class="content-section" id="bewerbung">
+    <h2>Bewerbung</h2>
+    <p>ZWZ AG<br>Bahnstrasse 170<br>8105 Regensdorf</p>
+    <p>Zürich, 28. März 2025</p>
+    <p>Sehr geehrte Damen und Herren</p>
+    <p>Die Stelle als Informatiker Applikationsentwicklung EFZ bei der ZWZ AG hat mein Interesse geweckt, weil ich mich für IT-Lösungen interessiere, die Abläufe im Alltag verbessern. Besonders spannend finde ich, wie die ZWZ AG moderne Technologien nutzt, um ihre Textilservices für das Gesundheitswesen effizient zu gestalten. Das motiviert mich, in der Informatik weiterzukommen und Teil eines sinnvollen, zukunftsorientierten Unternehmens zu sein.</p>
+    <p>Im Sommer letzten Jahres habe ich die Sekundarschule Liguster im Niveau A abgeschlossen und besuche derzeit das BVJ Technik und Informatik an der Fachschule Viventa, Schulhaus Wehntal in Zürich. Besonders in den Fächern Englisch, Deutsch und Mathematik zeige ich gute Leistungen. Im Informatikunterricht freue ich mich besonders darauf, Programmiersprachen wie HTML, JavaScript, CSS und Python kennenzulernen. Zu meinen Stärken zählen Zuverlässigkeit, Pünktlichkeit und eine konzentrierte Arbeitsweise, die ich in schulischen Projekten unter Beweis gestellt habe. Um meine IT-Kenntnisse weiter auszubauen, nehme ich derzeit privat Informatikunterricht und beschäftige mich intensiv mit HTML und CSS. Auch wenn ich bisher keine Schnupperlehre als Informatiker gemacht habe, habe ich durch drei Informationsveranstaltungen einen Einblick in den Beruf erhalten. Ich habe dort viel über die Aufgaben und Perspektiven gelernt, was mich darin bestärkt hat, diesen Berufsweg einzuschlagen.</p>
+    <p>In meiner Freizeit bin ich sportlich aktiv, gehe ins Gym und mache regelmässig Judo. Diese Aktivitäten fördern meine Disziplin und Ausdauer – Eigenschaften, die mir auch im Berufsleben zugutekommen werden.</p>
+    <p>Ich freue mich darauf, meine Fähigkeiten bei einer Schnupperlehre zu zeigen und bin motiviert, während der Lehre Neues zu lernen und mein Wissen einzubringen. Vielen Dank für die Prüfung meiner Bewerbungsunterlagen. Ich freue mich auf Ihre Rückmeldung.</p>
+    <p>Freundliche Grüsse<br>Saif Abdullah</p>
+  </section>
+
+  <section class="content-section" id="motivation">
+    <h2>Motivationsschreiben</h2>
+    <p>ZWZ AG<br>Bahnstrasse 170<br>8105 Regensdorf</p>
+    <p>Zürich, 28. März 2025</p>
+    <p><strong>Meine Eignung für den Beruf Informatiker EFZ</strong></p>
+    <p>Schon früh wurde mir klar, dass ich Informatiker werden möchte. Besuche auf der Berufsmesse und die Informationsveranstaltungen haben meinen Wunsch bestätigt. Ich interessiere mich sehr für Technik und digitale Medien, besonders das Erstellen von Webseiten. In der Schule habe ich bemerkt, dass ich ein gutes Organisationstalent besitze und Projekte ruhig und strukturiert angehe, auch wenn es Herausforderungen gibt. Dies hat mir geholfen, Aufgaben eigenständig zu planen und zielorientiert abzuschliessen. Ich freue mich daher, in der Lehre noch mehr zu lernen und meine Fähigkeiten weiter auszubauen.</p>
+    <p><strong>Warum ich mich für ZWZ AG entschieden habe</strong></p>
+    <p>Die ZWZ AG finde ich besonders interessant, weil sie moderne Technik mit einem wichtigen Zweck verbindet, nämlich dem Gesundheitswesen zu helfen. Ich würde mich sehr freuen, in einem Betrieb zu lernen, in dem meine Arbeit einen echten Nutzen hat. Besonders gefallen mir die gut organisierten Abläufe und die zentrale Rolle der Informatik in Ihrem Unternehmen. Ich bin neugierig, offen für Neues und freue mich darauf, bei der ZWZ AG viel zu lernen und das Team mit meiner Motivation zu unterstützen.</p>
+    <p><strong>Meine Ziele</strong></p>
+    <p>Ich arbeite weiter daran, mich zu verbessern, vor allem in Mathematik und Informatik. In der Oberstufe hatte ich aufgrund einer Epstein-Barr-Virus-Erkrankung einige Absenzen, die mich zeitweise vom Unterricht ferngehalten haben, und ich musste lange im Spital sein. Aber jetzt geht es mir viel besser, und ich bin wieder voll motiviert und bereit, mein Bestes zu geben. Zudem freue ich mich darauf, meine Begeisterung für digitale Medien und Technik in die Lehre bei ZWZ AG einzubringen und das Team zu unterstützen.</p>
+    <p>Freundliche Grüsse<br>Saif Abdullah</p>
+  </section>
+
+  <section class="content-section" id="lebenslauf">
+    <h2>Lebenslauf</h2>
+    <div class="cv-grid">
+      <div class="cv-box">
+        <h3>PERSÖNLICHES</h3>
+        <p><strong>Name, Vorname:</strong> Saif Abdullah</p>
+        <p><strong>Geburtsdatum:</strong> 24. November 2008</p>
+        <p><strong>Heimatort:</strong> Zürich</p>
+        <p><strong>Nationalität:</strong> Schweiz, Bangladesch</p>
+        <h3>FAMILIE</h3>
+        <p><strong>Vater:</strong> Saifullah Mohammed Tarek, Pflegehelfer</p>
+        <p><strong>Mutter:</strong> Masuda Parvin, Hort Mitarbeiterin</p>
+        <p><strong>Schwester:</strong> Hazra Tarek, 2015, Schülerin</p>
+        <h3>SPRACHKENNTNISSE</h3>
+        <p><strong>Deutsch:</strong> Erstsprache</p>
+        <p><strong>Englisch:</strong> Schulkenntnisse 3. Jahr</p>
+        <p><strong>Französisch:</strong> Schulkenntnisse 5. Jahr</p>
+        <p><strong>Bengalisch:</strong> Muttersprache</p>
+        <h3>HOBBYS</h3>
+        <p>Gym, Judo, Lesen</p>
+      </div>
+      <div class="cv-box">
+        <h3>BESUCHTE SCHULEN</h3>
+        <p>2024 – Aktuell<br>Fachschule Viventa, BVJ, Zürich, Technik u. Informatik</p>
+        <p>2021 – 2024<br>Sekundarschule Liguster Zürich, 1. – 3. Klasse, Niveau A</p>
+        <p>2015 – 2021<br>Primarschule Holderbach, Zürich, 1. – 6. Klasse</p>
+        <h3>SCHNUPPERLEHREN</h3>
+        <p>Januar 2025: FaGe, Gesundheitszentrum Witikon, ZH</p>
+        <p>Oktober 2024: Informatiker, Boishaki TV, Bangladesh</p>
+        <p>April 2024: FaGe, Hort Ernahof, ZH</p>
+        <p>Juni 2023: Mediamatiker, Jomb AG, ZH</p>
+        <p>Juni 2023: MPA, KinderJugend Medizin, ZH</p>
+        <p>Februar 2023: Informatiker, Alabus AG, ZH</p>
+        <h3>REFERENZ</h3>
+        <p>Klassenlehrer:<br>Stefan Herde<br>stefan.herde@schulen.zuerich.ch<br>044 413 5250</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="content-section" id="stellwerk">
+    <h2>Stellwerktest</h2>
+    <embed src="Stellwerktest_SaifAbdullah.pdf" type="application/pdf">
+  </section>
+
+  <section class="content-section" id="zeugnisse">
+    <h2>Zeugnisse</h2>
+    <embed src="Zeugnisse_SaifAbdullah.pdf" type="application/pdf">
+  </section>
+
   <script>
     function showSection(id) {
       document.getElementById('startseite').style.display = 'none';
       document.getElementById('bg-video').style.display = 'none';
       const sections = document.querySelectorAll('.content-section');
-      sections.forEach(section => {
-        section.style.display = 'none';
-        section.classList.remove('show');
-      });
-      const selected = document.getElementById(id);
-      selected.style.display = 'block';
-      setTimeout(() => selected.classList.add('show'), 10);
-
-      const nav = document.getElementById('mainNav');
-      if (nav.classList.contains('show')) nav.classList.remove('show');
+      sections.forEach(section => section.style.display = 'none');
+      document.getElementById(id).style.display = 'block';
     }
 
     function goHome() {
       const sections = document.querySelectorAll('.content-section');
-      sections.forEach(section => {
-        section.style.display = 'none';
-        section.classList.remove('show');
-      });
+      sections.forEach(section => section.style.display = 'none');
       document.getElementById('bg-video').style.display = 'block';
-      document.getElementById('startseite').style.display = 'block';
-
-      const nav = document.getElementById('mainNav');
-      if (nav.classList.contains('show')) nav.classList.remove('show');
-    }
-
-    function toggleMenu() {
-      const nav = document.getElementById('mainNav');
-      nav.classList.toggle('show');
+      document.getElementById('startseite').style.display = 'flex';
     }
   </script>
 </body>
-</html>
-
