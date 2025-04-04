@@ -1,1 +1,298 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Saif Abdullah – Bewerbung</title>
+  <style>
+    @font-face {
+      font-family: 'Philosopher';
+      src: url('fonts/Philosopher-Regular.ttf') format('truetype');
+    }
 
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Philosopher', Calibri, sans-serif;
+      color: white;
+      background-color: #111;
+      overflow-x: hidden;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      padding: 1rem;
+      text-align: center;
+      z-index: 1000;
+    }
+
+    nav a {
+      margin: 0 1rem;
+      text-decoration: none;
+      color: white;
+      font-size: 1rem;
+      font-weight: 600;
+      transition: color 0.3s, transform 0.3s;
+      cursor: pointer;
+    }
+
+    nav a:hover {
+      color: #4f8df5;
+      transform: scale(1.1);
+    }
+
+    .hero {
+      height: 100vh;
+      padding: 3rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      z-index: 10;
+      color: white;
+      animation: fadeIn 1.5s ease forwards;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.6);
+      z-index: -1;
+    }
+
+    .hero-text {
+      max-width: 60%;
+      margin-left: 3rem;
+      animation: slideInLeft 1s ease forwards;
+    }
+
+    .hero-text h1 {
+      font-size: 3.5rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+    }
+
+    .hero-text .contact {
+      font-size: 1.2rem;
+      line-height: 2rem;
+    }
+
+    .profile-pic {
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-right: 4rem;
+      animation: fadeIn 3s ease forwards;
+      z-index: 1;
+    }
+
+    video.bg-video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -2;
+      opacity: 0.4;
+    }
+
+    .content-section {
+      display: none;
+      padding: 6rem 2rem;
+      max-width: 1000px;
+      margin: auto;
+      background-color: #111;
+      text-align: justify;
+      animation: fadeIn 1s ease forwards;
+    }
+
+    .content-section h2 {
+      margin-bottom: 1.5rem;
+      font-size: 2rem;
+      color: #4f8df5;
+    }
+
+    .content-section p {
+      margin-bottom: 1.2rem;
+      line-height: 1.6;
+    }
+
+    .cv-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    .cv-box {
+      background-color: #222;
+      padding: 1.5rem;
+      border-radius: 10px;
+      animation: fadeInUp 1s ease forwards;
+    }
+
+    .cv-box h3 {
+      color: #4f8df5;
+      margin-bottom: 0.5rem;
+      font-size: 1.2rem;
+      border-bottom: 1px solid #444;
+    }
+
+    .cv-box p {
+      font-size: 0.95rem;
+      margin: 0.3rem 0;
+    }
+
+    embed {
+      width: 100%;
+      height: 600px;
+      border: none;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes slideInLeft {
+      from { transform: translateX(-50px); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <video class="bg-video" autoplay muted loop id="bg-video">
+    <source src="VideoInformatik.mp4" type="video/mp4">
+  </video>
+
+  <header>
+    <nav>
+      <a onclick="goHome()">Home</a>
+      <a onclick="showSection('bewerbung')">Bewerbung</a>
+      <a onclick="showSection('motivation')">Motivationsschreiben</a>
+      <a onclick="showSection('lebenslauf')">Lebenslauf</a>
+      <a onclick="showSection('stellwerk')">Stellwerktest</a>
+      <a onclick="showSection('zeugnisse')">Zeugnisse</a>
+    </nav>
+  </header>
+
+  <div class="hero" id="startseite">
+    <div class="hero-text">
+      <h1>SAIF ABDULLAH</h1>
+      <div class="contact">
+        📞 +41 78 268 38 22<br>
+        ✉️ saifabdullah2411@gmail.com<br>
+        📍 Furttalstrasse 45, 8046 Zürich
+      </div>
+    </div>
+    <img src="SaifAbdullah.png" alt="Profilbild" class="profile-pic">
+  </div>
+
+  <section class="content-section" id="bewerbung">
+    <h2>Bewerbung</h2>
+    <p>TIE International<br>Frau Nadia Zyka<br>Hohlstrasse 560<br>8048 Zürich</p>
+    <p>Zürich, 04. April 2025</p>
+    <p>Sehr geehrte Frau Zyka</p>
+    <p>Die Stelle als Informatiker Applikationsentwicklung EFZ bei TIE International hat mein Interesse geweckt, da ich mich für innovative Lösungen und das Arbeiten an anspruchsvollen IT-Infrastrukturen begeistere. Ich finde es beeindruckend, wie TIE International Technologien wie Cloud-Services, Container-Plattformen und Automatisierungslösungen einsetzt, um komplexe Unternehmensanforderungen zu erfüllen. Solche moderne Technologien motiviert mich sehr in der Informatikwelt weiter zu machen. Ich sehe in dieser Ausbildung eine gute Gelegenheit, meine Fähigkeiten in der Informatik weiterzuentwickeln und gleichzeitig in einem globalen Umfeld Erfahrungen zu sammeln.</p>
+    <p>Im Sommer letzten Jahres habe ich die Sekundarschule Liguster im Niveau A abgeschlossen und besuche derzeit das BVJ Technik und Informatik an der Fachschule Viventa, Schulhaus Wehntal in Zürich. Besonders in den Fächern Englisch, Deutsch und Mathematik zeige ich gute Leistungen. Im Informatikunterricht freue ich mich besonders darauf, Programmiersprachen wie HTML, JavaScript, CSS und Python kennenzulernen. Zu meinen Stärken zählen Zuverlässigkeit, Pünktlichkeit und eine konzentrierte Arbeitsweise, die ich in schulischen Projekten unter Beweis gestellt habe. Um meine IT-Kenntnisse weiter auszubauen, nehme ich derzeit privat Informatikunterricht und beschäftige mich intensiv mit HTML und CSS. Auch wenn ich bisher keine Schnupperlehre als Informatiker gemacht habe, habe ich durch drei Informationsveranstaltungen einen Einblick in den Beruf erhalten. Ich habe dort viel über die Aufgaben und Perspektiven gelernt, was mich darin bestärkt hat, diesen Berufsweg einzuschlagen.</p>
+    <p>In meiner Freizeit bin ich sportlich aktiv, gehe ins Gym und mache regelmässig Judo. Diese Aktivitäten fördern meine Disziplin und Ausdauer – Eigenschaften, die mir auch im Berufsleben zugutekommen werden.</p>
+    <p>Ich freue mich darauf, meine Fähigkeiten bei einer Schnupperlehre zu zeigen und bin motiviert, während der Lehre Neues zu lernen und mein Wissen einzubringen. Vielen Dank für die Prüfung meiner Bewerbungsunterlagen. Ich freue mich auf Ihre Rückmeldung.</p>
+    <p>Freundliche Grüsse<br>Saif Abdullah</p>
+  </section>
+
+  <section class="content-section" id="motivation">
+    <h2>Motivationsschreiben</h2>
+    <p>TIE International<br>Frau Nadia Zyka<br>Hohlstrasse 560<br>8048 Zürich</p>
+    <p>Zürich, 04. April 2025</p>
+    <p><strong>Meine Eignung für den Beruf Informatiker EFZ</strong></p>
+    <p>Schon früh wurde mir klar, dass ich Informatiker werden möchte. Besuche auf der Berufsmesse und die Informationsveranstaltungen haben meinen Wunsch bestätigt. Ich interessiere mich sehr für Technik und digitale Medien, besonders das Erstellen von Webseiten. In der Schule habe ich bemerkt, dass ich ein gutes Organisationstalent besitze und Projekte ruhig und strukturiert angehe, auch wenn es Herausforderungen gibt. Dies hat mir geholfen, Aufgaben eigenständig zu planen und zielorientiert abzuschliessen. Ich freue mich daher, in der Lehre noch mehr zu lernen und meine Fähigkeiten weiter auszubauen.</p>
+    <p><strong>Warum ich mich für TIE International entschieden habe</strong></p>
+    <pTIE International ist bekannt für ihre innovativen Ansätze in der digitalen Medienproduktion und die Zusammenarbeit mit globalen Partnern. Hier sehe ich die Möglichkeit, mich in einem inspirierenden Umfeld weiterzuentwickeln und von erfahrenen Fachleuten zu lernen. Besonders gefallen mir die kreativen Projekte und die internationale Perspektive, die TIE International bietet. Ich sehe darin eine wertvolle Chance, meine Kenntnisse in Mediamatik und Informatik zu vertiefen und eigenverantwortlich zu arbeiten. Diese Lernbereitschaft und Neugier bringe ich für TIE International mit und freue mich darauf, das Team zu unterstützen.</p>
+    <p><strong>Meine Ziele</strong></p>
+    <p>Ich arbeite weiter daran, mich zu verbessern, vor allem in Mathematik und Informatik. In der Oberstufe hatte ich aufgrund einer Epstein-Barr-Virus-Erkrankung einige Absenzen, die mich zeitweise vom Unterricht ferngehalten haben, und ich musste lange im Spital sein. Aber jetzt geht es mir viel besser, und ich bin wieder voll motiviert und bereit, mein Bestes zu geben. Zudem freue ich mich darauf, meine Begeisterung für digitale Medien und Technik in die Lehre bei TIE International einzubringen und das Team zu unterstützen.</p>
+    <p>Freundliche Grüsse<br>Saif Abdullah</p>
+  </section>
+
+  <section class="content-section" id="lebenslauf">
+    <h2>Lebenslauf</h2>
+    <div class="cv-grid">
+      <div class="cv-box">
+        <h3>PERSÖNLICHES</h3>
+        <p><strong>Name, Vorname:</strong> Saif Abdullah</p>
+        <p><strong>Geburtsdatum:</strong> 24. November 2008</p>
+        <p><strong>Heimatort:</strong> Zürich</p>
+        <p><strong>Nationalität:</strong> Schweiz, Bangladesch</p>
+        <h3>FAMILIE</h3>
+        <p><strong>Vater:</strong> Saifullah Mohammed Tarek, Pflegehelfer</p>
+        <p><strong>Mutter:</strong> Masuda Parvin, Hort Mitarbeiterin</p>
+        <p><strong>Schwester:</strong> Hazra Tarek, 2015, Schülerin</p>
+        <h3>SPRACHKENNTNISSE</h3>
+        <p><strong>Deutsch:</strong> Erstsprache</p>
+        <p><strong>Englisch:</strong> Schulkenntnisse 3. Jahr</p>
+        <p><strong>Französisch:</strong> Schulkenntnisse 5. Jahr</p>
+        <p><strong>Bengalisch:</strong> Muttersprache</p>
+        <h3>HOBBYS</h3>
+        <p>Gym, Judo, Lesen</p>
+      </div>
+      <div class="cv-box">
+        <h3>BESUCHTE SCHULEN</h3>
+        <p>2024 – Aktuell<br>Fachschule Viventa, BVJ, Zürich, Technik u. Informatik</p>
+        <p>2021 – 2024<br>Sekundarschule Liguster Zürich, 1. – 3. Klasse, Niveau A</p>
+        <p>2015 – 2021<br>Primarschule Holderbach, Zürich, 1. – 6. Klasse</p>
+        <h3>SCHNUPPERLEHREN</h3>
+        <p>Januar 2025: FaGe, Gesundheitszentrum Witikon, ZH</p>
+        <p>Oktober 2024: Informatiker, Boishaki TV, Bangladesh</p>
+        <p>April 2024: FaGe, Hort Ernahof, ZH</p>
+        <p>Juni 2023: Mediamatiker, Jomb AG, ZH</p>
+        <p>Juni 2023: MPA, KinderJugend Medizin, ZH</p>
+        <p>Februar 2023: Informatiker, Alabus AG, ZH</p>
+        <h3>REFERENZ</h3>
+        <p>Klassenlehrer:<br>Stefan Herde<br>stefan.herde@schulen.zuerich.ch<br>044 413 5250</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="content-section" id="stellwerk">
+    <h2>Stellwerktest</h2>
+    <embed src="Stellwerktest_SaifAbdullah.pdf" type="application/pdf">
+  </section>
+
+  <section class="content-section" id="zeugnisse">
+    <h2>Zeugnisse</h2>
+    <embed src="Zeugnisse_SaifAbdullah.pdf" type="application/pdf">
+  </section>
+
+  <script>
+    function showSection(id) {
+      document.getElementById('startseite').style.display = 'none';
+      document.getElementById('bg-video').style.display = 'none';
+      const sections = document.querySelectorAll('.content-section');
+      sections.forEach(section => section.style.display = 'none');
+      document.getElementById(id).style.display = 'block';
+    }
+
+    function goHome() {
+      const sections = document.querySelectorAll('.content-section');
+      sections.forEach(section => section.style.display = 'none');
+      document.getElementById('bg-video').style.display = 'block';
+      document.getElementById('startseite').style.display = 'flex';
+    }
+  </script>
+</body>
