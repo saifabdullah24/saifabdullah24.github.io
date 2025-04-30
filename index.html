@@ -6,8 +6,23 @@
   <title>Saif Abdullah – Bewerbung</title>
   <style>
     @font-face {
-      font-family: 'Philosopher';
-      src: url('fonts/Philosopher-Regular.ttf') format('truetype');
+      font-family: 'Comfortaa';
+      src: url('comfortaa/Comfortaa-Regular.ttf') format('truetype');
+      font-style: normal;
+      font-weight: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Comfortaa';
+      src: url('comfortaa/Comfortaa-Bold.ttf') format('truetype');
+      font-weight: bold;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Comfortaa';
+      src: url('comfortaa/Comfortaa-Light.ttf') format('truetype');
+      font-weight: 300;
+      font-display: swap;
     }
 
     * {
@@ -17,14 +32,15 @@
     }
 
     html {
-      scroll-behavior: auto;
+      scroll-behavior: smooth;
     }
 
     body {
-      font-family: 'Philosopher', Calibri, sans-serif;
+      font-family: 'Comfortaa', sans-serif;
       color: white;
       background-color: #111;
       overflow-x: hidden;
+      font-display: swap;
     }
 
     header {
@@ -180,12 +196,89 @@
       from { transform: translateY(-50px); opacity: 0; }
       to { transform: translateY(0); opacity: 1; }
     }
-  </style>
+      .kontakt-panel {
+      position: fixed;
+      top: 0;
+      right: -400px;
+      width: min(90%, 300px);
+      height: 100%;
+      background: #111;
+      color: white;
+      padding: 2rem;
+      box-shadow: -2px 0 10px rgba(0,0,0,0.5);
+      z-index: 2000;
+      transition: right 0.5s ease;
+    }
+
+    
+    .kontakt-panel p {
+      margin-bottom: 1.2rem;
+      line-height: 1.6;
+    }
+
+    .kontakt-panel h2 {
+      margin-top: 3rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+    :root {
+      --accent-color: #4f8df5;
+    }
+
+    .kontakt-title {
+      color: var(--accent-color);
+      margin-top: 3rem;
+      margin-bottom: 1.5rem;
+    }
+    @media (max-width: 500px) {
+      .kontakt-panel {
+        width: 100%;
+        padding: 1.5rem;
+      }
+    }
+
+    .kontakt-panel a {
+      color: white;
+      text-decoration: underline;
+    }
+
+    .kontakt-panel a:hover {
+      color: var(--accent-color);
+    }
+    .kontakt-link {
+      color: white;
+      text-decoration: underline;
+    }
+
+    .kontakt-link:hover {
+      color: var(--accent-color);
+    }
+    .pdf-frame {
+      width: 100%;
+      height: 600px;
+      border: none;
+    }
+
+    @media (max-width: 768px) {
+      .cv-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+</style>
 </head>
-
 <body>
-
-<video class="bg-video" autoplay muted loop>
+<video class="bg-video" autoplay muted loop preload="none">
   <source src="VideoInformatik2.mp4" type="video/mp4">
 </video>
 
@@ -197,6 +290,7 @@
     <a onclick="smoothScroll('lebenslauf')">Lebenslauf</a>
     <a onclick="smoothScroll('stellwerk')">Stellwerktest</a>
     <a onclick="smoothScroll('zeugnisse')">Zeugnisse</a>
+    <a onclick="smoothScroll('kontakt')">Kontakt</a>
   </nav>
 </header>
 
@@ -255,34 +349,51 @@
     </div>
     <div class="cv-box">
       <h3>BESUCHTE SCHULEN</h3>
-      <p>2024 – Aktuell: Fachschule Viventa, BVJ Technik und Informatik</p>
-      <p>2021 – 2024: Sekundarschule Liguster Zürich, Niveau A</p>
-      <p>2015 – 2021: Primarschule Holderbach, Zürich</p>
-      <h3>SCHNUPPERLEHREN</h3>
-      <p>Januar 2025: FaGe, Gesundheitszentrum Witikon</p>
-      <p>Oktober 2024: Informatiker, Boishaki TV, Bangladesh</p>
-      <p>April 2024: FaGe, Hort Ernahof, ZH</p>
-      <p>Juni 2023: Mediamatiker, Jomb AG, ZH</p>
-      <p>Juni 2023: MPA, KinderJugend Medizin, ZH</p>
-      <p>Februar 2023: Informatiker, Alabus AG, ZH</p>
-      <h3>REFERENZ</h3>
-      <p>Klassenlehrer: Stefan Herde<br>Email: stefan.herde@schulen.zuerich.ch<br>Telefon: 044 413 52 50</p>
+<ul style="padding-left: 1rem; list-style: none; line-height: 1.8;">
+  <li>2024 – Aktuell: Fachschule Viventa, BVJ Technik und Informatik</li>
+  <li>2021 – 2024: Sekundarschule Liguster Zürich, Niveau A</li>
+  <li>2015 – 2021: Primarschule Holderbach, Zürich</li>
+</ul>
+<h3>SCHNUPPERLEHREN</h3>
+<div style="padding-left: 1rem; display: flex; flex-direction: column; gap: 0.5rem;">
+  <div>Januar 2025: FaGe, Gesundheitszentrum Witikon</div>
+  <div>Oktober 2024: Informatiker, Boishaki TV, Bangladesh</div>
+  <div>April 2024: FaGe, Hort Ernahof, ZH</div>
+  <div>Juni 2023: Mediamatiker, Jomb AG, ZH</div>
+  <div>Juni 2023: MPA, KinderJugend Medizin, ZH</div>
+  <div>Februar 2023: Informatiker, Alabus AG, ZH</div>
+</div>
+<h3>REFERENZ</h3>
+      <p>Klassenlehrer: Stefan Herde<br>Email: <a href="mailto:stefan.herde@schulen.zuerich.ch" class="kontakt-link">stefan.herde@schulen.zuerich.ch</a><br>Telefon: <a href="tel:+41444135250" class="kontakt-link">044 413 52 50</a></p>
     </div>
   </div>
 </section>
 
 <section id="stellwerk" class="content-section">
   <h2>Stellwerktest</h2>
-  <embed src="Stellwerktest_SaifAbdullah.pdf" type="application/pdf">
+  <iframe class="pdf-frame" src="Stellwerktest_SaifAbdullah.pdf" loading="lazy"></iframe>
 </section>
 
 <section id="zeugnisse" class="content-section">
   <h2>Zeugnisse</h2>
-  <embed src="Zeugnisse_SaifAbdullah.pdf" type="application/pdf">
+  <iframe class="pdf-frame" src="Zeugnisse_SaifAbdullah.pdf" loading="lazy"></iframe>
 </section>
+
+<div id="kontakt-panel" role="dialog" aria-label="Kontaktinformationen" class="kontakt-panel">
+  <button onclick="closeKontakt()" class="close-btn" aria-label="Kontakt schließen">✕</button>
+  <h2 class="kontakt-title">Kontakt</h2>
+  <p><strong>Email:</strong><br><a href="mailto:saifabdullah2411@gmail.com" class="kontakt-link">saifabdullah2411@gmail.com</a></p>
+  <p><strong>Telefon:</strong><br><a href="tel:+41761234567" class="kontakt-link">+41 76 123 45 67</a></p>
+  <p><strong>Adresse:</strong><br>Furttalstrasse 45,<br>8046 Zürich</p>
+  
+</div>
 
 <script>
 function smoothScroll(targetId) {
+  if (targetId === 'kontakt') {
+    document.getElementById('kontakt-panel').style.right = '0';
+    return;
+  }
   const target = document.getElementById(targetId);
   const headerOffset = 80;
   const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - headerOffset;
@@ -308,7 +419,22 @@ function smoothScroll(targetId) {
 
   requestAnimationFrame(animation);
 }
-</script>
 
+function closeKontakt() {
+  document.getElementById('kontakt-panel').style.right = '-400px';
+}
+document.addEventListener('keydown', function(event) {
+  if (event.key === 'Escape') {
+    closeKontakt();
+  }
+});
+
+window.addEventListener('click', function(event) {
+  const kontaktPanel = document.getElementById('kontakt-panel');
+  if (kontaktPanel.style.right === '0px' && !kontaktPanel.contains(event.target) && event.target.closest('a[onclick*="kontakt"]') === null) {
+    closeKontakt();
+  }
+});
+</script>
 </body>
 </html>
