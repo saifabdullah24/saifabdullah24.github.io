@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
+  <meta name="description" content="Digitale Bewerbung von Saif Abdullah für eine Lehrstelle als Informatiker EFZ bei der Emil Frey IT Solutions AG.">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Saif Abdullah – Bewerbung</title>
@@ -9,19 +10,7 @@
       font-family: 'Comfortaa';
       src: url('Comfortaa-Regular.ttf') format('truetype');
       font-style: normal;
-      font-weight: normal;
-      font-display: swap;
-    }
-    @font-face {
-      font-family: 'Comfortaa';
-      src: url('Comfortaa-Regular.ttf') format('truetype');
-      font-weight: bold;
-      font-display: swap;
-    }
-    @font-face {
-      font-family: 'Comfortaa';
-      src: url('Comfortaa-Regular.ttf') format('truetype');
-      font-weight: 300;
+      font-weight: 300 700;
       font-display: swap;
     }
 
@@ -40,7 +29,6 @@
       color: white;
       background-color: #111;
       overflow-x: hidden;
-      font-display: swap;
     }
 
     header {
@@ -165,7 +153,7 @@
 
     .cv-box h3 {
       color: #4f8df5;
-      margin-bottom: 1.5rem 0 1rem 0;
+      margin-bottom: 1.5rem;
       font-size: 1.2rem;
       border-bottom: 1px solid #444;
     }
@@ -175,26 +163,18 @@
       margin: 0.3rem 0;
     }
 
-    embed {
+    embed, .pdf-frame {
       width: 100%;
       height: 600px;
       border: none;
       margin-top: 2rem;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes slideInDown {
-      from { transform: translateY(-50px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      color: #777;
+      font-size: 0.9rem;
     }
       .kontakt-panel {
       position: fixed;
@@ -210,17 +190,6 @@
       transition: right 0.5s ease;
     }
 
-    
-    .kontakt-panel p {
-      margin-bottom: 1.2rem;
-      line-height: 1.6;
-    }
-
-    .kontakt-panel h2 {
-      margin-top: 3rem;
-      margin-bottom: 1.5rem;
-    }
-
     .close-btn {
       position: absolute;
       top: 1rem;
@@ -231,96 +200,74 @@
       font-size: 1.2rem;
       cursor: pointer;
     }
-    :root {
-      --accent-color: #4f8df5;
-    }
 
     .kontakt-title {
-      color: var(--accent-color);
+      color: #4f8df5;
       margin-top: 3rem;
       margin-bottom: 1.5rem;
     }
-    @media (max-width: 500px) {
-      .kontakt-panel {
-        width: 100%;
-        padding: 1.5rem;
-      }
-    }
 
-    .kontakt-panel a {
-      color: white;
-      text-decoration: underline;
-    }
-
-    .kontakt-panel a:hover {
-      color: var(--accent-color);
-    }
     .kontakt-link {
       color: white;
       text-decoration: underline;
     }
 
     .kontakt-link:hover {
-      color: var(--accent-color);
-    }
-    .pdf-frame {
-      width: 100%;
-      height: 600px;
-      border: none;
+      color: #4f8df5;
     }
 
-    @media (max-width: 768px) {
-      .cv-grid {
-        grid-template-columns: 1fr;
+    @media (max-width: 500px) {
+      .kontakt-panel {
+        width: 100%;
+        padding: 1.5rem;
       }
     }
-
 </style>
 </head>
 <body>
-<video class="bg-video" autoplay muted loop preload="none">
-  <source src="VideoInformatik2.mp4" type="video/mp4">
-</video>
+  <video class="bg-video" autoplay muted loop preload="none">
+    <source src="VideoInformatik2.mp4" type="video/mp4">
+  </video>
 
-<header>
-  <nav>
-    <a onclick="smoothScroll('home')">Home</a>
-    <a onclick="smoothScroll('bewerbung')">Bewerbung</a>
-    <a onclick="smoothScroll('motivation')">Motivationsschreiben</a>
-    <a onclick="smoothScroll('lebenslauf')">Lebenslauf</a>
-    <a onclick="smoothScroll('stellwerk')">Stellwerktest</a>
-    <a onclick="smoothScroll('zeugnisse')">Zeugnisse</a>
-    <a onclick="smoothScroll('kontakt')">Kontakt</a>
-  </nav>
-</header>
+  <header>
+    <nav>
+      <a onclick="smoothScroll('home')">Home</a>
+      <a onclick="smoothScroll('bewerbung')">Bewerbung</a>
+      <a onclick="smoothScroll('motivation')">Motivationsschreiben</a>
+      <a onclick="smoothScroll('lebenslauf')">Lebenslauf</a>
+      <a onclick="smoothScroll('stellwerk')">Stellwerktest</a>
+      <a onclick="smoothScroll('zeugnisse')">Zeugnisse</a>
+      <a onclick="smoothScroll('kontakt')">Kontakt</a>
+    </nav>
+  </header>
 
-<section id="home" class="hero">
-  <h1>SAIF ABDULLAH</h1>
-  <img src="SaifAbdullah1.png" alt="Profilbild" class="profile-pic">
-  <div class="arrow-down">↓</div>
-</section>
+  <section id="home" class="hero">
+    <h1>SAIF ABDULLAH</h1>
+    <img src="SaifAbdullah1.png" alt="Profilbild" class="profile-pic">
+    <div class="arrow-down">↓</div>
+  </section>
 
-<section id="bewerbung" class="content-section">
+  <section id="bewerbung" class="content-section">
   <h2>Bewerbung</h2>
   <p>Emil Frey IT Solutions AG<br>Frau Valeria Giarrusso<br>Buckhauserstrasse 22<br>8048 Zürich</p>
-  <p>Zürich, 20. Mai 2025</p>
+  <p>Zürich, 21. Mai 2025</p>
   <p>Sehr geehrte Frau Giarrusso</p>
   <p>Die Welt der Informatik begeistert mich. Besonders, wenn sie mit spannenden Bereichen wie der Automobilbranche verbunden ist. Deshalb bewerbe ich mich mit grossem Interesse um eine Lehrstelle als Informatiker Plattformentwicklung EFZ bei der Emil Frey IT Solutions AG.</p>
   <p>Im Sommer letzten Jahres habe ich die Sekundarschule Liguster im Niveau A abgeschlossen und besuche derzeit das BVJ Technik und Informatik an der Fachschule Viventa, Schulhaus Wehntal in Zürich. Besonders in den Fächern Englisch, Deutsch und Mathematik zeige ich gute Leistungen. Im Informatikunterricht arbeite ich zurzeit mit Programmiersprachen wie HTML, JavaScript, CSS und Python. Auch privat beschäftige ich mich intensiv mit Technik. Neben zusätzlichem Informatikunterricht programmiere ich aktuell mit Arduino und arbeite gerade an einem LED-Streifen-Projekt.</p>
   <p>Auch wenn ich bisher keine Schnupperlehre als Informatiker gemacht habe, habe ich durch drei Informationsveranstaltungen einen guten Einblick in den Beruf erhalten. Ich habe dort viel über die Aufgaben und Perspektiven gelernt, was mich darin bestärkt hat, diesen Berufsweg einzuschlagen.</p>
   <p>In meiner Freizeit bin ich sportlich aktiv, gehe ins Gym und mache regelmässig Judo. Diese Aktivitäten fördern meine Disziplin und Ausdauer – Eigenschaften, die mir auch im Berufsleben zugutekommen werden.</p>
-  <p>Ich freue mich darauf, meine Motivation bei einer Schnupperlehre zu zeigen und bin bereit, während der Lehre mein Bestes zu geben. Vielen Dank für die Prüfung meiner Unterlagen. Ich freue mich auf Ihre Rückmeldung</p>
+  <p>Ich freue mich darauf, meine Motivation bei einer Schnupperlehre zu zeigen und bin bereit, während der Lehre mein Bestes zu geben. Vielen Dank für die Prüfung meiner Unterlagen. Ich freue mich auf Ihre Rückmeldung.</p>
   <p>Freundliche Grüsse<br>Saif Abdullah</p>
 </section>
 
 <section id="motivation" class="content-section">
   <h2>Motivationsschreiben</h2>
   <p>Emil Frey IT Solutions AG<br>Frau Valeria Giarrusso<br>Buckhauserstrasse 22<br>8048 Zürich</p>
-  <p>Zürich, 20. Mai 2025</p>
+  <p>Zürich, 21. Mai 2025</p>
   <p><strong>Meine Eignung für den Beruf Informatiker EFZ</strong></p>
   <p>Schon früh wurde mir klar, dass ich Informatiker werden möchte. Besuche auf der Berufsmesse und Informationsveranstaltungen haben meinen Wunsch bestätigt. Ich interessiere mich sehr für Technik und digitale Medien, besonders das Erstellen von Webseiten. In der Schule habe ich bemerkt, dass ich ein gutes Organisationstalent besitze und Projekte ruhig und strukturiert angehe, auch wenn es Herausforderungen gibt. Dies hat mir geholfen, Aufgaben eigenständig zu planen und zielorientiert abzuschliessen. Ich freue mich daher, in der Lehre noch mehr zu lernen und meine Fähigkeiten weiter auszubauen.</p>
-  <p><strong>Warum ich mich für die Emily Frey IT Solutions AG entschieden habe</strong></p>
-  <p>Ich habe mich für die Emil Frey IT Solutions AG entschieden, weil ich mich sehr für Autos und Technik interessiere. Besonders spannend finde ich, wie Ihr Unternehmen die IT hinter so vielen bekannten Garagenbetrieben steuert und betreut. Dabei wurde mir klar, wie wichtig Informatik ist, damit alles im Hintergrund reibungslos funktioniert – vom Verkauf bis zur Werkstatt. Ich möchte meine Leidenschaft für Computer und Technik in einem Umfeld einbringen, das moderne IT mit meiner Begeisterung für Autos verbindet. Die Emil Frey Gruppe hat eine lange Tradition und bewegt die Schweiz genau das motiviert mich. Ich bin überzeugt, dass ich bei Ihnen viel lernen kann und freue mich darauf, mein Wissen und meinen Einsatz einzubringen.</p>
+  <p><strong>Warum ich mich für die Emil Frey IT Solutions AG entschieden habe</strong></p>
+  <p>Ich habe mich für die Emil Frey IT Solutions AG entschieden, weil ich mich sehr für Autos und Technik interessiere. Besonders spannend finde ich, wie Ihr Unternehmen die IT hinter so vielen bekannten Garagenbetrieben steuert und betreut. Dabei wurde mir klar, wie wichtig Informatik ist, damit alles im Hintergrund reibungslos funktioniert – vom Verkauf bis zur Werkstatt. Ich möchte meine Leidenschaft für Computer und Technik in einem Umfeld einbringen, das moderne IT mit meiner Begeisterung für Autos verbindet. Die Emil Frey Gruppe hat eine lange Tradition und bewegt die Schweiz – genau das motiviert mich. Ich bin überzeugt, dass ich bei Ihnen viel lernen kann und freue mich darauf, mein Wissen und meinen Einsatz einzubringen.</p>
   <p><strong>Meine Ziele</strong></p>
   <p>Ich arbeite stetig daran, mich weiterzuentwickeln, besonders in den Fächern Mathematik und Informatik. In der Oberstufe hatte ich wegen einer Epstein-Barr-Virus-Erkrankung einige Absenzen und musste längere Zeit im Spital bleiben. Heute geht es mir wieder sehr gut, und ich bin motiviert, mein Bestes zu geben. Ich freue mich darauf, meine Begeisterung für Technik, Computer und digitale Themen in die Lehre bei der Emil Frey IT Solutions AG einzubringen und das Team engagiert zu unterstützen.</p>
   <p>Freundliche Grüsse<br>Saif Abdullah</p>
@@ -349,21 +296,21 @@
     </div>
     <div class="cv-box">
       <h3>BESUCHTE SCHULEN</h3>
-<ul style="padding-left: 1rem; list-style: none; line-height: 1.8;">
-  <li>2024 – Aktuell: Fachschule Viventa, BVJ Technik und Informatik</li>
-  <li>2021 – 2024: Sekundarschule Liguster Zürich, Niveau A</li>
-  <li>2015 – 2021: Primarschule Holderbach, Zürich</li>
-</ul>
-<h3>SCHNUPPERLEHREN</h3>
-<div style="padding-left: 1rem; display: flex; flex-direction: column; gap: 0.5rem;">
-  <div>Jan. 2025: FaGe, GFA Witikon, ZH</div>
-  <div>Okt. 2024: Informatiker ,Boishaki TV, BD</div>
-  <div>Apr. 2024: FaGe, Hort Ernahof, ZH</div>
-  <div>Jun. 2023: Mediamatiker, Jomb AG, ZH</div>
-  <div>Jun. 2023: MPA, KinderJugend Medizin, ZH</div>
-  <div>Feb. 2023: Informatiker, Alabus AG, ZH</div>
-</div>
-<h3>REFERENZ</h3>
+      <ul style="padding-left: 1rem; list-style: none; line-height: 1.8;">
+        <li>2024 – Aktuell: Fachschule Viventa, BVJ Technik und Informatik</li>
+        <li>2021 – 2024: Sekundarschule Liguster Zürich, Niveau A</li>
+        <li>2015 – 2021: Primarschule Holderbach, Zürich</li>
+      </ul>
+      <h3>SCHNUPPERLEHREN</h3>
+      <div style="padding-left: 1rem; display: flex; flex-direction: column; gap: 0.5rem;">
+        <div>Jan. 2025: FaGe, GFA Witikon, ZH</div>
+        <div>Okt. 2024: Informatiker, Boishaki TV, BD</div>
+        <div>Apr. 2024: FaGe, Hort Ernahof, ZH</div>
+        <div>Jun. 2023: Mediamatiker, Jomb AG, ZH</div>
+        <div>Jun. 2023: MPA, KinderJugend Medizin, ZH</div>
+        <div>Feb. 2023: Informatiker, Alabus AG, ZH</div>
+      </div>
+      <h3>REFERENZ</h3>
       <p>Klassenlehrer: Stefan Herde<br>Email: <a href="mailto:stefan.herde@schulen.zuerich.ch" class="kontakt-link">stefan.herde@schulen.zuerich.ch</a><br>Telefon: <a href="tel:+41444135250" class="kontakt-link">044 413 52 50</a></p>
     </div>
   </div>
@@ -371,70 +318,89 @@
 
 <section id="stellwerk" class="content-section">
   <h2>Stellwerktest</h2>
-  <iframe class="pdf-frame" src="Stellwerktest_SaifAbdullah.pdf" loading="lazy"></iframe>
+  <iframe class="pdf-frame" src="Stellwerktest_SaifAbdullah.pdf" loading="lazy" onerror="this.outerHTML='<p>PDF konnte nicht geladen werden.</p>'"></iframe>
 </section>
 
 <section id="zeugnisse" class="content-section">
   <h2>Zeugnisse</h2>
-  <iframe class="pdf-frame" src="Zeugnisse_SaifAbdullah.pdf" loading="lazy"></iframe>
+  <iframe class="pdf-frame" src="Zeugnisse_SaifAbdullah.pdf" loading="lazy" onerror="this.outerHTML='<p>PDF konnte nicht geladen werden.</p>'"></iframe>
 </section>
 
-<div id="kontakt-panel" role="dialog" aria-label="Kontaktinformationen" class="kontakt-panel">
+<div id="kontakt-panel" role="dialog" aria-label="Kontaktinformationen" class="kontakt-panel" style="display: block;">
   <button onclick="closeKontakt()" class="close-btn" aria-label="Kontakt schließen">✕</button>
   <h2 class="kontakt-title">Kontakt</h2>
-  <p><strong>Email:</strong><br><a href="mailto:saifabdullah2411@gmail.com" class="kontakt-link">saifabdullah2411@gmail.com</a></p>
-  <p><strong>Telefon:</strong><br><a href="tel:+41782683822" class="kontakt-link">+41 78 268 38 22</a></p>
-  <p><strong>Adresse:</strong><br>Furttalstrasse 45,<br>8046 Zürich</p>
-  
+  <p style="margin-bottom: 1rem;"><strong>Email:</strong><br><a href="mailto:saifabdullah2411@gmail.com" class="kontakt-link">saifabdullah2411@gmail.com</a></p>
+  <p style="margin-bottom: 1rem;"><strong>Telefon:</strong><br><a href="tel:+41782683822" class="kontakt-link">+41 78 268 38 22</a></p>
+  <p style="margin-bottom: 1rem;"><strong>Adresse:</strong><br>Furttalstrasse 45,<br>8046 Zürich</p>
 </div>
 
-<script>
-function smoothScroll(targetId) {
-  if (targetId === 'kontakt') {
-    document.getElementById('kontakt-panel').style.right = '0';
-    return;
-  }
-  const target = document.getElementById(targetId);
-  const headerOffset = 80;
-  const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - headerOffset;
-  const startPosition = window.pageYOffset;
-  const distance = targetPosition - startPosition;
-  const duration = 1000;
-  let startTime = null;
+  <footer>
+    © 2025 Saif Abdullah – Alle Rechte vorbehalten
+  </footer>
 
-  function animation(currentTime) {
-    if (startTime === null) startTime = currentTime;
-    const timeElapsed = currentTime - startTime;
-    const run = easeInOutQuad(timeElapsed, startPosition, distance, duration);
-    window.scrollTo(0, run);
-    if (timeElapsed < duration) requestAnimationFrame(animation);
-  }
+  <script>
+    function smoothScroll(targetId) {
+      if (targetId === 'kontakt') {
+        document.getElementById('kontakt-panel').style.right = '0';
+        return;
+      }
+      const target = document.getElementById(targetId);
+      const headerOffset = 80;
+      const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - headerOffset;
+      const startPosition = window.pageYOffset;
+      const distance = targetPosition - startPosition;
+      const duration = 1000;
+      let startTime = null;
 
-  function easeInOutQuad(t, b, c, d) {
-    t /= d/2;
-    if (t < 1) return c/2*t*t + b;
-    t--;
-    return -c/2 * (t*(t-2) - 1) + b;
-  }
+      function animation(currentTime) {
+        if (startTime === null) startTime = currentTime;
+        const timeElapsed = currentTime - startTime;
+        const run = easeInOutQuad(timeElapsed, startPosition, distance, duration);
+        window.scrollTo(0, run);
+        if (timeElapsed < duration) requestAnimationFrame(animation);
+      }
 
-  requestAnimationFrame(animation);
-}
+      function easeInOutQuad(t, b, c, d) {
+        t /= d/2;
+        if (t < 1) return c/2*t*t + b;
+        t--;
+        return -c/2 * (t*(t-2) - 1) + b;
+      }
 
-function closeKontakt() {
-  document.getElementById('kontakt-panel').style.right = '-400px';
-}
-document.addEventListener('keydown', function(event) {
-  if (event.key === 'Escape') {
-    closeKontakt();
-  }
-});
+      requestAnimationFrame(animation);
+    }
 
-window.addEventListener('click', function(event) {
-  const kontaktPanel = document.getElementById('kontakt-panel');
-  if (kontaktPanel.style.right === '0px' && !kontaktPanel.contains(event.target) && event.target.closest('a[onclick*="kontakt"]') === null) {
-    closeKontakt();
-  }
-});
-</script>
+    function closeKontakt() {
+      document.getElementById('kontakt-panel').style.right = '-400px';
+    }
+
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape') {
+        closeKontakt();
+      }
+    });
+
+    window.addEventListener('click', function(event) {
+      const kontaktPanel = document.getElementById('kontakt-panel');
+      if (kontaktPanel && kontaktPanel.style.right === '0px' && !kontaktPanel.contains(event.target) && event.target.closest('a[onclick*="kontakt"]') === null) {
+        closeKontakt();
+      }
+    });
+
+    // Sicherheitsblocker gegen Rechtsklick und DevTools
+    document.addEventListener('contextmenu', function (e) {
+      e.preventDefault();
+    });
+    document.addEventListener('keydown', function (e) {
+      if (
+        e.key === 'F12' ||
+        (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'i') ||
+        (e.ctrlKey && e.key.toLowerCase() === 'u') ||
+        (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'j')
+      ) {
+        e.preventDefault();
+      }
+    });
+  </script>
 </body>
 </html>
