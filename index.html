@@ -247,12 +247,12 @@
     <div class="arrow-down">↓</div>
   </section>
 
-  <section id="bewerbung" class="content-section">
+<section id="bewerbung" class="content-section">
   <h2>Bewerbung</h2>
   <p>libs<br>Industrielle Berufslehren Schweiz<br>Vega-Strasse 3<br>8152 Glattpark (Opfikon) (ZH)</p>
-  <p>Zürich, 04. Juni 2025</p>
+  <p>Zürich, <span id="auto-datum"></span></p>
   <p>Sehr geehrte Damen und Herren</p>
-  
+
   <p>Ich interessiere mich besonders für Informatik, wenn sie konkrete Auswirkungen auf den Alltag der Menschen hat  genau wie bei libs. Die Vorstellung, an Projekten mitzuarbeiten, die echten Nutzen stiften  zum Beispiel in der technischen Bereichen oder in der digitalen Infrastruktur , motiviert mich sehr. Deshalb bewerbe ich mich mit grossem Interesse um eine Lehrstelle als ICT-Fachmann EFZ bei libs.</p>
   <p>Im Sommer letzten Jahres habe ich die Sekundarschule Liguster im Niveau A abgeschlossen und besuche derzeit das BVJ Technik und Informatik an der Fachschule Viventa in Zürich. Besonders in den Fächern Englisch, Deutsch und Mathematik zeige ich gute Leistungen. Im Informatikunterricht arbeite ich zurzeit mit HTML, JavaScript, CSS und Python. Auch privat beschäftige ich mich intensiv mit Technik  aktuell programmiere ich mit Arduino und arbeite an einem LED-Streifen-Projekt.</p>
   <p>Letztes Jahr hatte ich mit meiner Klasse die Möglichkeit, libs vor Ort zu besuchen  am gleichen Standort wie oben angegeben. Wir erhielten spannende Einblicke in die technischen Bereiche und konnten verschiedene Maschinen und Arbeitsplätze besichtigen. Diese Erfahrung hat mich nachhaltig beeindruckt und mein Interesse an technischen Berufen, insbesondere im Bereich ICT, weiter gestärkt. Ich würde sehr gerne in einem Umfeld lernen, das sowohl technisches Verständnis als auch menschliches Denken vereint.</p>
@@ -265,7 +265,7 @@
 <section id="motivation" class="content-section">
   <h2>Motivationsschreiben</h2>
   <p>libs<br>Industrielle Berufslehren Schweiz<br>Vega-Strasse 3<br>8152 Glattpark (Opfikon) (ZH)</p>
-  <p>Zürich, 04. Juni 2025</p>
+  <p>Zürich, <span id="auto-datum"></span></p>
 
   <p><strong>Meine Eignung für den Beruf ICT-Fachmann EFZ</strong></p>
   <p>Der Beruf des ICT-Fachmanns interessiert mich sehr, weil ich mich für Technik, digitale Lösungen und die Funktionsweise von Informatiksystemen begeistere. Schon früh habe ich begonnen, privat mit Computern zu arbeiten und mich mit Programmen wie HTML oder PowerPoint zu beschäftigen. In der Schule gestalte ich gerne Präsentationen und helfe oft bei technischen Problemen  zum Beispiel bei Beamer, WLAN oder Drucker. Auch im Familien- oder Bekanntenkreis werde ich häufig um Rat gefragt, wenn es um technische Themen geht.</p>
@@ -280,6 +280,26 @@
 
   <p>Freundliche Grüsse<br>Saif Abdullah</p>
 </section>
+
+<script>
+  function heutigesDatumDeutsch() {
+    const heute = new Date();
+    const tage = heute.getDate();
+    const monate = [
+      "Januar", "Februar", "März", "April", "Mai", "Juni",
+      "Juli", "August", "September", "Oktober", "November", "Dezember"
+    ];
+    const monat = monate[heute.getMonth()];
+    const jahr = heute.getFullYear();
+    return `${tage}. ${monat} ${jahr}`;
+  }
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const datumElemente = document.querySelectorAll("#auto-datum");
+    datumElemente.forEach(el => el.textContent = heutigesDatumDeutsch());
+  });
+</script>
+
 
 <section id="lebenslauf" class="content-section">
   <h2>Lebenslauf</h2>
