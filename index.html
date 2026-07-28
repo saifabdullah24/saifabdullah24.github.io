@@ -14,6 +14,19 @@
       font-display: swap;
     }
 
+    :root {
+      --bg: #0b0d12;
+      --panel: rgba(20, 22, 28, 0.72);
+      --panel-solid: #15171d;
+      --border: rgba(255, 255, 255, 0.08);
+      --text: #e9edf3;
+      --text-dim: #a6adb9;
+      --accent: #5b8cff;
+      --accent-soft: rgba(91, 140, 255, 0.14);
+      --radius: 18px;
+      --maxw: 920px;
+    }
+
     * {
       margin: 0;
       padding: 0;
@@ -25,40 +38,58 @@
     }
 
     body {
-      font-family: 'Comfortaa', sans-serif;
-      color: white;
-      background-color: #111;
+      font-family: 'Comfortaa', system-ui, sans-serif;
+      color: var(--text);
+      background-color: var(--bg);
       overflow-x: hidden;
+      line-height: 1.7;
     }
 
-  header {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  background: rgba(0, 0, 0, 0.1);
-  padding: 1rem;
-  text-align: center;
-  z-index: 1000;
-  backdrop-filter: blur(4px);
-}
+    a { color: inherit; }
 
-    nav a {
-      margin: 0 1.5rem;
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(11, 13, 18, 0.55);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem;
+      text-align: center;
+      z-index: 1000;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.25rem;
+    }
+
+    nav a, nav button.nav-link {
+      appearance: none;
+      background: none;
+      border: none;
+      margin: 0 0.35rem;
+      padding: 0.4rem 0.7rem;
       text-decoration: none;
-      color: white;
-      font-size: 1rem;
+      color: var(--text-dim);
+      font-family: inherit;
+      font-size: 0.95rem;
       font-weight: 600;
-      transition: color 0.3s, transform 0.3s;
+      border-radius: 999px;
       cursor: pointer;
+      transition: color 0.25s ease, background 0.25s ease;
     }
 
-    nav a:hover {
-      color: #4f8df5;
-      transform: scale(1.1);
+    nav a:hover, nav button.nav-link:hover {
+      color: var(--text);
+      background: var(--accent-soft);
     }
 
     .hero {
-      height: 100vh;
+      min-height: 100vh;
       padding: 3rem 2rem;
       display: flex;
       align-items: center;
@@ -66,45 +97,58 @@
       flex-direction: column;
       position: relative;
       text-align: center;
-      animation: fadeIn 1.5s ease forwards;
       z-index: 10;
     }
 
     .hero::before {
       content: "";
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.2);
+      inset: 0;
+      background: linear-gradient(180deg, rgba(11,13,18,0.35) 0%, rgba(11,13,18,0.75) 100%);
       z-index: -1;
     }
 
+    .hero .eyebrow {
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      font-size: 0.8rem;
+      color: var(--accent);
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+
     .hero h1 {
-      font-size: 3.5rem;
-      font-weight: bold;
+      font-size: clamp(2.2rem, 6vw, 3.6rem);
+      font-weight: 700;
+      margin-bottom: 0.6rem;
+      letter-spacing: 0.02em;
+    }
+
+    .hero p.tagline {
+      color: var(--text-dim);
+      font-size: 1.05rem;
       margin-bottom: 2rem;
-      animation: slideInDown 1.5s ease forwards;
     }
 
     .profile-pic {
-      width: 250px;
-      height: 250px;
+      width: 200px;
+      height: 200px;
       border-radius: 50%;
       object-fit: cover;
-      margin-bottom: 2rem;
-      animation: fadeIn 2s ease forwards;
+      margin-bottom: 1.75rem;
+      border: 3px solid var(--border);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.45);
     }
 
     .arrow-down {
-      font-size: 2rem;
+      font-size: 1.5rem;
+      color: var(--text-dim);
       animation: bounce 2s infinite;
     }
 
     @keyframes bounce {
       0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(10px); }
+      50% { transform: translateY(8px); }
     }
 
     video.bg-video {
@@ -115,106 +159,180 @@
       height: 100%;
       object-fit: cover;
       z-index: -2;
-      opacity: 0.5;
+      opacity: 0.35;
     }
 
     .content-section {
-      padding: 6rem 2rem;
-      max-width: 1000px;
-      margin: 6rem auto;
-      background: rgba(0, 0, 0, 0.6);
-      border-radius: 15px;
-      animation: fadeInUp 1s ease forwards;
-      text-align: justify;
+      padding: 3rem 2.5rem;
+      max-width: var(--maxw);
+      margin: 2.5rem auto;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.35);
+      text-align: left;
     }
 
     .content-section h2 {
-      margin-bottom: 1.5rem;
-      font-size: 2rem;
-      color: #4f8df5;
-      text-align: center;
+      margin-bottom: 1.75rem;
+      font-size: 1.6rem;
+      color: var(--text);
+      text-align: left;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .content-section h2::before {
+      content: "";
+      width: 6px;
+      height: 1.4rem;
+      background: var(--accent);
+      border-radius: 3px;
+      display: inline-block;
     }
 
     .content-section p {
-      margin-bottom: 1.2rem;
-      line-height: 1.6;
+      margin-bottom: 1.1rem;
+      line-height: 1.75;
+      color: var(--text);
+    }
+
+    .content-section p strong {
+      color: var(--text);
+    }
+
+    .letter-meta {
+      color: var(--text-dim);
+      font-size: 0.95rem;
     }
 
     .cv-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 2rem;
+      gap: 1.5rem;
     }
 
     .cv-box {
-      background-color: rgba(30, 30, 30, 0.9);
+      background-color: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border);
       padding: 1.5rem;
-      border-radius: 10px;
+      border-radius: 12px;
     }
 
     .cv-box h3 {
-      color: #4f8df5;
-      margin-bottom: 1.5rem;
-      font-size: 1.2rem;
-      border-bottom: 1px solid #444;
+      color: var(--accent);
+      margin: 1.25rem 0 0.75rem;
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
     }
 
-    .cv-box p {
-      font-size: 0.95rem;
+    .cv-box h3:first-child {
+      margin-top: 0;
+    }
+
+    .cv-box p, .cv-box li, .cv-box div {
+      font-size: 0.92rem;
       margin: 0.3rem 0;
+      color: var(--text-dim);
     }
 
-    embed, .pdf-frame {
-      width: 100%;
-      height: 600px;
-      border: none;
-      margin-top: 2rem;
+    .cv-box p strong {
+      color: var(--text);
+    }
+
+    @media (max-width: 700px) {
+      .cv-grid { grid-template-columns: 1fr; }
+    }
+
+    .doc-hint {
+      color: var(--text-dim);
+      font-size: 0.92rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .doc-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--accent);
+      color: #fff;
+      text-decoration: none;
+      padding: 0.7rem 1.3rem;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .doc-link:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 24px rgba(91, 140, 255, 0.35);
     }
 
     footer {
       text-align: center;
-      padding: 2rem 1rem;
-      color: #777;
-      font-size: 0.9rem;
+      padding: 2.5rem 1rem 3rem;
+      color: var(--text-dim);
+      font-size: 0.85rem;
     }
-      .kontakt-panel {
+
+    .kontakt-panel {
       position: fixed;
       top: 0;
       right: -400px;
-      width: min(90%, 300px);
+      width: min(90%, 320px);
       height: 100%;
-      background: #111;
-      color: white;
+      background: var(--panel-solid);
+      border-left: 1px solid var(--border);
+      color: var(--text);
       padding: 2rem;
-      box-shadow: -2px 0 10px rgba(0,0,0,0.5);
+      box-shadow: -20px 0 60px rgba(0,0,0,0.5);
       z-index: 2000;
-      transition: right 0.5s ease;
+      transition: right 0.4s ease;
     }
 
     .close-btn {
       position: absolute;
-      top: 1rem;
-      right: 1rem;
+      top: 1.25rem;
+      right: 1.25rem;
       background: none;
       border: none;
-      color: white;
+      color: var(--text-dim);
       font-size: 1.2rem;
       cursor: pointer;
     }
 
+    .close-btn:hover { color: var(--text); }
+
     .kontakt-title {
-      color: #4f8df5;
+      color: var(--accent);
       margin-top: 3rem;
       margin-bottom: 1.5rem;
+      font-size: 1.2rem;
+    }
+
+    .kontakt-label {
+      color: var(--text-dim);
+      font-size: 0.85rem;
+      letter-spacing: 0.05em;
+      display: block;
+      margin-bottom: 0.3rem;
     }
 
     .kontakt-link {
-      color: white;
-      text-decoration: underline;
+      color: var(--text);
+      text-decoration: none;
+      border-bottom: 1px solid var(--border);
     }
 
     .kontakt-link:hover {
-      color: #4f8df5;
+      color: var(--accent);
+      border-color: var(--accent);
     }
 
     @media (max-width: 500px) {
@@ -222,8 +340,11 @@
         width: 100%;
         padding: 1.5rem;
       }
+      .content-section {
+        padding: 2rem 1.4rem;
+      }
     }
-</style>
+  </style>
 </head>
 <body>
   <video class="bg-video" autoplay muted loop preload="none">
@@ -232,26 +353,28 @@
 
   <header>
     <nav>
-      <a onclick="smoothScroll('home')">Home</a>
-      <a onclick="smoothScroll('bewerbung')">Bewerbung</a>
-      <a onclick="smoothScroll('motivation')">Motivationsschreiben</a>
-      <a onclick="smoothScroll('lebenslauf')">Lebenslauf</a>
-      <a onclick="smoothScroll('stellwerk')">Stellwerktest</a>
-      <a onclick="smoothScroll('zeugnisse')">Zeugnisse</a>
-      <a onclick="smoothScroll('kontakt')">Kontakt</a>
+      <a href="#home">Home</a>
+      <a href="#bewerbung">Bewerbung</a>
+      <a href="#motivation">Motivationsschreiben</a>
+      <a href="#lebenslauf">Lebenslauf</a>
+      <a href="#stellwerk">Stellwerktest</a>
+      <a href="#zeugnisse">Zeugnisse</a>
+      <button type="button" class="nav-link" onclick="openKontakt()">Kontakt</button>
     </nav>
   </header>
 
   <section id="home" class="hero">
+    <div class="eyebrow">Bewerbung · Entwickler digitales Business EFZ</div>
     <h1>SAIF ABDULLAH</h1>
+    <p class="tagline">Lehrstellenbewerbung</p>
     <img src="SaifAbdullah1.png" alt="Profilbild" class="profile-pic">
     <div class="arrow-down">↓</div>
   </section>
 
 <section id="bewerbung" class="content-section">
   <h2>Bewerbung</h2>
-  <p>AZW<br>Sonnenbergstrasse 14<br>8610 Uster (ZH)</p>
-  <p>Zürich, <span id="auto-datum"></span></p>
+  <p class="letter-meta">AZW<br>Sonnenbergstrasse 14<br>8610 Uster (ZH)</p>
+  <p class="letter-meta">Zürich, <span class="auto-datum"></span></p>
   <p>Sehr geehrte Damen und Herren</p>
 
 <p>Ich habe kürzlich bei der AZW Uster angerufen, um mich nach Lehrstellen im Bereich Informatik zu erkundigen. Dabei wurde mir mitgeteilt, dass die Lehrstelle als Entwickler digitales Business EFZ noch offen ist. Diese Nachricht hat mich sehr gefreut. Die Möglichkeit, meine Lehre in einem zukunftsgerichteten Bereich beginnen zu dürfen, motiviert mich besonders.</p>
@@ -265,8 +388,8 @@
 
 <section id="motivation" class="content-section">
   <h2>Motivationsschreiben</h2>
-  <p>AZW<br>Sonnenbergstrasse 14<br>8610 Uster (ZH)</p>
-  <p>Zürich, <span id="auto-datum"></span></p>
+  <p class="letter-meta">AZW<br>Sonnenbergstrasse 14<br>8610 Uster (ZH)</p>
+  <p class="letter-meta">Zürich, <span class="auto-datum"></span></p>
 
 <p><strong>Meine Eignung für die Lehre als Entwickler digitales Business EFZ</strong><br><br>
 Der Beruf Entwickler digitales Business interessiert mich sehr, weil ich mich gerne mit digitalen Lösungen beschäftige. Besonders HTML, CSS und JavaScript faszinieren mich, weil man damit direkt sehen kann, wie digitale Oberflächen entstehen und funktionieren. In der Schule und auch privat arbeite ich oft mit diesen Programmiersprachen und gestalte eigene Webseiten. Es macht mir Freude, Ideen digital umzusetzen und dabei ständig Neues zu lernen.<br><br>
@@ -295,7 +418,7 @@ Ich arbeite täglich daran, mich weiterzuentwickeln, besonders in Mathematik, Te
   }
 
   document.addEventListener("DOMContentLoaded", function () {
-    const datumElemente = document.querySelectorAll("#auto-datum");
+    const datumElemente = document.querySelectorAll(".auto-datum");
     datumElemente.forEach(el => el.textContent = heutigesDatumDeutsch());
   });
 </script>
@@ -346,96 +469,42 @@ Ich arbeite täglich daran, mich weiterzuentwickeln, besonders in Mathematik, Te
 
 <section id="stellwerk" class="content-section">
   <h2>Stellwerktest</h2>
-  <div id="stellwerk-passwortfeld">
-    <p>Bitte Passwort eingeben, um den Stellwerktest anzuzeigen:</p>
-    <input type="password" id="stellwerk-passwort" placeholder="Passwort eingeben..." style="padding: 0.5rem; border-radius: 5px; border: none;">
-    <button onclick="pruefePasswort('stellwerk')" style="padding: 0.5rem 1rem; margin-left: 0.5rem; background-color: #4f8df5; color: white; border: none; border-radius: 5px; cursor: pointer;">Anzeigen</button>
-    <p id="fehlermeldung-stellwerk" style="color: red; margin-top: 1rem;"></p>
-  </div>
-
-  <div id="stellwerk-pdf" style="display: none;">
-    <iframe class="pdf-frame" src="Stellwerktest_SaifAbdullah.pdf" loading="lazy" onerror="this.outerHTML='<p>PDF konnte nicht geladen werden.</p>'"></iframe>
-  </div>
+  <p class="doc-hint">Das Dokument ist passwortgeschützt. Der PDF-Reader fragt beim Öffnen nach dem Passwort — das Passwort wird auf Anfrage per Email mitgeteilt.</p>
+  <a class="doc-link" href="Stellwerktest_SaifAbdullah.pdf" target="_blank" rel="noopener">PDF öffnen ↗</a>
 </section>
 
 <section id="zeugnisse" class="content-section">
   <h2>Zeugnisse</h2>
-  <div id="zeugnisse-passwortfeld">
-    <p>Bitte Passwort eingeben, um die Zeugnisse anzuzeigen:</p>
-    <input type="password" id="zeugnisse-passwort" placeholder="Passwort eingeben..." style="padding: 0.5rem; border-radius: 5px; border: none;">
-    <button onclick="pruefePasswort('zeugnisse')" style="padding: 0.5rem 1rem; margin-left: 0.5rem; background-color: #4f8df5; color: white; border: none; border-radius: 5px; cursor: pointer;">Anzeigen</button>
-    <p id="fehlermeldung-zeugnisse" style="color: red; margin-top: 1rem;"></p>
-  </div>
-
-  <div id="zeugnisse-pdf" style="display: none;">
-    <iframe class="pdf-frame" src="Zeugnisse_SaifAbdullah.pdf" loading="lazy" onerror="this.outerHTML='<p>PDF konnte nicht geladen werden.</p>'"></iframe>
-  </div>
+  <p class="doc-hint">Das Dokument ist passwortgeschützt. Der PDF-Reader fragt beim Öffnen nach dem Passwort — das Passwort wird auf Anfrage per Email mitgeteilt.</p>
+  <a class="doc-link" href="Zeugnisse_SaifAbdullah.pdf" target="_blank" rel="noopener">PDF öffnen ↗</a>
 </section>
-
-<script>
-  function pruefePasswort(bereich) {
-    const korrektesPasswort = "SaifWebsite1";
-
-    const passwortfeld = document.getElementById(`${bereich}-passwort`);
-    const fehlermeldung = document.getElementById(`fehlermeldung-${bereich}`);
-    const pdfBereich = document.getElementById(`${bereich}-pdf`);
-    const passwortContainer = document.getElementById(`${bereich}-passwortfeld`);
-
-    if (passwortfeld.value === korrektesPasswort) {
-      fehlermeldung.textContent = "";
-      passwortContainer.style.display = "none";
-      pdfBereich.style.display = "block";
-    } else {
-      fehlermeldung.textContent = "Falsches Passwort. Bitte erneut versuchen.";
-    }
-  }
-</script>
 
 <div id="kontakt-panel" role="dialog" aria-label="Kontaktinformationen" class="kontakt-panel">
   <button onclick="closeKontakt()" class="close-btn" aria-label="Kontakt schliessen">✕</button>
   <h2 class="kontakt-title">Kontakt</h2>
-  <div style="display: flex; flex-direction: column; gap: 3rem;">
-  
-  <p><strong>Email:</strong><br><a href="mailto:saifabdullah2411@gmail.com" class="kontakt-link">saifabdullah2411@gmail.com</a></p>
-  <p><strong>Telefon:</strong><br><a href="tel:+41782683822" class="kontakt-link">+41 78 268 38 22</a></p>
-  <p><strong>Adresse:</strong><br>Furttalstrasse 45,<br>8046 Zürich</p>
+  <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+    <div>
+      <span class="kontakt-label">EMAIL</span>
+      <a href="mailto:saifabdullah2411@gmail.com" class="kontakt-link">saifabdullah2411@gmail.com</a>
+    </div>
+    <div>
+      <span class="kontakt-label">TELEFON</span>
+      <a href="tel:+41782683822" class="kontakt-link">+41 78 268 38 22</a>
+    </div>
+    <div>
+      <span class="kontakt-label">ADRESSE</span>
+      Furttalstrasse 45,<br>8046 Zürich
+    </div>
   </div>
 </div>
 
   <footer>
-    © 2025 Saif Abdullah  Alle Rechte vorbehalten
+    © 2025 Saif Abdullah — Alle Rechte vorbehalten
   </footer>
 
   <script>
-    function smoothScroll(targetId) {
-      if (targetId === 'kontakt') {
-        document.getElementById('kontakt-panel').style.right = '0';
-        return;
-      }
-      const target = document.getElementById(targetId);
-      const headerOffset = 80;
-      const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - headerOffset;
-      const startPosition = window.pageYOffset;
-      const distance = targetPosition - startPosition;
-      const duration = 1000;
-      let startTime = null;
-
-      function animation(currentTime) {
-        if (startTime === null) startTime = currentTime;
-        const timeElapsed = currentTime - startTime;
-        const run = easeInOutQuad(timeElapsed, startPosition, distance, duration);
-        window.scrollTo(0, run);
-        if (timeElapsed < duration) requestAnimationFrame(animation);
-      }
-
-      function easeInOutQuad(t, b, c, d) {
-        t /= d/2;
-        if (t < 1) return c/2*t*t + b;
-        t--;
-        return -c/2 * (t*(t-2) - 1) + b;
-      }
-
-      requestAnimationFrame(animation);
+    function openKontakt() {
+      document.getElementById('kontakt-panel').style.right = '0';
     }
 
     function closeKontakt() {
@@ -450,23 +519,8 @@ Ich arbeite täglich daran, mich weiterzuentwickeln, besonders in Mathematik, Te
 
     window.addEventListener('click', function(event) {
       const kontaktPanel = document.getElementById('kontakt-panel');
-      if (kontaktPanel && kontaktPanel.style.right === '0px' && !kontaktPanel.contains(event.target) && event.target.closest('a[onclick*="kontakt"]') === null) {
+      if (kontaktPanel && kontaktPanel.style.right === '0px' && !kontaktPanel.contains(event.target) && !event.target.closest('.nav-link')) {
         closeKontakt();
-      }
-    });
-
-    // Sicherheitsblocker gegen Rechtsklick und DevTools
-    document.addEventListener('contextmenu', function (e) {
-      e.preventDefault();
-    });
-    document.addEventListener('keydown', function (e) {
-      if (
-        e.key === 'F12' ||
-        (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'i') ||
-        (e.ctrlKey && e.key.toLowerCase() === 'u') ||
-        (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'j')
-      ) {
-        e.preventDefault();
       }
     });
   </script>
