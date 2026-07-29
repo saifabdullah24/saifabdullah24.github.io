@@ -274,7 +274,7 @@
       font-weight: 600;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: var(--ink-2);
+      color: var(--accent, var(--ink-2));
       margin-bottom: 0.7rem;
     }
 
@@ -284,7 +284,20 @@
       font-weight: 600;
       letter-spacing: -0.028em;
       margin-bottom: 2.6rem;
+      background: linear-gradient(100deg, var(--g1, #1d1d1f) 0%, var(--g2, #1d1d1f) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      width: fit-content;
+      max-width: 100%;
     }
+
+    /* Apple-Farbwelt pro Sektion */
+    #bewerbung  { --g1: #0071e3; --g2: #5e5ce6; --accent: #0071e3; }
+    #motivation { --g1: #8944ab; --g2: #d4145a; --accent: #a53d9c; }
+    #lebenslauf { --g1: #007d8f; --g2: #0071e3; --accent: #00808f; }
+    #dokumente  { --g1: #c96a00; --g2: #d4145a; --accent: #c05600; }
+    #kontakt    { --g1: #00875a; --g2: #007d8f; --accent: #00875a; }
 
     /* Briefkopf: klar getrennt, mit Luft */
     .letterhead {
@@ -350,7 +363,7 @@
       font-weight: 600;
       letter-spacing: 0.09em;
       text-transform: uppercase;
-      color: var(--ink-2);
+      color: var(--accent, var(--ink-2));
       margin-bottom: 0.9rem;
     }
 
@@ -382,7 +395,11 @@
       text-align: center;
     }
     .doc-card .lock { font-size: 32px; margin-bottom: 0.7rem; display: block; }
-    .doc-card h3 { font-size: 24px; font-weight: 600; letter-spacing: -0.02em; margin-bottom: 0.8rem; }
+    .doc-card h3 {
+      font-size: 24px; font-weight: 600; letter-spacing: -0.02em; margin-bottom: 0.8rem;
+      background: linear-gradient(100deg, var(--g1) 0%, var(--g2) 100%);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
     .doc-card p { font-size: 17px; color: var(--ink-2); max-width: 540px; margin: 0 auto 2rem; line-height: 1.55; }
 
     /* ---------- Kontakt: untereinander ---------- */
@@ -402,7 +419,7 @@
       font-weight: 600;
       letter-spacing: 0.09em;
       text-transform: uppercase;
-      color: var(--ink-2);
+      color: var(--accent, var(--ink-2));
     }
 
     .contact-row dd {
