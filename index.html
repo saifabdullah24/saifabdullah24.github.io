@@ -1,521 +1,677 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta name="description" content="Digitale Bewerbung von Saif Abdullah für eine Lehrstelle">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Saif Abdullah . Bewerbung</title>
+  <meta name="description" content="Digitale Bewerbung von Saif Abdullah für eine Lehrstelle">
+  <title>Saif Abdullah — Bewerbung</title>
   <style>
-    @font-face {
-      font-family: 'Comfortaa';
-      src: url('Comfortaa-Regular.ttf') format('truetype');
-      font-style: normal;
-      font-weight: 300 700;
-      font-display: swap;
-    }
-
     :root {
-      --bg: #0b0d12;
-      --panel: rgba(20, 22, 28, 0.72);
-      --panel-solid: #15171d;
-      --border: rgba(255, 255, 255, 0.08);
-      --text: #e9edf3;
-      --text-dim: #a6adb9;
-      --accent: #5b8cff;
-      --accent-soft: rgba(91, 140, 255, 0.14);
-      --radius: 18px;
-      --maxw: 920px;
+      --ink: #1d1d1f;
+      --ink-2: #6e6e73;
+      --line: #d2d2d7;
+      --bg: #ffffff;
+      --bg-alt: #f5f5f7;
+      --blue: #0071e3;
+      --nav-h: 48px;
+      --maxw: 980px;
+      --font: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text",
+              "Helvetica Neue", Helvetica, Arial, sans-serif;
     }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     html {
       scroll-behavior: smooth;
+      scroll-padding-top: var(--nav-h);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
     body {
-      font-family: 'Comfortaa', system-ui, sans-serif;
-      color: var(--text);
-      background-color: var(--bg);
+      font-family: var(--font);
+      color: var(--ink);
+      background: var(--bg);
+      line-height: 1.47;
+      letter-spacing: -0.01em;
       overflow-x: hidden;
-      line-height: 1.7;
     }
 
-    a { color: inherit; }
-
+    /* ---------- Navigation ---------- */
     header {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      background: rgba(11, 13, 18, 0.55);
-      border-bottom: 1px solid var(--border);
-      padding: 1rem;
-      text-align: center;
-      z-index: 1000;
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-    }
-
-    nav {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 0.25rem;
-    }
-
-    nav a, nav button.nav-link {
-      appearance: none;
-      background: none;
-      border: none;
-      margin: 0 0.35rem;
-      padding: 0.4rem 0.7rem;
-      text-decoration: none;
-      color: var(--text-dim);
-      font-family: inherit;
-      font-size: 0.95rem;
-      font-weight: 600;
-      border-radius: 999px;
-      cursor: pointer;
-      transition: color 0.25s ease, background 0.25s ease;
-    }
-
-    nav a:hover, nav button.nav-link:hover {
-      color: var(--text);
-      background: var(--accent-soft);
-    }
-
-    .hero {
-      min-height: 100vh;
-      padding: 3rem 2rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      position: relative;
-      text-align: center;
-      z-index: 10;
-    }
-
-    .hero::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, rgba(11,13,18,0.35) 0%, rgba(11,13,18,0.75) 100%);
-      z-index: -1;
-    }
-
-    .hero .eyebrow {
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      font-size: 0.8rem;
-      color: var(--accent);
-      margin-bottom: 1rem;
-      font-weight: 700;
-    }
-
-    .hero h1 {
-      font-size: clamp(2.2rem, 6vw, 3.6rem);
-      font-weight: 700;
-      margin-bottom: 0.6rem;
-      letter-spacing: 0.02em;
-    }
-
-    .hero p.tagline {
-      color: var(--text-dim);
-      font-size: 1.05rem;
-      margin-bottom: 2rem;
-    }
-
-    .profile-pic {
-      width: 200px;
-      height: 200px;
-      border-radius: 50%;
-      object-fit: cover;
-      margin-bottom: 1.75rem;
-      border: 3px solid var(--border);
-      box-shadow: 0 20px 60px rgba(0,0,0,0.45);
-    }
-
-    .arrow-down {
-      font-size: 1.5rem;
-      color: var(--text-dim);
-      animation: bounce 2s infinite;
-    }
-
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(8px); }
-    }
-
-    video.bg-video {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
-      height: 100%;
-      object-fit: cover;
-      z-index: -2;
-      opacity: 0.35;
+      height: var(--nav-h);
+      background: rgba(255, 255, 255, 0.72);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+      z-index: 9999;
     }
 
-    .content-section {
-      padding: 3rem 2.5rem;
+    nav {
       max-width: var(--maxw);
-      margin: 2.5rem auto;
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      box-shadow: 0 20px 50px rgba(0,0,0,0.35);
-      text-align: left;
-    }
-
-    .content-section h2 {
-      margin-bottom: 1.75rem;
-      font-size: 1.6rem;
-      color: var(--text);
-      text-align: left;
+      height: 100%;
+      margin: 0 auto;
+      padding: 0 22px;
       display: flex;
       align-items: center;
-      gap: 0.6rem;
+      justify-content: space-between;
+      gap: 1rem;
     }
 
-    .content-section h2::before {
+    .nav-brand {
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      text-decoration: none;
+      color: var(--ink);
+      white-space: nowrap;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.6rem;
+    }
+
+    .nav-links a,
+    .nav-links button {
+      appearance: none;
+      background: none;
+      border: none;
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 0;
+      color: var(--ink);
+      text-decoration: none;
+      opacity: 0.85;
+      cursor: pointer;
+      transition: opacity 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .nav-links a:hover,
+    .nav-links button:hover { opacity: 0.55; }
+
+    @media (max-width: 860px) {
+      .nav-links { gap: 1rem; overflow-x: auto; scrollbar-width: none; }
+      .nav-links::-webkit-scrollbar { display: none; }
+      .nav-brand { display: none; }
+    }
+
+    /* ---------- Hero ---------- */
+    .hero {
+      position: relative;
+      min-height: 100svh;
+      margin-top: var(--nav-h);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 5rem 22px 6rem;
+      background: #000;
+      color: #f5f5f7;
+      overflow: hidden;
+    }
+
+    .hero video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.42;
+      z-index: 0;
+    }
+
+    .hero::after {
       content: "";
-      width: 6px;
-      height: 1.4rem;
-      background: var(--accent);
-      border-radius: 3px;
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.55) 55%, #000 100%);
+      z-index: 1;
+    }
+
+    .hero > * { position: relative; z-index: 2; }
+
+    .hero .eyebrow {
+      font-size: 19px;
+      font-weight: 600;
+      color: #2997ff;
+      margin-bottom: 0.4rem;
+      letter-spacing: 0;
+    }
+
+    .hero h1 {
+      font-size: clamp(46px, 9vw, 88px);
+      line-height: 1.05;
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      margin-bottom: 1rem;
+    }
+
+    .hero .sub {
+      font-size: clamp(19px, 2.4vw, 26px);
+      font-weight: 400;
+      color: rgba(245, 245, 247, 0.82);
+      max-width: 620px;
+      margin: 0 auto 2.5rem;
+      letter-spacing: 0;
+    }
+
+    .hero img.portrait {
+      width: clamp(160px, 26vw, 220px);
+      height: clamp(160px, 26vw, 220px);
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1px solid rgba(255,255,255,0.22);
+      box-shadow: 0 30px 80px rgba(0,0,0,0.55);
+      margin-bottom: 2.5rem;
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      justify-content: center;
+    }
+
+    .btn {
       display: inline-block;
+      font-size: 17px;
+      font-weight: 400;
+      letter-spacing: 0;
+      padding: 12px 22px;
+      border-radius: 980px;
+      text-decoration: none;
+      border: 1px solid transparent;
+      cursor: pointer;
+      font-family: inherit;
+      transition: background 0.2s ease, color 0.2s ease, opacity 0.2s ease;
     }
 
-    .content-section p {
-      margin-bottom: 1.1rem;
-      line-height: 1.75;
-      color: var(--text);
+    .btn-primary {
+      background: var(--blue);
+      color: #fff;
+    }
+    .btn-primary:hover { background: #0077ed; }
+
+    .btn-ghost {
+      background: transparent;
+      color: #2997ff;
+      border-color: rgba(41, 151, 255, 0.6);
+    }
+    .btn-ghost:hover { background: rgba(41, 151, 255, 0.12); }
+
+    /* ---------- Sections ---------- */
+    section.band {
+      padding: clamp(72px, 11vw, 130px) 22px;
     }
 
-    .content-section p strong {
-      color: var(--text);
+    section.band.alt { background: var(--bg-alt); }
+
+    .wrap {
+      max-width: var(--maxw);
+      margin: 0 auto;
+    }
+
+    .wrap.narrow { max-width: 720px; }
+
+    .kicker {
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      color: var(--ink-2);
+      margin-bottom: 0.6rem;
+    }
+
+    h2.title {
+      font-size: clamp(34px, 5.2vw, 56px);
+      line-height: 1.07;
+      font-weight: 600;
+      letter-spacing: -0.025em;
+      margin-bottom: 2.2rem;
     }
 
     .letter-meta {
-      color: var(--text-dim);
-      font-size: 0.95rem;
+      font-size: 15px;
+      color: var(--ink-2);
+      margin-bottom: 1.6rem;
+      line-height: 1.6;
     }
+
+    .prose p {
+      font-size: 19px;
+      line-height: 1.62;
+      letter-spacing: -0.01em;
+      margin-bottom: 1.4rem;
+      color: var(--ink);
+    }
+
+    .prose p strong { font-weight: 600; }
+
+    .prose .lead {
+      font-size: 21px;
+      font-weight: 500;
+    }
+
+    /* ---------- CV ---------- */
+    .cv-head {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem 2.5rem;
+      padding-bottom: 2rem;
+      margin-bottom: 2.5rem;
+      border-bottom: 1px solid var(--line);
+      font-size: 15px;
+      color: var(--ink-2);
+    }
+
+    .cv-head a { color: var(--ink-2); text-decoration: none; }
+    .cv-head a:hover { color: var(--blue); }
 
     .cv-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.5rem;
+      grid-template-columns: 260px 1fr;
+      gap: 3.5rem;
     }
 
-    .cv-box {
-      background-color: rgba(255, 255, 255, 0.03);
-      border: 1px solid var(--border);
-      padding: 1.5rem;
-      border-radius: 12px;
+    @media (max-width: 800px) {
+      .cv-grid { grid-template-columns: 1fr; gap: 2.5rem; }
     }
 
-    .cv-box h3 {
-      color: var(--accent);
-      margin: 1.25rem 0 0.75rem;
-      font-size: 0.85rem;
+    .cv-block { margin-bottom: 2.4rem; }
+
+    .cv-block h3 {
+      font-size: 12px;
+      font-weight: 600;
       letter-spacing: 0.08em;
-      padding-bottom: 0.5rem;
-      border-bottom: 1px solid var(--border);
+      text-transform: uppercase;
+      color: var(--ink-2);
+      margin-bottom: 0.9rem;
     }
 
-    .cv-box h3:first-child {
-      margin-top: 0;
+    .cv-block p,
+    .cv-block li {
+      font-size: 17px;
+      line-height: 1.5;
+      margin-bottom: 0.45rem;
+      list-style: none;
     }
 
-    .cv-box p, .cv-box li, .cv-box div {
-      font-size: 0.92rem;
-      margin: 0.3rem 0;
-      color: var(--text-dim);
+    .cv-block .muted { color: var(--ink-2); font-size: 15px; }
+
+    .entry {
+      display: grid;
+      grid-template-columns: 170px 1fr;
+      gap: 1.5rem;
+      padding: 1.1rem 0;
+      border-top: 1px solid var(--line);
     }
 
-    .cv-box p strong {
-      color: var(--text);
+    .entry:last-child { border-bottom: 1px solid var(--line); }
+
+    .entry .when {
+      font-size: 15px;
+      color: var(--ink-2);
+      white-space: nowrap;
+      padding-top: 2px;
     }
 
-    @media (max-width: 700px) {
-      .cv-grid { grid-template-columns: 1fr; }
+    .entry .what {
+      font-size: 17px;
+      line-height: 1.5;
     }
 
-    .doc-hint {
-      color: var(--text-dim);
-      font-size: 0.92rem;
-      margin-bottom: 1.25rem;
+    .entry .what strong { font-weight: 600; display: block; }
+    .entry .what span { color: var(--ink-2); font-size: 15px; }
+
+    @media (max-width: 640px) {
+      .entry { grid-template-columns: 1fr; gap: 0.25rem; }
     }
 
-    .doc-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      background: var(--accent);
-      color: #fff;
+    /* ---------- Documents ---------- */
+    .doc-card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: clamp(28px, 4vw, 44px);
+      text-align: center;
+    }
+
+    .doc-card .lock {
+      font-size: 34px;
+      margin-bottom: 0.6rem;
+      display: block;
+    }
+
+    .doc-card h3 {
+      font-size: 24px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.7rem;
+    }
+
+    .doc-card p {
+      font-size: 17px;
+      color: var(--ink-2);
+      max-width: 540px;
+      margin: 0 auto 1.8rem;
+      line-height: 1.55;
+    }
+
+    /* ---------- Contact ---------- */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 2.5rem;
+      margin-top: 1rem;
+    }
+
+    .contact-grid h3 {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-2);
+      margin-bottom: 0.7rem;
+    }
+
+    .contact-grid a,
+    .contact-grid p {
+      font-size: 19px;
       text-decoration: none;
-      padding: 0.7rem 1.3rem;
-      border-radius: 10px;
-      font-weight: 700;
-      font-size: 0.95rem;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      color: var(--ink);
+      line-height: 1.5;
     }
 
-    .doc-link:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 24px rgba(91, 140, 255, 0.35);
-    }
+    .contact-grid a:hover { color: var(--blue); }
 
     footer {
+      background: var(--bg-alt);
+      border-top: 1px solid var(--line);
+      padding: 2.2rem 22px;
       text-align: center;
-      padding: 2.5rem 1rem 3rem;
-      color: var(--text-dim);
-      font-size: 0.85rem;
+      font-size: 12px;
+      color: var(--ink-2);
     }
 
-    .kontakt-panel {
-      position: fixed;
-      top: 0;
-      right: -400px;
-      width: min(90%, 320px);
-      height: 100%;
-      background: var(--panel-solid);
-      border-left: 1px solid var(--border);
-      color: var(--text);
-      padding: 2rem;
-      box-shadow: -20px 0 60px rgba(0,0,0,0.5);
-      z-index: 2000;
-      transition: right 0.4s ease;
+    /* ---------- Reveal ---------- */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.9s cubic-bezier(0.28, 0.11, 0.32, 1),
+                  transform 0.9s cubic-bezier(0.28, 0.11, 0.32, 1);
     }
+    .reveal.in { opacity: 1; transform: none; }
 
-    .close-btn {
-      position: absolute;
-      top: 1.25rem;
-      right: 1.25rem;
-      background: none;
-      border: none;
-      color: var(--text-dim);
-      font-size: 1.2rem;
-      cursor: pointer;
-    }
-
-    .close-btn:hover { color: var(--text); }
-
-    .kontakt-title {
-      color: var(--accent);
-      margin-top: 3rem;
-      margin-bottom: 1.5rem;
-      font-size: 1.2rem;
-    }
-
-    .kontakt-label {
-      color: var(--text-dim);
-      font-size: 0.85rem;
-      letter-spacing: 0.05em;
-      display: block;
-      margin-bottom: 0.3rem;
-    }
-
-    .kontakt-link {
-      color: var(--text);
-      text-decoration: none;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .kontakt-link:hover {
-      color: var(--accent);
-      border-color: var(--accent);
-    }
-
-    @media (max-width: 500px) {
-      .kontakt-panel {
-        width: 100%;
-        padding: 1.5rem;
-      }
-      .content-section {
-        padding: 2rem 1.4rem;
-      }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+      html { scroll-behavior: auto; }
     }
   </style>
 </head>
 <body>
-  <video class="bg-video" autoplay muted loop preload="none">
-    <source src="VideoInformatik3.mp4" type="video/mp4">
-  </video>
 
   <header>
     <nav>
-      <a href="#home">Home</a>
-      <a href="#bewerbung">Bewerbung</a>
-      <a href="#motivation">Motivationsschreiben</a>
-      <a href="#lebenslauf">Lebenslauf</a>
-      <a href="#dokumente">Zeugnisse &amp; Stellwerktest</a>
-      <button type="button" class="nav-link" onclick="openKontakt()">Kontakt</button>
+      <a class="nav-brand" href="#home">Saif Abdullah</a>
+      <div class="nav-links">
+        <a href="#bewerbung">Bewerbung</a>
+        <a href="#motivation">Motivation</a>
+        <a href="#lebenslauf">Lebenslauf</a>
+        <a href="#dokumente">Dokumente</a>
+        <a href="#kontakt">Kontakt</a>
+      </div>
     </nav>
   </header>
 
+  <!-- HERO -->
   <section id="home" class="hero">
-    <div class="eyebrow">Bewerbung · Entwickler digitales Business EFZ</div>
-    <h1>SAIF ABDULLAH</h1>
-    <p class="tagline">Lehrstellenbewerbung</p>
-    <img src="SaifAbdullah1.png" alt="Profilbild" class="profile-pic">
-    <div class="arrow-down">↓</div>
+    <video autoplay muted loop playsinline preload="metadata">
+      <source src="VideoInformatik3.mp4" type="video/mp4">
+    </video>
+    <img src="SaifAbdullah1.png" alt="Porträt von Saif Abdullah" class="portrait">
+    <p class="eyebrow">Bewerbung 2026</p>
+    <h1>Saif Abdullah</h1>
+    <p class="sub">Lehrstelle als Entwickler digitales Business EFZ.</p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="#bewerbung">Bewerbung lesen</a>
+      <a class="btn btn-ghost" href="#lebenslauf">Lebenslauf ansehen</a>
+    </div>
   </section>
 
-<section id="bewerbung" class="content-section">
-  <h2>Bewerbung</h2>
-  <p class="letter-meta">AZW<br>Sonnenbergstrasse 14<br>8610 Uster (ZH)</p>
-  <p class="letter-meta">Zürich, <span class="auto-datum"></span></p>
-  <p>Sehr geehrte Damen und Herren</p>
-
-<p>Ich habe kürzlich bei der AZW Uster angerufen, um mich nach Lehrstellen im Bereich Informatik zu erkundigen. Dabei wurde mir mitgeteilt, dass die Lehrstelle als Entwickler digitales Business EFZ noch offen ist. Diese Nachricht hat mich sehr gefreut. Die Möglichkeit, meine Lehre in einem zukunftsgerichteten Bereich beginnen zu dürfen, motiviert mich besonders.</p>
-<p>Die Fachrichtung interessiert mich, weil man dabei nicht nur digitale Anwendungen entwickelt, sondern auch Geschäftsprozesse kennenlernt und optimiert. Bei der AZW Uster ist Informatik ein zentraler Bestandteil des Lehrangebots. Besonders schätze ich, dass Sie grossen Wert auf praxisnahes Lernen, moderne Infrastruktur und persönliche Betreuung legen. Genau in einem solchen Umfeld möchte ich meine Lehre absolvieren.</p>
-<p>Im Sommer letzten Jahres habe ich die Sekundarschule Liguster im Niveau A abgeschlossen. Zurzeit be-suche ich das Berufsvorbereitungsjahr Technik und Informatik an der Fachschule Viventa in Zürich. Besonders in den Fächern Englisch, Deutsch und Mathematik zeige ich gute Leistungen. Im Informatikunterricht arbeite ich mit HTML, CSS, JavaScript und Python. Auch in meiner Freizeit beschäftige ich mich gerne mit Technik. Aktuell programmiere ich mit Arduino und arbeite an einem LED-Streifenprojekt.</p>
-<p>Auch wenn ich bisher keine Schnupperlehre als Entwickler digitales Business EFZ gemacht habe, konnte ich an mehreren Informationsveranstaltungen teilnehmen. Dabei habe ich viel über das Berufsbild erfahren. Das hat meinen Wunsch weiter gestärkt.</p>
-<p>In meiner Freizeit gehe ich ins Fitnessstudio und trainiere Judo. Diese Aktivitäten helfen mir, diszipliniert, ausdauernd und konzentriert zu bleiben. Genau diese Eigenschaften möchte ich in meine Lehre einbringen.</p>
-<p>Ich freue mich darauf, meine Motivation bei einer Schnupperlehre persönlich zu zeigen und danke Ihnen herzlich für die Prüfung meiner Unterlagen. Gerne warte ich auf Ihre Rückmeldung.</p>
-<p>Freundliche Grüsse<br>Saif Abdullah</p>
-</section>
-
-<section id="motivation" class="content-section">
-  <h2>Motivationsschreiben</h2>
-  <p class="letter-meta">AZW<br>Sonnenbergstrasse 14<br>8610 Uster (ZH)</p>
-  <p class="letter-meta">Zürich, <span class="auto-datum"></span></p>
-
-<p><strong>Meine Eignung für die Lehre als Entwickler digitales Business EFZ</strong><br><br>
-Der Beruf Entwickler digitales Business interessiert mich sehr, weil ich mich gerne mit digitalen Lösungen beschäftige. Besonders HTML, CSS und JavaScript faszinieren mich, weil man damit direkt sehen kann, wie digitale Oberflächen entstehen und funktionieren. In der Schule und auch privat arbeite ich oft mit diesen Programmiersprachen und gestalte eigene Webseiten. Es macht mir Freude, Ideen digital umzusetzen und dabei ständig Neues zu lernen.<br><br>
-Ich arbeite konzentriert, sorgfältig und zuverlässig. In der Schule erledige ich Aufgaben sauber und pünktlich. Besonders im selbstorganisierten Lernen bin ich es gewohnt, meine Arbeiten selbst zu planen und umzusetzen. Ich arbeite gerne im Team, bin kommunikativ und bringe mich aktiv in Gruppenarbeiten ein. Diese Eigenschaften möchte ich auch in meine Lehre einbringen.</p>
-
-<p><strong>Warum ich mich für die AZW entschieden habe</strong><br><br>
-Ich habe mich telefonisch und online über die AZW informiert und war sofort überzeugt. Am Standort Uster wird die Lehre als Entwickler digitales Business EFZ angeboten, bei der man digitale Prozesse nicht nur versteht, sondern auch aktiv mitgestaltet. Das hat mich besonders angesprochen.<br><br>
-Bei der AZW Uster steht Informatik im Zentrum und ist nicht einfach ein Zusatzbereich. Lernende arbeiten an realen Projekten, analysieren Geschäftsprozesse, gestalten digitale Lösungen und übernehmen früh Verantwortung. Genau das suche ich. Ich möchte in einer Umgebung lernen, in der moderne Technik, praxisnahes Arbeiten und Teamarbeit zusammenkommen. Ausserdem finde ich es spannend, dass Lernende mit anderen technischen Berufen zusammenarbeiten und auch externe Aufträge bearbeiten dürfen. Ich bin überzeugt, dass ich mich bei der AZW fachlich und persönlich weiterentwickeln kann.</p>
-
-<p><strong>Meine Ziele</strong><br><br>
-Ich arbeite täglich daran, mich weiterzuentwickeln, besonders in Mathematik, Technik und Informatik. In der Oberstufe hatte ich wegen einer Epstein Barr Virus Erkrankung einige Absenzen. Heute geht es mir wieder gut und ich bin sehr motiviert. Ich freue mich darauf, meine Energie und Lernbereitschaft in die Lehre bei der AZW einzubringen.</p>
-
-<p>Freundliche Grüsse<br>Saif Abdullah</p></section>
-
-<script>
-  function heutigesDatumDeutsch() {
-    const heute = new Date();
-    const tage = heute.getDate();
-    const monate = [
-      "Januar", "Februar", "März", "April", "Mai", "Juni",
-      "Juli", "August", "September", "Oktober", "November", "Dezember"
-    ];
-    const monat = monate[heute.getMonth()];
-    const jahr = heute.getFullYear();
-    return `${tage}. ${monat} ${jahr}`;
-  }
-
-  document.addEventListener("DOMContentLoaded", function () {
-    const datumElemente = document.querySelectorAll(".auto-datum");
-    datumElemente.forEach(el => el.textContent = heutigesDatumDeutsch());
-  });
-</script>
-
-
-<section id="lebenslauf" class="content-section">
-  <h2>Lebenslauf</h2>
-  <div class="cv-grid">
-    <div class="cv-box">
-      <h3>PERSÖNLICHES</h3>
-      <p><strong>Name:</strong> Saif Abdullah</p>
-      <p><strong>Geburtsdatum:</strong> 24. November 2008</p>
-      <p><strong>Heimatort:</strong> Zürich</p>
-      <p><strong>Nationalität:</strong> Schweiz, Bangladesch</p>
-      <h3>FAMILIE</h3>
-      <p><strong>Vater:</strong> Saifullah Mohammed Tarek, Pflegehelfer</p>
-      <p><strong>Mutter:</strong> Masuda Parvin, Hort Mitarbeiterin</p>
-      <p><strong>Schwester:</strong> Hazra Tarek, 2015, Schülerin</p>
-      <h3>SPRACHKENNTNISSE</h3>
-      <p><strong>Deutsch:</strong> Erstsprache</p>
-      <p><strong>Englisch:</strong> Schulkenntnisse 3. Jahr</p>
-      <p><strong>Französisch:</strong> Schulkenntnisse 5. Jahr</p>
-      <p><strong>Bengalisch:</strong> Muttersprache</p>
-      <h3>HOBBYS</h3>
-      <p>Gym, Judo, Lesen</p>
-    </div>
-    <div class="cv-box">
-      <h3>BESUCHTE SCHULEN</h3>
-      <ul style="padding-left: 1rem; list-style: none; line-height: 1.8;">
-        <li>2024  Aktuell: Fachschule Viventa, BVJ Technik und Informatik</li>
-        <li>2021  2024: Sekundarschule Liguster Zürich, Niveau A</li>
-        <li>2015  2021: Primarschule Holderbach, Zürich</li>
-      </ul>
-      <h3>SCHNUPPERLEHREN</h3>
-      <div style="padding-left: 1rem; display: flex; flex-direction: column; gap: 0.5rem;">
-        <div>Jan. 2025: FaGe, GFA Witikon, ZH</div>
-        <div>Okt. 2024: Informatiker, Boishaki TV, BD</div>
-        <div>Apr. 2024: FaGe, Hort Ernahof, ZH</div>
-        <div>Jun. 2023: Mediamatiker, Jomb AG, ZH</div>
-        <div>Jun. 2023: MPA, KinderJugend Medizin, ZH</div>
-        <div>Feb. 2023: Informatiker, Alabus AG, ZH</div>
+  <!-- BEWERBUNG -->
+  <section id="bewerbung" class="band">
+    <div class="wrap narrow reveal">
+      <p class="kicker">Bewerbungsschreiben</p>
+      <h2 class="title">Warum ich mich bewerbe.</h2>
+      <p class="letter-meta">
+        AZW · Sonnenbergstrasse 14 · 8610 Uster (ZH)<br>
+        Zürich, <span class="auto-datum"></span>
+      </p>
+      <div class="prose">
+        <p class="lead">Sehr geehrte Damen und Herren</p>
+        <p>Ich habe kürzlich bei der AZW Uster angerufen, um mich nach Lehrstellen im Bereich Informatik zu erkundigen. Dabei wurde mir mitgeteilt, dass die Lehrstelle als Entwickler digitales Business EFZ noch offen ist. Diese Nachricht hat mich sehr gefreut. Die Möglichkeit, meine Lehre in einem zukunftsgerichteten Bereich beginnen zu dürfen, motiviert mich besonders.</p>
+        <p>Die Fachrichtung interessiert mich, weil man dabei nicht nur digitale Anwendungen entwickelt, sondern auch Geschäftsprozesse kennenlernt und optimiert. Bei der AZW Uster ist Informatik ein zentraler Bestandteil des Lehrangebots. Besonders schätze ich, dass Sie grossen Wert auf praxisnahes Lernen, moderne Infrastruktur und persönliche Betreuung legen. Genau in einem solchen Umfeld möchte ich meine Lehre absolvieren.</p>
+        <p>Im Sommer letzten Jahres habe ich die Sekundarschule Liguster im Niveau A abgeschlossen. Zurzeit be-suche ich das Berufsvorbereitungsjahr Technik und Informatik an der Fachschule Viventa in Zürich. Besonders in den Fächern Englisch, Deutsch und Mathematik zeige ich gute Leistungen. Im Informatikunterricht arbeite ich mit HTML, CSS, JavaScript und Python. Auch in meiner Freizeit beschäftige ich mich gerne mit Technik. Aktuell programmiere ich mit Arduino und arbeite an einem LED-Streifenprojekt.</p>
+        <p>Auch wenn ich bisher keine Schnupperlehre als Entwickler digitales Business EFZ gemacht habe, konnte ich an mehreren Informationsveranstaltungen teilnehmen. Dabei habe ich viel über das Berufsbild erfahren. Das hat meinen Wunsch weiter gestärkt.</p>
+        <p>In meiner Freizeit gehe ich ins Fitnessstudio und trainiere Judo. Diese Aktivitäten helfen mir, diszipliniert, ausdauernd und konzentriert zu bleiben. Genau diese Eigenschaften möchte ich in meine Lehre einbringen.</p>
+        <p>Ich freue mich darauf, meine Motivation bei einer Schnupperlehre persönlich zu zeigen und danke Ihnen herzlich für die Prüfung meiner Unterlagen. Gerne warte ich auf Ihre Rückmeldung.</p>
+        <p>Freundliche Grüsse<br>Saif Abdullah</p>
       </div>
-      <h3>REFERENZ</h3>
-      <p>Klassenlehrer: Stefan Herde<br>Email: <a href="mailto:stefan.herde@schulen.zuerich.ch" class="kontakt-link">stefan.herde@schulen.zuerich.ch</a><br>Telefon: <a href="tel:+41444135250" class="kontakt-link">044 413 52 50</a></p>
     </div>
-  </div>
-</section>
+  </section>
 
-<section id="dokumente" class="content-section">
-  <h2>Zeugnisse &amp; Stellwerktest</h2>
-  <p class="doc-hint">Schulzeugnisse und Stellwerktest sind in einem Dokument zusammengefasst. Das PDF ist passwortgeschützt — der PDF-Reader fragt beim Öffnen nach dem Passwort. Das Passwort wird auf Anfrage per Email mitgeteilt.</p>
-  <a class="doc-link" href="Zeugnisse_SaifAbdullah.pdf" target="_blank" rel="noopener">PDF öffnen ↗</a>
-</section>
+  <!-- MOTIVATION -->
+  <section id="motivation" class="band alt">
+    <div class="wrap narrow reveal">
+      <p class="kicker">Motivationsschreiben</p>
+      <h2 class="title">Was mich antreibt.</h2>
+      <p class="letter-meta">
+        AZW · Sonnenbergstrasse 14 · 8610 Uster (ZH)<br>
+        Zürich, <span class="auto-datum"></span>
+      </p>
+      <div class="prose">
+        <p><strong>Meine Eignung für die Lehre als Entwickler digitales Business EFZ</strong></p>
+        <p>Der Beruf Entwickler digitales Business interessiert mich sehr, weil ich mich gerne mit digitalen Lösungen beschäftige. Besonders HTML, CSS und JavaScript faszinieren mich, weil man damit direkt sehen kann, wie digitale Oberflächen entstehen und funktionieren. In der Schule und auch privat arbeite ich oft mit diesen Programmiersprachen und gestalte eigene Webseiten. Es macht mir Freude, Ideen digital umzusetzen und dabei ständig Neues zu lernen.</p>
+        <p>Ich arbeite konzentriert, sorgfältig und zuverlässig. In der Schule erledige ich Aufgaben sauber und pünktlich. Besonders im selbstorganisierten Lernen bin ich es gewohnt, meine Arbeiten selbst zu planen und umzusetzen. Ich arbeite gerne im Team, bin kommunikativ und bringe mich aktiv in Gruppenarbeiten ein. Diese Eigenschaften möchte ich auch in meine Lehre einbringen.</p>
+        <p><strong>Warum ich mich für die AZW entschieden habe</strong></p>
+        <p>Ich habe mich telefonisch und online über die AZW informiert und war sofort überzeugt. Am Standort Uster wird die Lehre als Entwickler digitales Business EFZ angeboten, bei der man digitale Prozesse nicht nur versteht, sondern auch aktiv mitgestaltet. Das hat mich besonders angesprochen.</p>
+        <p>Bei der AZW Uster steht Informatik im Zentrum und ist nicht einfach ein Zusatzbereich. Lernende arbeiten an realen Projekten, analysieren Geschäftsprozesse, gestalten digitale Lösungen und übernehmen früh Verantwortung. Genau das suche ich. Ich möchte in einer Umgebung lernen, in der moderne Technik, praxisnahes Arbeiten und Teamarbeit zusammenkommen. Ausserdem finde ich es spannend, dass Lernende mit anderen technischen Berufen zusammenarbeiten und auch externe Aufträge bearbeiten dürfen. Ich bin überzeugt, dass ich mich bei der AZW fachlich und persönlich weiterentwickeln kann.</p>
+        <p><strong>Meine Ziele</strong></p>
+        <p>Ich arbeite täglich daran, mich weiterzuentwickeln, besonders in Mathematik, Technik und Informatik. In der Oberstufe hatte ich wegen einer Epstein Barr Virus Erkrankung einige Absenzen. Heute geht es mir wieder gut und ich bin sehr motiviert. Ich freue mich darauf, meine Energie und Lernbereitschaft in die Lehre bei der AZW einzubringen.</p>
+        <p>Freundliche Grüsse<br>Saif Abdullah</p>
+      </div>
+    </div>
+  </section>
 
-<div id="kontakt-panel" role="dialog" aria-label="Kontaktinformationen" class="kontakt-panel">
-  <button onclick="closeKontakt()" class="close-btn" aria-label="Kontakt schliessen">✕</button>
-  <h2 class="kontakt-title">Kontakt</h2>
-  <div style="display: flex; flex-direction: column; gap: 1.5rem;">
-    <div>
-      <span class="kontakt-label">EMAIL</span>
-      <a href="mailto:saifabdullah2411@gmail.com" class="kontakt-link">saifabdullah2411@gmail.com</a>
+  <!-- LEBENSLAUF -->
+  <section id="lebenslauf" class="band">
+    <div class="wrap reveal">
+      <p class="kicker">Lebenslauf</p>
+      <h2 class="title">Mein Werdegang.</h2>
+
+      <div class="cv-head">
+        <span>Furttalstrasse 45, 8046 Zürich</span>
+        <a href="tel:+41782683822">+41 78 268 38 22</a>
+        <a href="mailto:saifabdullah2411@gmail.com">saifabdullah2411@gmail.com</a>
+      </div>
+
+      <div class="cv-grid">
+        <aside>
+          <div class="cv-block">
+            <h3>Persönliches</h3>
+            <p>Saif Abdullah</p>
+            <p class="muted">Geboren 24. November 2008</p>
+            <p class="muted">Heimatort Zürich</p>
+            <p class="muted">Schweiz, Bangladesch</p>
+          </div>
+
+          <div class="cv-block">
+            <h3>Familie</h3>
+            <p class="muted">Vater, Pflegehelfer</p>
+            <p class="muted">Mutter, Hortmitarbeiterin</p>
+            <p class="muted">Schwester, Schülerin</p>
+          </div>
+
+          <div class="cv-block">
+            <h3>Sprachen</h3>
+            <p>Deutsch <span class="muted">Erstsprache</span></p>
+            <p>Bengalisch <span class="muted">Muttersprache</span></p>
+            <p>Englisch <span class="muted">Muttersprache</span></p>
+            <p>Französisch <span class="muted">Grundkenntnisse</span></p>
+          </div>
+
+          <div class="cv-block">
+            <h3>Hobbys</h3>
+            <p class="muted">Gym, Judo, Lesen, Kochen</p>
+          </div>
+
+          <div class="cv-block">
+            <h3>Referenz</h3>
+            <p>Dina Lüscher</p>
+            <p class="muted">Coachin JOB PLUS</p>
+            <p class="muted"><a href="tel:+41444128865" style="color:inherit;text-decoration:none;">044 412 88 65</a></p>
+            <p class="muted"><a href="mailto:dina.luescher@zuerich.ch" style="color:inherit;text-decoration:none;">dina.luescher@zuerich.ch</a></p>
+          </div>
+        </aside>
+
+        <div>
+          <div class="cv-block">
+            <h3>Berufserfahrung</h3>
+            <div class="entry">
+              <div class="when">06.2026</div>
+              <div class="what">
+                <strong>Praktikum ICT-Fachmann / Logistik</strong>
+                <span>dPlan Regensdorf · Brückenangebot JOB PLUS, Zürich</span>
+              </div>
+            </div>
+            <div class="entry">
+              <div class="when">15.06.–20.06.2026</div>
+              <div class="what">
+                <strong>Detailhandel (Textil &amp; Einkaufserlebnisse)</strong>
+                <span>Dosenbach, ShopVille</span>
+              </div>
+            </div>
+            <div class="entry">
+              <div class="when">01.2025</div>
+              <div class="what">
+                <strong>Schnupperlehre Fachmann Gesundheit</strong>
+                <span>Gesundheitszentrum Witikon</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="cv-block">
+            <h3>Schulen</h3>
+            <div class="entry">
+              <div class="when">Seit 03.2026</div>
+              <div class="what">
+                <strong>Brückenangebot JOB PLUS</strong>
+                <span>Zürich (1 Tag Schule pro Woche)</span>
+              </div>
+            </div>
+            <div class="entry">
+              <div class="when">08.2025 – 02.2026</div>
+              <div class="what">
+                <strong>Fachmittelschule</strong>
+                <span>Kantonsschule Zürich Nord</span>
+              </div>
+            </div>
+            <div class="entry">
+              <div class="when">08.2024 – 07.2025</div>
+              <div class="what">
+                <strong>Berufsvorbereitungsjahr Viventa</strong>
+                <span>Technik und Informatik, Zürich</span>
+              </div>
+            </div>
+            <div class="entry">
+              <div class="when">08.2021 – 07.2024</div>
+              <div class="what">
+                <strong>Sekundarschule Liguster, Niveau A</strong>
+                <span>Zürich</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div>
-      <span class="kontakt-label">TELEFON</span>
-      <a href="tel:+41782683822" class="kontakt-link">+41 78 268 38 22</a>
+  </section>
+
+  <!-- DOKUMENTE -->
+  <section id="dokumente" class="band alt">
+    <div class="wrap narrow reveal">
+      <p class="kicker">Unterlagen</p>
+      <h2 class="title">Zeugnisse &amp; Stellwerktest.</h2>
+      <div class="doc-card">
+        <span class="lock" aria-hidden="true">🔒</span>
+        <h3>Ein Dokument, passwortgeschützt</h3>
+        <p>Schulzeugnisse und Stellwerktest sind in einer PDF-Datei zusammengefasst. Die Datei ist verschlüsselt — beim Öffnen fragt der PDF-Reader nach dem Passwort. Das Passwort teile ich Ihnen gerne per E-Mail mit.</p>
+        <a class="btn btn-primary" href="Zeugnisse_SaifAbdullah.pdf" target="_blank" rel="noopener">PDF öffnen</a>
+      </div>
     </div>
-    <div>
-      <span class="kontakt-label">ADRESSE</span>
-      Furttalstrasse 45,<br>8046 Zürich
+  </section>
+
+  <!-- KONTAKT -->
+  <section id="kontakt" class="band">
+    <div class="wrap narrow reveal">
+      <p class="kicker">Kontakt</p>
+      <h2 class="title">Ich freue mich auf Ihre Rückmeldung.</h2>
+      <div class="contact-grid">
+        <div>
+          <h3>E-Mail</h3>
+          <a href="mailto:saifabdullah2411@gmail.com">saifabdullah2411@gmail.com</a>
+        </div>
+        <div>
+          <h3>Telefon</h3>
+          <a href="tel:+41782683822">+41 78 268 38 22</a>
+        </div>
+        <div>
+          <h3>Adresse</h3>
+          <p>Furttalstrasse 45<br>8046 Zürich</p>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
+  </section>
 
   <footer>
-    © 2025 Saif Abdullah — Alle Rechte vorbehalten
+    © 2026 Saif Abdullah — Alle Rechte vorbehalten
   </footer>
 
   <script>
-    function openKontakt() {
-      document.getElementById('kontakt-panel').style.right = '0';
-    }
+    // Datum
+    (function () {
+      const monate = ["Januar","Februar","März","April","Mai","Juni",
+                      "Juli","August","September","Oktober","November","Dezember"];
+      const h = new Date();
+      const text = h.getDate() + ". " + monate[h.getMonth()] + " " + h.getFullYear();
+      document.querySelectorAll(".auto-datum").forEach(el => el.textContent = text);
+    })();
 
-    function closeKontakt() {
-      document.getElementById('kontakt-panel').style.right = '-400px';
-    }
-
-    document.addEventListener('keydown', function(event) {
-      if (event.key === 'Escape') {
-        closeKontakt();
+    // Scroll-Reveal
+    (function () {
+      const els = document.querySelectorAll(".reveal");
+      if (!("IntersectionObserver" in window)) {
+        els.forEach(el => el.classList.add("in"));
+        return;
       }
-    });
-
-    window.addEventListener('click', function(event) {
-      const kontaktPanel = document.getElementById('kontakt-panel');
-      if (kontaktPanel && kontaktPanel.style.right === '0px' && !kontaktPanel.contains(event.target) && !event.target.closest('.nav-link')) {
-        closeKontakt();
-      }
-    });
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.classList.add("in");
+            io.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: "0px 0px -60px 0px" });
+      els.forEach(el => io.observe(el));
+    })();
   </script>
 </body>
 </html>
