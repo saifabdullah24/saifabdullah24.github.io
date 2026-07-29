@@ -13,7 +13,7 @@
       --bg: #ffffff;
       --bg-alt: #f5f5f7;
       --blue: #0071e3;
-      --nav-h: 48px;
+      --nav-h: 52px;
       --maxw: 980px;
       --font: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text",
               "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -62,30 +62,31 @@
       gap: 1rem;
     }
 
-    .nav-brand {
-      font-size: 15px;
+    .nav-home {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-size: 14px;
       font-weight: 600;
-      letter-spacing: -0.02em;
+      letter-spacing: -0.01em;
       text-decoration: none;
       color: var(--ink);
       white-space: nowrap;
+      opacity: 0.9;
+      transition: opacity 0.2s ease;
     }
+    .nav-home:hover { opacity: 0.55; }
+    .nav-home svg { width: 15px; height: 15px; flex: none; }
 
     .nav-links {
       display: flex;
       align-items: center;
-      gap: 1.6rem;
+      gap: 1.5rem;
     }
 
-    .nav-links a,
-    .nav-links button {
-      appearance: none;
-      background: none;
-      border: none;
-      font-family: inherit;
-      font-size: 12px;
+    .nav-links a {
+      font-size: 12.5px;
       font-weight: 400;
-      letter-spacing: 0;
       color: var(--ink);
       text-decoration: none;
       opacity: 0.85;
@@ -93,14 +94,41 @@
       transition: opacity 0.2s ease;
       white-space: nowrap;
     }
+    .nav-links a:hover { opacity: 0.5; }
 
-    .nav-links a:hover,
-    .nav-links button:hover { opacity: 0.55; }
+    /* Sprachumschalter */
+    .lang {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid rgba(0,0,0,0.16);
+      border-radius: 980px;
+      overflow: hidden;
+      flex: none;
+    }
 
-    @media (max-width: 860px) {
-      .nav-links { gap: 1rem; overflow-x: auto; scrollbar-width: none; }
+    .lang button {
+      appearance: none;
+      border: none;
+      background: transparent;
+      font-family: inherit;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--ink-2);
+      padding: 4px 10px;
+      cursor: pointer;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+
+    .lang button.active {
+      background: var(--ink);
+      color: #fff;
+    }
+
+    @media (max-width: 900px) {
+      .nav-links { gap: 0.95rem; overflow-x: auto; scrollbar-width: none; }
       .nav-links::-webkit-scrollbar { display: none; }
-      .nav-brand { display: none; }
+      .nav-home span { display: none; }
     }
 
     /* ---------- Hero ---------- */
@@ -113,285 +141,282 @@
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 5rem 22px 6rem;
+      padding: 6rem 22px 7rem;
       background: #000;
       color: #f5f5f7;
       overflow: hidden;
+      isolation: isolate;
     }
 
-    .hero video {
+    /* mehrschichtiger, ruhiger Verlauf statt Video */
+    .hero::before {
+      content: "";
       position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      opacity: 0.42;
-      z-index: 0;
+      inset: -20%;
+      z-index: -2;
+      background:
+        radial-gradient(closest-side at 50% 22%, rgba(70, 120, 220, 0.30), transparent 70%),
+        radial-gradient(closest-side at 18% 78%, rgba(120, 90, 210, 0.22), transparent 70%),
+        radial-gradient(closest-side at 84% 70%, rgba(0, 140, 200, 0.20), transparent 70%),
+        linear-gradient(180deg, #05070d 0%, #0a0d16 45%, #000 100%);
+      animation: drift 22s ease-in-out infinite alternate;
     }
 
+    /* feine Rasterlinien für Tiefe */
     .hero::after {
       content: "";
       position: absolute;
       inset: 0;
-      background: linear-gradient(180deg, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.55) 55%, #000 100%);
-      z-index: 1;
+      z-index: -1;
+      background:
+        linear-gradient(rgba(255,255,255,0.045) 1px, transparent 1px) 0 0 / 100% 76px,
+        linear-gradient(90deg, rgba(255,255,255,0.045) 1px, transparent 1px) 0 0 / 76px 100%;
+      mask-image: radial-gradient(closest-side at 50% 45%, #000 35%, transparent 100%);
+      -webkit-mask-image: radial-gradient(closest-side at 50% 45%, #000 35%, transparent 100%);
+      opacity: 0.7;
     }
 
-    .hero > * { position: relative; z-index: 2; }
+    @keyframes drift {
+      from { transform: translate3d(-1.5%, -1%, 0) scale(1.02); }
+      to   { transform: translate3d(1.5%, 1.5%, 0) scale(1.06); }
+    }
 
-    .hero .eyebrow {
-      font-size: 19px;
-      font-weight: 600;
-      color: #2997ff;
-      margin-bottom: 0.4rem;
-      letter-spacing: 0;
+    .portrait-frame {
+      position: relative;
+      display: grid;
+      place-items: center;
+      margin-bottom: 2.6rem;
+    }
+
+    .portrait-frame::before,
+    .portrait-frame::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.14);
+    }
+    .portrait-frame::before { inset: -18px; }
+    .portrait-frame::after  { inset: -40px; border-color: rgba(255,255,255,0.07); }
+
+    .hero img.portrait {
+      width: clamp(180px, 27vw, 250px);
+      height: clamp(180px, 27vw, 250px);
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+      border: 1px solid rgba(255,255,255,0.25);
+      box-shadow: 0 40px 90px rgba(0,0,0,0.65),
+                  0 0 0 1px rgba(255,255,255,0.05) inset;
     }
 
     .hero h1 {
-      font-size: clamp(46px, 9vw, 88px);
-      line-height: 1.05;
+      font-size: clamp(48px, 9vw, 92px);
+      line-height: 1.04;
       font-weight: 600;
-      letter-spacing: -0.03em;
+      letter-spacing: -0.035em;
       margin-bottom: 1rem;
+      background: linear-gradient(180deg, #ffffff 25%, #b9bfcc 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
     }
 
     .hero .sub {
-      font-size: clamp(19px, 2.4vw, 26px);
+      font-size: clamp(19px, 2.3vw, 25px);
       font-weight: 400;
-      color: rgba(245, 245, 247, 0.82);
-      max-width: 620px;
-      margin: 0 auto 2.5rem;
+      color: rgba(245, 245, 247, 0.78);
+      max-width: 600px;
+      margin: 0 auto 2.8rem;
       letter-spacing: 0;
-    }
-
-    .hero img.portrait {
-      width: clamp(160px, 26vw, 220px);
-      height: clamp(160px, 26vw, 220px);
-      border-radius: 50%;
-      object-fit: cover;
-      border: 1px solid rgba(255,255,255,0.22);
-      box-shadow: 0 30px 80px rgba(0,0,0,0.55);
-      margin-bottom: 2.5rem;
+      line-height: 1.4;
     }
 
     .cta-row {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.75rem;
+      gap: 0.8rem;
       justify-content: center;
     }
 
     .btn {
       display: inline-block;
-      font-size: 17px;
+      font-size: 16px;
       font-weight: 400;
       letter-spacing: 0;
-      padding: 12px 22px;
+      padding: 12px 24px;
       border-radius: 980px;
       text-decoration: none;
       border: 1px solid transparent;
       cursor: pointer;
       font-family: inherit;
-      transition: background 0.2s ease, color 0.2s ease, opacity 0.2s ease;
+      transition: background 0.22s ease, color 0.22s ease, transform 0.22s ease;
     }
 
-    .btn-primary {
-      background: var(--blue);
-      color: #fff;
-    }
-    .btn-primary:hover { background: #0077ed; }
+    .btn-primary { background: var(--blue); color: #fff; }
+    .btn-primary:hover { background: #0077ed; transform: translateY(-1px); }
 
     .btn-ghost {
       background: transparent;
       color: #2997ff;
-      border-color: rgba(41, 151, 255, 0.6);
+      border-color: rgba(41, 151, 255, 0.55);
     }
-    .btn-ghost:hover { background: rgba(41, 151, 255, 0.12); }
+    .btn-ghost:hover { background: rgba(41, 151, 255, 0.12); transform: translateY(-1px); }
 
     /* ---------- Sections ---------- */
-    section.band {
-      padding: clamp(72px, 11vw, 130px) 22px;
-    }
-
+    section.band { padding: clamp(76px, 11vw, 132px) 22px; }
     section.band.alt { background: var(--bg-alt); }
 
-    .wrap {
-      max-width: var(--maxw);
-      margin: 0 auto;
-    }
-
+    .wrap { max-width: var(--maxw); margin: 0 auto; }
     .wrap.narrow { max-width: 720px; }
 
     .kicker {
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 600;
-      letter-spacing: 0.02em;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
       color: var(--ink-2);
-      margin-bottom: 0.6rem;
+      margin-bottom: 0.7rem;
     }
 
     h2.title {
       font-size: clamp(34px, 5.2vw, 56px);
       line-height: 1.07;
       font-weight: 600;
-      letter-spacing: -0.025em;
-      margin-bottom: 2.2rem;
+      letter-spacing: -0.028em;
+      margin-bottom: 2.6rem;
     }
 
-    .letter-meta {
-      font-size: 15px;
+    /* Briefkopf: klar getrennt, mit Luft */
+    .letterhead {
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      padding: 1.9rem 0;
+      margin-bottom: 3.2rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 1.8rem 3rem;
+    }
+
+    .letterhead .lh-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
       color: var(--ink-2);
-      margin-bottom: 1.6rem;
-      line-height: 1.6;
+      margin-bottom: 0.7rem;
+    }
+
+    .letterhead .lh-body {
+      font-size: 16px;
+      line-height: 1.75;
+      color: var(--ink);
     }
 
     .prose p {
       font-size: 19px;
-      line-height: 1.62;
+      line-height: 1.65;
       letter-spacing: -0.01em;
-      margin-bottom: 1.4rem;
+      margin-bottom: 1.5rem;
       color: var(--ink);
     }
 
     .prose p strong { font-weight: 600; }
-
-    .prose .lead {
-      font-size: 21px;
-      font-weight: 500;
-    }
+    .prose .lead { font-size: 21px; font-weight: 500; margin-bottom: 1.8rem; }
+    .prose .sub-h { margin-top: 2.6rem; margin-bottom: 1rem; }
+    .prose .sign { margin-top: 2.4rem; }
 
     /* ---------- CV ---------- */
     .cv-head {
       display: flex;
       flex-wrap: wrap;
-      gap: 1.5rem 2.5rem;
+      gap: 1.2rem 2.5rem;
       padding-bottom: 2rem;
-      margin-bottom: 2.5rem;
+      margin-bottom: 2.8rem;
       border-bottom: 1px solid var(--line);
       font-size: 15px;
       color: var(--ink-2);
     }
-
     .cv-head a { color: var(--ink-2); text-decoration: none; }
     .cv-head a:hover { color: var(--blue); }
 
-    .cv-grid {
-      display: grid;
-      grid-template-columns: 260px 1fr;
-      gap: 3.5rem;
-    }
+    .cv-grid { display: grid; grid-template-columns: 260px 1fr; gap: 3.5rem; }
+    @media (max-width: 800px) { .cv-grid { grid-template-columns: 1fr; gap: 2.5rem; } }
 
-    @media (max-width: 800px) {
-      .cv-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-    }
-
-    .cv-block { margin-bottom: 2.4rem; }
+    .cv-block { margin-bottom: 2.5rem; }
 
     .cv-block h3 {
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 600;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.09em;
       text-transform: uppercase;
       color: var(--ink-2);
       margin-bottom: 0.9rem;
     }
 
-    .cv-block p,
-    .cv-block li {
-      font-size: 17px;
-      line-height: 1.5;
-      margin-bottom: 0.45rem;
-      list-style: none;
-    }
-
+    .cv-block p { font-size: 17px; line-height: 1.5; margin-bottom: 0.45rem; }
     .cv-block .muted { color: var(--ink-2); font-size: 15px; }
+    .cv-block a { color: inherit; text-decoration: none; }
+    .cv-block a:hover { color: var(--blue); }
 
     .entry {
       display: grid;
       grid-template-columns: 170px 1fr;
       gap: 1.5rem;
-      padding: 1.1rem 0;
+      padding: 1.15rem 0;
       border-top: 1px solid var(--line);
     }
-
     .entry:last-child { border-bottom: 1px solid var(--line); }
-
-    .entry .when {
-      font-size: 15px;
-      color: var(--ink-2);
-      white-space: nowrap;
-      padding-top: 2px;
-    }
-
-    .entry .what {
-      font-size: 17px;
-      line-height: 1.5;
-    }
-
+    .entry .when { font-size: 15px; color: var(--ink-2); white-space: nowrap; padding-top: 2px; }
+    .entry .what { font-size: 17px; line-height: 1.5; }
     .entry .what strong { font-weight: 600; display: block; }
     .entry .what span { color: var(--ink-2); font-size: 15px; }
+    @media (max-width: 640px) { .entry { grid-template-columns: 1fr; gap: 0.25rem; } }
 
-    @media (max-width: 640px) {
-      .entry { grid-template-columns: 1fr; gap: 0.25rem; }
-    }
-
-    /* ---------- Documents ---------- */
+    /* ---------- Dokumente ---------- */
     .doc-card {
       background: #fff;
       border: 1px solid var(--line);
-      border-radius: 18px;
-      padding: clamp(28px, 4vw, 44px);
+      border-radius: 20px;
+      padding: clamp(30px, 4vw, 48px);
       text-align: center;
     }
+    .doc-card .lock { font-size: 32px; margin-bottom: 0.7rem; display: block; }
+    .doc-card h3 { font-size: 24px; font-weight: 600; letter-spacing: -0.02em; margin-bottom: 0.8rem; }
+    .doc-card p { font-size: 17px; color: var(--ink-2); max-width: 540px; margin: 0 auto 2rem; line-height: 1.55; }
 
-    .doc-card .lock {
-      font-size: 34px;
-      margin-bottom: 0.6rem;
-      display: block;
-    }
+    /* ---------- Kontakt: untereinander ---------- */
+    .contact-list { border-top: 1px solid var(--line); }
 
-    .doc-card h3 {
-      font-size: 24px;
-      font-weight: 600;
-      letter-spacing: -0.02em;
-      margin-bottom: 0.7rem;
-    }
-
-    .doc-card p {
-      font-size: 17px;
-      color: var(--ink-2);
-      max-width: 540px;
-      margin: 0 auto 1.8rem;
-      line-height: 1.55;
-    }
-
-    /* ---------- Contact ---------- */
-    .contact-grid {
+    .contact-row {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-      gap: 2.5rem;
-      margin-top: 1rem;
+      grid-template-columns: 150px 1fr;
+      gap: 1.5rem;
+      align-items: baseline;
+      padding: 1.5rem 0;
+      border-bottom: 1px solid var(--line);
     }
 
-    .contact-grid h3 {
-      font-size: 12px;
+    .contact-row dt {
+      font-size: 11px;
       font-weight: 600;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.09em;
       text-transform: uppercase;
       color: var(--ink-2);
-      margin-bottom: 0.7rem;
     }
 
-    .contact-grid a,
-    .contact-grid p {
-      font-size: 19px;
-      text-decoration: none;
-      color: var(--ink);
+    .contact-row dd {
+      font-size: 20px;
       line-height: 1.5;
+      color: var(--ink);
     }
 
-    .contact-grid a:hover { color: var(--blue); }
+    .contact-row dd a { color: inherit; text-decoration: none; }
+    .contact-row dd a:hover { color: var(--blue); }
+
+    @media (max-width: 600px) {
+      .contact-row { grid-template-columns: 1fr; gap: 0.4rem; }
+    }
 
     footer {
       background: var(--bg-alt);
@@ -405,14 +430,15 @@
     /* ---------- Reveal ---------- */
     .reveal {
       opacity: 0;
-      transform: translateY(28px);
-      transition: opacity 0.9s cubic-bezier(0.28, 0.11, 0.32, 1),
-                  transform 0.9s cubic-bezier(0.28, 0.11, 0.32, 1);
+      transform: translateY(26px);
+      transition: opacity 0.85s cubic-bezier(0.28, 0.11, 0.32, 1),
+                  transform 0.85s cubic-bezier(0.28, 0.11, 0.32, 1);
     }
     .reveal.in { opacity: 1; transform: none; }
 
     @media (prefers-reduced-motion: reduce) {
       .reveal { opacity: 1; transform: none; transition: none; }
+      .hero::before { animation: none; }
       html { scroll-behavior: auto; }
     }
   </style>
@@ -421,50 +447,102 @@
 
   <header>
     <nav>
-      <a class="nav-brand" href="#home">Saif Abdullah</a>
+      <a class="nav-home" href="#home" aria-label="Home">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M3 10.5 12 3l9 7.5"></path>
+          <path d="M5 9.5V21h14V9.5"></path>
+        </svg>
+        <span data-de="Home" data-en="Home">Home</span>
+      </a>
+
       <div class="nav-links">
-        <a href="#bewerbung">Bewerbung</a>
-        <a href="#motivation">Motivation</a>
-        <a href="#lebenslauf">Lebenslauf</a>
-        <a href="#dokumente">Dokumente</a>
-        <a href="#kontakt">Kontakt</a>
+        <a href="#bewerbung"  data-de="Bewerbung"  data-en="Application">Bewerbung</a>
+        <a href="#motivation" data-de="Motivation" data-en="Motivation">Motivation</a>
+        <a href="#lebenslauf" data-de="Lebenslauf" data-en="CV">Lebenslauf</a>
+        <a href="#dokumente"  data-de="Dokumente"  data-en="Documents">Dokumente</a>
+        <a href="#kontakt"    data-de="Kontakt"    data-en="Contact">Kontakt</a>
+      </div>
+
+      <div class="lang" role="group" aria-label="Sprache / Language">
+        <button type="button" id="btn-de" class="active" onclick="setLang('de')">DE</button>
+        <button type="button" id="btn-en" onclick="setLang('en')">EN</button>
       </div>
     </nav>
   </header>
 
   <!-- HERO -->
   <section id="home" class="hero">
-    <video autoplay muted loop playsinline preload="metadata">
-      <source src="VideoInformatik3.mp4" type="video/mp4">
-    </video>
-    <img src="SaifAbdullah1.png" alt="Porträt von Saif Abdullah" class="portrait">
-    <p class="eyebrow">Bewerbung 2026</p>
+    <div class="portrait-frame">
+      <img src="SaifAbdullah1.png" alt="Saif Abdullah" class="portrait">
+    </div>
     <h1>Saif Abdullah</h1>
-    <p class="sub">Lehrstelle als Entwickler digitales Business EFZ.</p>
+    <p class="sub"
+       data-de="Bewerbung für die Lehrstelle als Entwickler digitales Business EFZ."
+       data-en="Application for an apprenticeship as Digital Business Developer EFZ.">
+      Bewerbung für die Lehrstelle als Entwickler digitales Business EFZ.
+    </p>
     <div class="cta-row">
-      <a class="btn btn-primary" href="#bewerbung">Bewerbung lesen</a>
-      <a class="btn btn-ghost" href="#lebenslauf">Lebenslauf ansehen</a>
+      <a class="btn btn-primary" href="#bewerbung"
+         data-de="Bewerbung lesen" data-en="Read application">Bewerbung lesen</a>
+      <a class="btn btn-ghost" href="#lebenslauf"
+         data-de="Lebenslauf ansehen" data-en="View CV">Lebenslauf ansehen</a>
     </div>
   </section>
 
   <!-- BEWERBUNG -->
   <section id="bewerbung" class="band">
     <div class="wrap narrow reveal">
-      <p class="kicker">Bewerbungsschreiben</p>
-      <h2 class="title">Warum ich mich bewerbe.</h2>
-      <p class="letter-meta">
-        AZW · Sonnenbergstrasse 14 · 8610 Uster (ZH)<br>
-        Zürich, <span class="auto-datum"></span>
-      </p>
+      <p class="kicker" data-de="Bewerbungsschreiben" data-en="Application letter">Bewerbungsschreiben</p>
+      <h2 class="title" data-de="Warum ich mich bewerbe." data-en="Why I am applying.">Warum ich mich bewerbe.</h2>
+
+      <div class="letterhead">
+        <div>
+          <div class="lh-label" data-de="Adressiert an" data-en="Addressed to">Adressiert an</div>
+          <div class="lh-body">AZW<br>Sonnenbergstrasse 14<br>8610 Uster (ZH)</div>
+        </div>
+        <div>
+          <div class="lh-label" data-de="Ort und Datum" data-en="Place and date">Ort und Datum</div>
+          <div class="lh-body">Zürich<br><span class="auto-datum"></span></div>
+        </div>
+      </div>
+
       <div class="prose">
-        <p class="lead">Sehr geehrte Damen und Herren</p>
-        <p>Ich habe kürzlich bei der AZW Uster angerufen, um mich nach Lehrstellen im Bereich Informatik zu erkundigen. Dabei wurde mir mitgeteilt, dass die Lehrstelle als Entwickler digitales Business EFZ noch offen ist. Diese Nachricht hat mich sehr gefreut. Die Möglichkeit, meine Lehre in einem zukunftsgerichteten Bereich beginnen zu dürfen, motiviert mich besonders.</p>
-        <p>Die Fachrichtung interessiert mich, weil man dabei nicht nur digitale Anwendungen entwickelt, sondern auch Geschäftsprozesse kennenlernt und optimiert. Bei der AZW Uster ist Informatik ein zentraler Bestandteil des Lehrangebots. Besonders schätze ich, dass Sie grossen Wert auf praxisnahes Lernen, moderne Infrastruktur und persönliche Betreuung legen. Genau in einem solchen Umfeld möchte ich meine Lehre absolvieren.</p>
-        <p>Im Sommer letzten Jahres habe ich die Sekundarschule Liguster im Niveau A abgeschlossen. Zurzeit be-suche ich das Berufsvorbereitungsjahr Technik und Informatik an der Fachschule Viventa in Zürich. Besonders in den Fächern Englisch, Deutsch und Mathematik zeige ich gute Leistungen. Im Informatikunterricht arbeite ich mit HTML, CSS, JavaScript und Python. Auch in meiner Freizeit beschäftige ich mich gerne mit Technik. Aktuell programmiere ich mit Arduino und arbeite an einem LED-Streifenprojekt.</p>
-        <p>Auch wenn ich bisher keine Schnupperlehre als Entwickler digitales Business EFZ gemacht habe, konnte ich an mehreren Informationsveranstaltungen teilnehmen. Dabei habe ich viel über das Berufsbild erfahren. Das hat meinen Wunsch weiter gestärkt.</p>
-        <p>In meiner Freizeit gehe ich ins Fitnessstudio und trainiere Judo. Diese Aktivitäten helfen mir, diszipliniert, ausdauernd und konzentriert zu bleiben. Genau diese Eigenschaften möchte ich in meine Lehre einbringen.</p>
-        <p>Ich freue mich darauf, meine Motivation bei einer Schnupperlehre persönlich zu zeigen und danke Ihnen herzlich für die Prüfung meiner Unterlagen. Gerne warte ich auf Ihre Rückmeldung.</p>
-        <p>Freundliche Grüsse<br>Saif Abdullah</p>
+        <p class="lead" data-de="Sehr geehrte Damen und Herren" data-en="Dear Sir or Madam">Sehr geehrte Damen und Herren</p>
+
+        <p data-de="Ich habe kürzlich bei der AZW Uster angerufen, um mich nach Lehrstellen im Bereich Informatik zu erkundigen. Dabei wurde mir mitgeteilt, dass die Lehrstelle als Entwickler digitales Business EFZ noch offen ist. Diese Nachricht hat mich sehr gefreut. Die Möglichkeit, meine Lehre in einem zukunftsgerichteten Bereich beginnen zu dürfen, motiviert mich besonders."
+           data-en="I recently called AZW Uster to ask about apprenticeships in IT. I was told that the apprenticeship as Digital Business Developer EFZ is still open. I was very happy to hear this. The chance to start my apprenticeship in a field with a strong future motivates me a lot.">
+          Ich habe kürzlich bei der AZW Uster angerufen, um mich nach Lehrstellen im Bereich Informatik zu erkundigen. Dabei wurde mir mitgeteilt, dass die Lehrstelle als Entwickler digitales Business EFZ noch offen ist. Diese Nachricht hat mich sehr gefreut. Die Möglichkeit, meine Lehre in einem zukunftsgerichteten Bereich beginnen zu dürfen, motiviert mich besonders.
+        </p>
+
+        <p data-de="Die Fachrichtung interessiert mich, weil man dabei nicht nur digitale Anwendungen entwickelt, sondern auch Geschäftsprozesse kennenlernt und optimiert. Bei der AZW Uster ist Informatik ein zentraler Bestandteil des Lehrangebots. Besonders schätze ich, dass Sie grossen Wert auf praxisnahes Lernen, moderne Infrastruktur und persönliche Betreuung legen. Genau in einem solchen Umfeld möchte ich meine Lehre absolvieren."
+           data-en="This field interests me because you do not only build digital applications, you also learn about business processes and improve them. At AZW Uster, IT is a central part of the training. I especially value that you focus on practical learning, modern equipment and personal support. This is exactly the environment where I would like to do my apprenticeship.">
+          Die Fachrichtung interessiert mich, weil man dabei nicht nur digitale Anwendungen entwickelt, sondern auch Geschäftsprozesse kennenlernt und optimiert. Bei der AZW Uster ist Informatik ein zentraler Bestandteil des Lehrangebots. Besonders schätze ich, dass Sie grossen Wert auf praxisnahes Lernen, moderne Infrastruktur und persönliche Betreuung legen. Genau in einem solchen Umfeld möchte ich meine Lehre absolvieren.
+        </p>
+
+        <p data-de="Im Sommer letzten Jahres habe ich die Sekundarschule Liguster im Niveau A abgeschlossen. Zurzeit be-suche ich das Berufsvorbereitungsjahr Technik und Informatik an der Fachschule Viventa in Zürich. Besonders in den Fächern Englisch, Deutsch und Mathematik zeige ich gute Leistungen. Im Informatikunterricht arbeite ich mit HTML, CSS, JavaScript und Python. Auch in meiner Freizeit beschäftige ich mich gerne mit Technik. Aktuell programmiere ich mit Arduino und arbeite an einem LED-Streifenprojekt."
+           data-en="Last summer I finished secondary school Liguster at level A. At the moment I attend the pre-apprenticeship year for technology and IT at Fachschule Viventa in Zurich. My results are especially good in English, German and mathematics. In IT lessons I work with HTML, CSS, JavaScript and Python. I also enjoy technology in my free time. Right now I am programming with Arduino and working on an LED strip project.">
+          Im Sommer letzten Jahres habe ich die Sekundarschule Liguster im Niveau A abgeschlossen. Zurzeit be-suche ich das Berufsvorbereitungsjahr Technik und Informatik an der Fachschule Viventa in Zürich. Besonders in den Fächern Englisch, Deutsch und Mathematik zeige ich gute Leistungen. Im Informatikunterricht arbeite ich mit HTML, CSS, JavaScript und Python. Auch in meiner Freizeit beschäftige ich mich gerne mit Technik. Aktuell programmiere ich mit Arduino und arbeite an einem LED-Streifenprojekt.
+        </p>
+
+        <p data-de="Auch wenn ich bisher keine Schnupperlehre als Entwickler digitales Business EFZ gemacht habe, konnte ich an mehreren Informationsveranstaltungen teilnehmen. Dabei habe ich viel über das Berufsbild erfahren. Das hat meinen Wunsch weiter gestärkt."
+           data-en="Even though I have not done a trial apprenticeship as Digital Business Developer EFZ yet, I took part in several information events. There I learned a lot about the profession. This made my wish even stronger.">
+          Auch wenn ich bisher keine Schnupperlehre als Entwickler digitales Business EFZ gemacht habe, konnte ich an mehreren Informationsveranstaltungen teilnehmen. Dabei habe ich viel über das Berufsbild erfahren. Das hat meinen Wunsch weiter gestärkt.
+        </p>
+
+        <p data-de="In meiner Freizeit gehe ich ins Fitnessstudio und trainiere Judo. Diese Aktivitäten helfen mir, diszipliniert, ausdauernd und konzentriert zu bleiben. Genau diese Eigenschaften möchte ich in meine Lehre einbringen."
+           data-en="In my free time I go to the gym and train judo. These activities help me stay disciplined, patient and focused. I would like to bring exactly these qualities into my apprenticeship.">
+          In meiner Freizeit gehe ich ins Fitnessstudio und trainiere Judo. Diese Aktivitäten helfen mir, diszipliniert, ausdauernd und konzentriert zu bleiben. Genau diese Eigenschaften möchte ich in meine Lehre einbringen.
+        </p>
+
+        <p data-de="Ich freue mich darauf, meine Motivation bei einer Schnupperlehre persönlich zu zeigen und danke Ihnen herzlich für die Prüfung meiner Unterlagen. Gerne warte ich auf Ihre Rückmeldung."
+           data-en="I would be glad to show my motivation in person during a trial apprenticeship, and I thank you very much for reviewing my documents. I look forward to your reply.">
+          Ich freue mich darauf, meine Motivation bei einer Schnupperlehre persönlich zu zeigen und danke Ihnen herzlich für die Prüfung meiner Unterlagen. Gerne warte ich auf Ihre Rückmeldung.
+        </p>
+
+        <p class="sign" data-de="Freundliche Grüsse<br>Saif Abdullah" data-en="Kind regards<br>Saif Abdullah">
+          Freundliche Grüsse<br>Saif Abdullah
+        </p>
       </div>
     </div>
   </section>
@@ -472,22 +550,65 @@
   <!-- MOTIVATION -->
   <section id="motivation" class="band alt">
     <div class="wrap narrow reveal">
-      <p class="kicker">Motivationsschreiben</p>
-      <h2 class="title">Was mich antreibt.</h2>
-      <p class="letter-meta">
-        AZW · Sonnenbergstrasse 14 · 8610 Uster (ZH)<br>
-        Zürich, <span class="auto-datum"></span>
-      </p>
+      <p class="kicker" data-de="Motivationsschreiben" data-en="Motivation letter">Motivationsschreiben</p>
+      <h2 class="title" data-de="Was mich antreibt." data-en="What drives me.">Was mich antreibt.</h2>
+
+      <div class="letterhead">
+        <div>
+          <div class="lh-label" data-de="Adressiert an" data-en="Addressed to">Adressiert an</div>
+          <div class="lh-body">AZW<br>Sonnenbergstrasse 14<br>8610 Uster (ZH)</div>
+        </div>
+        <div>
+          <div class="lh-label" data-de="Ort und Datum" data-en="Place and date">Ort und Datum</div>
+          <div class="lh-body">Zürich<br><span class="auto-datum"></span></div>
+        </div>
+      </div>
+
       <div class="prose">
-        <p><strong>Meine Eignung für die Lehre als Entwickler digitales Business EFZ</strong></p>
-        <p>Der Beruf Entwickler digitales Business interessiert mich sehr, weil ich mich gerne mit digitalen Lösungen beschäftige. Besonders HTML, CSS und JavaScript faszinieren mich, weil man damit direkt sehen kann, wie digitale Oberflächen entstehen und funktionieren. In der Schule und auch privat arbeite ich oft mit diesen Programmiersprachen und gestalte eigene Webseiten. Es macht mir Freude, Ideen digital umzusetzen und dabei ständig Neues zu lernen.</p>
-        <p>Ich arbeite konzentriert, sorgfältig und zuverlässig. In der Schule erledige ich Aufgaben sauber und pünktlich. Besonders im selbstorganisierten Lernen bin ich es gewohnt, meine Arbeiten selbst zu planen und umzusetzen. Ich arbeite gerne im Team, bin kommunikativ und bringe mich aktiv in Gruppenarbeiten ein. Diese Eigenschaften möchte ich auch in meine Lehre einbringen.</p>
-        <p><strong>Warum ich mich für die AZW entschieden habe</strong></p>
-        <p>Ich habe mich telefonisch und online über die AZW informiert und war sofort überzeugt. Am Standort Uster wird die Lehre als Entwickler digitales Business EFZ angeboten, bei der man digitale Prozesse nicht nur versteht, sondern auch aktiv mitgestaltet. Das hat mich besonders angesprochen.</p>
-        <p>Bei der AZW Uster steht Informatik im Zentrum und ist nicht einfach ein Zusatzbereich. Lernende arbeiten an realen Projekten, analysieren Geschäftsprozesse, gestalten digitale Lösungen und übernehmen früh Verantwortung. Genau das suche ich. Ich möchte in einer Umgebung lernen, in der moderne Technik, praxisnahes Arbeiten und Teamarbeit zusammenkommen. Ausserdem finde ich es spannend, dass Lernende mit anderen technischen Berufen zusammenarbeiten und auch externe Aufträge bearbeiten dürfen. Ich bin überzeugt, dass ich mich bei der AZW fachlich und persönlich weiterentwickeln kann.</p>
-        <p><strong>Meine Ziele</strong></p>
-        <p>Ich arbeite täglich daran, mich weiterzuentwickeln, besonders in Mathematik, Technik und Informatik. In der Oberstufe hatte ich wegen einer Epstein Barr Virus Erkrankung einige Absenzen. Heute geht es mir wieder gut und ich bin sehr motiviert. Ich freue mich darauf, meine Energie und Lernbereitschaft in die Lehre bei der AZW einzubringen.</p>
-        <p>Freundliche Grüsse<br>Saif Abdullah</p>
+        <p class="sub-h"
+           data-de="<strong>Meine Eignung für die Lehre als Entwickler digitales Business EFZ</strong>"
+           data-en="<strong>Why I am suited for the apprenticeship as Digital Business Developer EFZ</strong>">
+          <strong>Meine Eignung für die Lehre als Entwickler digitales Business EFZ</strong>
+        </p>
+
+        <p data-de="Der Beruf Entwickler digitales Business interessiert mich sehr, weil ich mich gerne mit digitalen Lösungen beschäftige. Besonders HTML, CSS und JavaScript faszinieren mich, weil man damit direkt sehen kann, wie digitale Oberflächen entstehen und funktionieren. In der Schule und auch privat arbeite ich oft mit diesen Programmiersprachen und gestalte eigene Webseiten. Es macht mir Freude, Ideen digital umzusetzen und dabei ständig Neues zu lernen."
+           data-en="The profession of Digital Business Developer interests me a lot because I enjoy working on digital solutions. HTML, CSS and JavaScript fascinate me the most, because with them you can see directly how digital interfaces are created and how they work. At school and in my free time I often work with these languages and build my own websites. I enjoy turning ideas into digital results and learning something new all the time.">
+          Der Beruf Entwickler digitales Business interessiert mich sehr, weil ich mich gerne mit digitalen Lösungen beschäftige. Besonders HTML, CSS und JavaScript faszinieren mich, weil man damit direkt sehen kann, wie digitale Oberflächen entstehen und funktionieren. In der Schule und auch privat arbeite ich oft mit diesen Programmiersprachen und gestalte eigene Webseiten. Es macht mir Freude, Ideen digital umzusetzen und dabei ständig Neues zu lernen.
+        </p>
+
+        <p data-de="Ich arbeite konzentriert, sorgfältig und zuverlässig. In der Schule erledige ich Aufgaben sauber und pünktlich. Besonders im selbstorganisierten Lernen bin ich es gewohnt, meine Arbeiten selbst zu planen und umzusetzen. Ich arbeite gerne im Team, bin kommunikativ und bringe mich aktiv in Gruppenarbeiten ein. Diese Eigenschaften möchte ich auch in meine Lehre einbringen."
+           data-en="I work in a focused, careful and reliable way. At school I finish my tasks cleanly and on time. In self-organised learning I am used to planning and completing my work on my own. I like working in a team, I communicate well and I take an active part in group work. I would like to bring these qualities into my apprenticeship as well.">
+          Ich arbeite konzentriert, sorgfältig und zuverlässig. In der Schule erledige ich Aufgaben sauber und pünktlich. Besonders im selbstorganisierten Lernen bin ich es gewohnt, meine Arbeiten selbst zu planen und umzusetzen. Ich arbeite gerne im Team, bin kommunikativ und bringe mich aktiv in Gruppenarbeiten ein. Diese Eigenschaften möchte ich auch in meine Lehre einbringen.
+        </p>
+
+        <p class="sub-h"
+           data-de="<strong>Warum ich mich für die AZW entschieden habe</strong>"
+           data-en="<strong>Why I chose AZW</strong>">
+          <strong>Warum ich mich für die AZW entschieden habe</strong>
+        </p>
+
+        <p data-de="Ich habe mich telefonisch und online über die AZW informiert und war sofort überzeugt. Am Standort Uster wird die Lehre als Entwickler digitales Business EFZ angeboten, bei der man digitale Prozesse nicht nur versteht, sondern auch aktiv mitgestaltet. Das hat mich besonders angesprochen."
+           data-en="I informed myself about AZW by phone and online, and I was convinced right away. At the Uster location you offer the apprenticeship as Digital Business Developer EFZ, where you do not only understand digital processes but also help to shape them. That appealed to me a lot.">
+          Ich habe mich telefonisch und online über die AZW informiert und war sofort überzeugt. Am Standort Uster wird die Lehre als Entwickler digitales Business EFZ angeboten, bei der man digitale Prozesse nicht nur versteht, sondern auch aktiv mitgestaltet. Das hat mich besonders angesprochen.
+        </p>
+
+        <p data-de="Bei der AZW Uster steht Informatik im Zentrum und ist nicht einfach ein Zusatzbereich. Lernende arbeiten an realen Projekten, analysieren Geschäftsprozesse, gestalten digitale Lösungen und übernehmen früh Verantwortung. Genau das suche ich. Ich möchte in einer Umgebung lernen, in der moderne Technik, praxisnahes Arbeiten und Teamarbeit zusammenkommen. Ausserdem finde ich es spannend, dass Lernende mit anderen technischen Berufen zusammenarbeiten und auch externe Aufträge bearbeiten dürfen. Ich bin überzeugt, dass ich mich bei der AZW fachlich und persönlich weiterentwickeln kann."
+           data-en="At AZW Uster, IT is at the centre and not just an extra subject. Apprentices work on real projects, analyse business processes, create digital solutions and take responsibility early on. That is exactly what I am looking for. I want to learn in an environment where modern technology, practical work and teamwork come together. I also find it exciting that apprentices work together with other technical professions and are allowed to handle external orders. I am convinced that I can develop professionally and personally at AZW.">
+          Bei der AZW Uster steht Informatik im Zentrum und ist nicht einfach ein Zusatzbereich. Lernende arbeiten an realen Projekten, analysieren Geschäftsprozesse, gestalten digitale Lösungen und übernehmen früh Verantwortung. Genau das suche ich. Ich möchte in einer Umgebung lernen, in der moderne Technik, praxisnahes Arbeiten und Teamarbeit zusammenkommen. Ausserdem finde ich es spannend, dass Lernende mit anderen technischen Berufen zusammenarbeiten und auch externe Aufträge bearbeiten dürfen. Ich bin überzeugt, dass ich mich bei der AZW fachlich und persönlich weiterentwickeln kann.
+        </p>
+
+        <p class="sub-h" data-de="<strong>Meine Ziele</strong>" data-en="<strong>My goals</strong>">
+          <strong>Meine Ziele</strong>
+        </p>
+
+        <p data-de="Ich arbeite täglich daran, mich weiterzuentwickeln, besonders in Mathematik, Technik und Informatik. In der Oberstufe hatte ich wegen einer Epstein Barr Virus Erkrankung einige Absenzen. Heute geht es mir wieder gut und ich bin sehr motiviert. Ich freue mich darauf, meine Energie und Lernbereitschaft in die Lehre bei der AZW einzubringen."
+           data-en="I work on improving myself every day, especially in mathematics, technology and IT. During upper secondary school I had some absences because of an Epstein Barr virus infection. Today I am well again and very motivated. I look forward to bringing my energy and my willingness to learn into the apprenticeship at AZW.">
+          Ich arbeite täglich daran, mich weiterzuentwickeln, besonders in Mathematik, Technik und Informatik. In der Oberstufe hatte ich wegen einer Epstein Barr Virus Erkrankung einige Absenzen. Heute geht es mir wieder gut und ich bin sehr motiviert. Ich freue mich darauf, meine Energie und Lernbereitschaft in die Lehre bei der AZW einzubringen.
+        </p>
+
+        <p class="sign" data-de="Freundliche Grüsse<br>Saif Abdullah" data-en="Kind regards<br>Saif Abdullah">
+          Freundliche Grüsse<br>Saif Abdullah
+        </p>
       </div>
     </div>
   </section>
@@ -495,8 +616,8 @@
   <!-- LEBENSLAUF -->
   <section id="lebenslauf" class="band">
     <div class="wrap reveal">
-      <p class="kicker">Lebenslauf</p>
-      <h2 class="title">Mein Werdegang.</h2>
+      <p class="kicker" data-de="Lebenslauf" data-en="Curriculum vitae">Lebenslauf</p>
+      <h2 class="title" data-de="Mein Werdegang." data-en="My background.">Mein Werdegang.</h2>
 
       <div class="cv-head">
         <span>Furttalstrasse 45, 8046 Zürich</span>
@@ -507,96 +628,110 @@
       <div class="cv-grid">
         <aside>
           <div class="cv-block">
-            <h3>Persönliches</h3>
+            <h3 data-de="Persönliches" data-en="Personal">Persönliches</h3>
             <p>Saif Abdullah</p>
-            <p class="muted">Geboren 24. November 2008</p>
-            <p class="muted">Heimatort Zürich</p>
-            <p class="muted">Schweiz, Bangladesch</p>
+            <p class="muted" data-de="Geboren 24. November 2008" data-en="Born 24 November 2008">Geboren 24. November 2008</p>
+            <p class="muted" data-de="Heimatort Zürich" data-en="Place of origin Zurich">Heimatort Zürich</p>
+            <p class="muted" data-de="Schweiz, Bangladesch" data-en="Switzerland, Bangladesh">Schweiz, Bangladesch</p>
           </div>
 
           <div class="cv-block">
-            <h3>Familie</h3>
-            <p class="muted">Vater, Pflegehelfer</p>
-            <p class="muted">Mutter, Hortmitarbeiterin</p>
-            <p class="muted">Schwester, Schülerin</p>
+            <h3 data-de="Familie" data-en="Family">Familie</h3>
+            <p class="muted" data-de="Vater, Pflegehelfer" data-en="Father, care assistant">Vater, Pflegehelfer</p>
+            <p class="muted" data-de="Mutter, Hortmitarbeiterin" data-en="Mother, after-school care worker">Mutter, Hortmitarbeiterin</p>
+            <p class="muted" data-de="Schwester, Schülerin" data-en="Sister, pupil">Schwester, Schülerin</p>
           </div>
 
           <div class="cv-block">
-            <h3>Sprachen</h3>
-            <p>Deutsch <span class="muted">Erstsprache</span></p>
-            <p>Bengalisch <span class="muted">Muttersprache</span></p>
-            <p>Englisch <span class="muted">Muttersprache</span></p>
-            <p>Französisch <span class="muted">Grundkenntnisse</span></p>
+            <h3 data-de="Sprachen" data-en="Languages">Sprachen</h3>
+            <p data-de="Deutsch <span class='muted'>Erstsprache</span>" data-en="German <span class='muted'>First language</span>">Deutsch <span class="muted">Erstsprache</span></p>
+            <p data-de="Bengalisch <span class='muted'>Muttersprache</span>" data-en="Bengali <span class='muted'>Mother tongue</span>">Bengalisch <span class="muted">Muttersprache</span></p>
+            <p data-de="Englisch <span class='muted'>Muttersprache</span>" data-en="English <span class='muted'>Mother tongue</span>">Englisch <span class="muted">Muttersprache</span></p>
+            <p data-de="Französisch <span class='muted'>Grundkenntnisse</span>" data-en="French <span class='muted'>Basic knowledge</span>">Französisch <span class="muted">Grundkenntnisse</span></p>
           </div>
 
           <div class="cv-block">
-            <h3>Hobbys</h3>
-            <p class="muted">Gym, Judo, Lesen, Kochen</p>
+            <h3 data-de="Hobbys" data-en="Hobbies">Hobbys</h3>
+            <p class="muted" data-de="Gym, Judo, Lesen, Kochen" data-en="Gym, judo, reading, cooking">Gym, Judo, Lesen, Kochen</p>
           </div>
 
           <div class="cv-block">
-            <h3>Referenz</h3>
+            <h3 data-de="Referenz" data-en="Reference">Referenz</h3>
             <p>Dina Lüscher</p>
-            <p class="muted">Coachin JOB PLUS</p>
-            <p class="muted"><a href="tel:+41444128865" style="color:inherit;text-decoration:none;">044 412 88 65</a></p>
-            <p class="muted"><a href="mailto:dina.luescher@zuerich.ch" style="color:inherit;text-decoration:none;">dina.luescher@zuerich.ch</a></p>
+            <p class="muted" data-de="Coachin JOB PLUS" data-en="Coach, JOB PLUS">Coachin JOB PLUS</p>
+            <p class="muted"><a href="tel:+41444128865">044 412 88 65</a></p>
+            <p class="muted"><a href="mailto:dina.luescher@zuerich.ch">dina.luescher@zuerich.ch</a></p>
           </div>
         </aside>
 
         <div>
           <div class="cv-block">
-            <h3>Berufserfahrung</h3>
+            <h3 data-de="Berufserfahrung" data-en="Work experience">Berufserfahrung</h3>
+
             <div class="entry">
               <div class="when">06.2026</div>
-              <div class="what">
-                <strong>Praktikum ICT-Fachmann / Logistik</strong>
-                <span>dPlan Regensdorf · Brückenangebot JOB PLUS, Zürich</span>
+              <div class="what"
+                   data-de="<strong>Praktikum ICT-Fachmann / Logistik</strong><span>dPlan Regensdorf · Brückenangebot JOB PLUS, Zürich</span>"
+                   data-en="<strong>Internship, ICT specialist / logistics</strong><span>dPlan Regensdorf · JOB PLUS bridge-year programme, Zurich</span>">
+                <strong>Praktikum ICT-Fachmann / Logistik</strong><span>dPlan Regensdorf · Brückenangebot JOB PLUS, Zürich</span>
               </div>
             </div>
+
             <div class="entry">
               <div class="when">15.06.–20.06.2026</div>
-              <div class="what">
-                <strong>Detailhandel (Textil &amp; Einkaufserlebnisse)</strong>
-                <span>Dosenbach, ShopVille</span>
+              <div class="what"
+                   data-de="<strong>Detailhandel (Textil &amp; Einkaufserlebnisse)</strong><span>Dosenbach, ShopVille</span>"
+                   data-en="<strong>Retail (textiles &amp; shopping experience)</strong><span>Dosenbach, ShopVille</span>">
+                <strong>Detailhandel (Textil &amp; Einkaufserlebnisse)</strong><span>Dosenbach, ShopVille</span>
               </div>
             </div>
+
             <div class="entry">
               <div class="when">01.2025</div>
-              <div class="what">
-                <strong>Schnupperlehre Fachmann Gesundheit</strong>
-                <span>Gesundheitszentrum Witikon</span>
+              <div class="what"
+                   data-de="<strong>Schnupperlehre Fachmann Gesundheit</strong><span>Gesundheitszentrum Witikon</span>"
+                   data-en="<strong>Trial apprenticeship, health care specialist</strong><span>Gesundheitszentrum Witikon</span>">
+                <strong>Schnupperlehre Fachmann Gesundheit</strong><span>Gesundheitszentrum Witikon</span>
               </div>
             </div>
           </div>
 
           <div class="cv-block">
-            <h3>Schulen</h3>
+            <h3 data-de="Schulen" data-en="Education">Schulen</h3>
+
             <div class="entry">
-              <div class="when">Seit 03.2026</div>
-              <div class="what">
-                <strong>Brückenangebot JOB PLUS</strong>
-                <span>Zürich (1 Tag Schule pro Woche)</span>
+              <div class="when" data-de="Seit 03.2026" data-en="Since 03.2026">Seit 03.2026</div>
+              <div class="what"
+                   data-de="<strong>Brückenangebot JOB PLUS</strong><span>Zürich (1 Tag Schule pro Woche)</span>"
+                   data-en="<strong>JOB PLUS bridge-year programme</strong><span>Zurich (one school day per week)</span>">
+                <strong>Brückenangebot JOB PLUS</strong><span>Zürich (1 Tag Schule pro Woche)</span>
               </div>
             </div>
+
             <div class="entry">
               <div class="when">08.2025 – 02.2026</div>
-              <div class="what">
-                <strong>Fachmittelschule</strong>
-                <span>Kantonsschule Zürich Nord</span>
+              <div class="what"
+                   data-de="<strong>Fachmittelschule</strong><span>Kantonsschule Zürich Nord</span>"
+                   data-en="<strong>Specialised secondary school</strong><span>Kantonsschule Zürich Nord</span>">
+                <strong>Fachmittelschule</strong><span>Kantonsschule Zürich Nord</span>
               </div>
             </div>
+
             <div class="entry">
               <div class="when">08.2024 – 07.2025</div>
-              <div class="what">
-                <strong>Berufsvorbereitungsjahr Viventa</strong>
-                <span>Technik und Informatik, Zürich</span>
+              <div class="what"
+                   data-de="<strong>Berufsvorbereitungsjahr Viventa</strong><span>Technik und Informatik, Zürich</span>"
+                   data-en="<strong>Pre-apprenticeship year, Viventa</strong><span>Technology and IT, Zurich</span>">
+                <strong>Berufsvorbereitungsjahr Viventa</strong><span>Technik und Informatik, Zürich</span>
               </div>
             </div>
+
             <div class="entry">
               <div class="when">08.2021 – 07.2024</div>
-              <div class="what">
-                <strong>Sekundarschule Liguster, Niveau A</strong>
-                <span>Zürich</span>
+              <div class="what"
+                   data-de="<strong>Sekundarschule Liguster, Niveau A</strong><span>Zürich</span>"
+                   data-en="<strong>Liguster secondary school, level A</strong><span>Zurich</span>">
+                <strong>Sekundarschule Liguster, Niveau A</strong><span>Zürich</span>
               </div>
             </div>
           </div>
@@ -608,13 +743,18 @@
   <!-- DOKUMENTE -->
   <section id="dokumente" class="band alt">
     <div class="wrap narrow reveal">
-      <p class="kicker">Unterlagen</p>
-      <h2 class="title">Zeugnisse &amp; Stellwerktest.</h2>
+      <p class="kicker" data-de="Unterlagen" data-en="Documents">Unterlagen</p>
+      <h2 class="title" data-de="Zeugnisse &amp; Stellwerktest." data-en="School reports &amp; Stellwerk test.">Zeugnisse &amp; Stellwerktest.</h2>
+
       <div class="doc-card">
         <span class="lock" aria-hidden="true">🔒</span>
-        <h3>Ein Dokument, passwortgeschützt</h3>
-        <p>Schulzeugnisse und Stellwerktest sind in einer PDF-Datei zusammengefasst. Die Datei ist verschlüsselt — beim Öffnen fragt der PDF-Reader nach dem Passwort. Das Passwort teile ich Ihnen gerne per E-Mail mit.</p>
-        <a class="btn btn-primary" href="Zeugnisse_SaifAbdullah.pdf" target="_blank" rel="noopener">PDF öffnen</a>
+        <h3 data-de="Ein Dokument, passwortgeschützt" data-en="One document, password protected">Ein Dokument, passwortgeschützt</h3>
+        <p data-de="Schulzeugnisse und Stellwerktest sind in einer PDF-Datei zusammengefasst. Die Datei ist verschlüsselt — beim Öffnen fragt der PDF-Reader nach dem Passwort. Das Passwort teile ich Ihnen gerne per E-Mail mit."
+           data-en="My school reports and the Stellwerk test are combined in one PDF file. The file is encrypted — your PDF reader will ask for the password when you open it. I am happy to send you the password by email.">
+          Schulzeugnisse und Stellwerktest sind in einer PDF-Datei zusammengefasst. Die Datei ist verschlüsselt — beim Öffnen fragt der PDF-Reader nach dem Passwort. Das Passwort teile ich Ihnen gerne per E-Mail mit.
+        </p>
+        <a class="btn btn-primary" href="Zeugnisse_SaifAbdullah.pdf" target="_blank" rel="noopener"
+           data-de="PDF öffnen" data-en="Open PDF">PDF öffnen</a>
       </div>
     </div>
   </section>
@@ -622,52 +762,73 @@
   <!-- KONTAKT -->
   <section id="kontakt" class="band">
     <div class="wrap narrow reveal">
-      <p class="kicker">Kontakt</p>
-      <h2 class="title">Ich freue mich auf Ihre Rückmeldung.</h2>
-      <div class="contact-grid">
-        <div>
-          <h3>E-Mail</h3>
-          <a href="mailto:saifabdullah2411@gmail.com">saifabdullah2411@gmail.com</a>
+      <p class="kicker" data-de="Kontakt" data-en="Contact">Kontakt</p>
+      <h2 class="title" data-de="Ich freue mich auf Ihre Rückmeldung." data-en="I look forward to your reply.">Ich freue mich auf Ihre Rückmeldung.</h2>
+
+      <dl class="contact-list">
+        <div class="contact-row">
+          <dt data-de="E-Mail" data-en="Email">E-Mail</dt>
+          <dd><a href="mailto:saifabdullah2411@gmail.com">saifabdullah2411@gmail.com</a></dd>
         </div>
-        <div>
-          <h3>Telefon</h3>
-          <a href="tel:+41782683822">+41 78 268 38 22</a>
+        <div class="contact-row">
+          <dt data-de="Telefon" data-en="Phone">Telefon</dt>
+          <dd><a href="tel:+41782683822">+41 78 268 38 22</a></dd>
         </div>
-        <div>
-          <h3>Adresse</h3>
-          <p>Furttalstrasse 45<br>8046 Zürich</p>
+        <div class="contact-row">
+          <dt data-de="Adresse" data-en="Address">Adresse</dt>
+          <dd>Furttalstrasse 45<br>8046 Zürich</dd>
         </div>
-      </div>
+      </dl>
     </div>
   </section>
 
   <footer>
-    © 2026 Saif Abdullah — Alle Rechte vorbehalten
+    <span data-de="© 2026 Saif Abdullah — Alle Rechte vorbehalten"
+          data-en="© 2026 Saif Abdullah — All rights reserved">© 2026 Saif Abdullah — Alle Rechte vorbehalten</span>
   </footer>
 
   <script>
-    // Datum
-    (function () {
-      const monate = ["Januar","Februar","März","April","Mai","Juni",
-                      "Juli","August","September","Oktober","November","Dezember"];
-      const h = new Date();
-      const text = h.getDate() + ". " + monate[h.getMonth()] + " " + h.getFullYear();
-      document.querySelectorAll(".auto-datum").forEach(el => el.textContent = text);
-    })();
+    /* ---------- Datum ---------- */
+    const MONATE = {
+      de: ["Januar","Februar","März","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember"],
+      en: ["January","February","March","April","May","June","July","August","September","October","November","December"]
+    };
 
-    // Scroll-Reveal
+    function datumText(lang) {
+      const h = new Date();
+      return lang === "en"
+        ? h.getDate() + " " + MONATE.en[h.getMonth()] + " " + h.getFullYear()
+        : h.getDate() + ". " + MONATE.de[h.getMonth()] + " " + h.getFullYear();
+    }
+
+    /* ---------- Sprache ---------- */
+    function setLang(lang) {
+      document.documentElement.lang = lang;
+      document.title = lang === "en" ? "Saif Abdullah — Application" : "Saif Abdullah — Bewerbung";
+
+      document.querySelectorAll("[data-de][data-en]").forEach(el => {
+        const val = el.getAttribute("data-" + lang);
+        if (val !== null) el.innerHTML = val;
+      });
+
+      document.querySelectorAll(".auto-datum").forEach(el => el.textContent = datumText(lang));
+
+      document.getElementById("btn-de").classList.toggle("active", lang === "de");
+      document.getElementById("btn-en").classList.toggle("active", lang === "en");
+    }
+
+    setLang("de");
+
+    /* ---------- Scroll-Reveal ---------- */
     (function () {
       const els = document.querySelectorAll(".reveal");
       if (!("IntersectionObserver" in window)) {
         els.forEach(el => el.classList.add("in"));
         return;
       }
-      const io = new IntersectionObserver((entries) => {
+      const io = new IntersectionObserver(entries => {
         entries.forEach(e => {
-          if (e.isIntersecting) {
-            e.target.classList.add("in");
-            io.unobserve(e.target);
-          }
+          if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
         });
       }, { threshold: 0.12, rootMargin: "0px 0px -60px 0px" });
       els.forEach(el => io.observe(el));
