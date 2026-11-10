@@ -4,8 +4,20 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex, nofollow">
-  <meta name="description" content="Persönliche Seite von Saif Abdullah">
+  <meta name="description" content="Saif Abdullah – Bewerbung für eine Lehrstelle als Kaufmann EFZ, Lehrstart Sommer 2027.">
+  <meta name="theme-color" content="#F2F0EA">
   <title>Saif Abdullah</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23131313'/%3E%3Ctext x='50%25' y='56%25' text-anchor='middle' dominant-baseline='middle' font-family='Arial,sans-serif' font-weight='700' font-size='28' fill='%23F2F0EA'%3ESA%3C/text%3E%3C/svg%3E">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@1,6..72,400&family=Schibsted+Grotesk:wght@400..800&display=swap" rel="stylesheet">
+
+  <script>
+    document.documentElement.classList.add("js");
+    /* Sicherheitsnetz: falls Animationen nicht laden, alles sichtbar machen */
+    setTimeout(function () { document.documentElement.classList.remove("js"); }, 3500);
+  </script>
 
 <!--
 ==========================================================================
@@ -15,476 +27,684 @@
 
   <style>
     :root {
-      --ink: #1d1d1f;
-      --ink-2: #6e6e73;
-      --line: #d2d2d7;
-      --bg: #ffffff;
-      --bg-alt: #f5f5f7;
-      --blue: #0071e3;
-      --nav-h: 52px;
-      --maxw: 980px;
-      --font: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text",
-              "Helvetica Neue", Helvetica, Arial, sans-serif;
+      --paper:   #F2F0EA;
+      --paper-2: #E8E5DC;
+      --ink:     #131313;
+      --ink-2:   #5C5952;
+      --ink-3:   #8E8A82;
+      --rule:    rgba(19, 19, 19, 0.15);
+      --blue:    #2346C8;   /* Kugelschreiber-Blau, wie die Unterschrift */
+
+      --pad:   clamp(16px, 3.4vw, 48px);
+      --gap:   clamp(12px, 2vw, 28px);
+      --nav-h: 60px;
+
+      --sans:  "Schibsted Grotesk", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+      --serif: "Newsreader", Georgia, "Times New Roman", serif;
+      --ease:  cubic-bezier(0.2, 0.7, 0.1, 1);
+      color-scheme: light;
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     html {
-      scroll-behavior: smooth;
       scroll-padding-top: var(--nav-h);
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
     }
 
+    /* Lenis */
+    html.lenis, html.lenis body { height: auto; }
+    .lenis.lenis-smooth { scroll-behavior: auto !important; }
+    .lenis.lenis-stopped { overflow: clip; }
+
     body {
-      font-family: var(--font);
+      font-family: var(--sans);
+      font-size: 17px;
+      line-height: 1.55;
       color: var(--ink);
-      background: var(--bg);
-      line-height: 1.47;
-      letter-spacing: -0.01em;
+      background: var(--paper);
       overflow-x: hidden;
+    }
+    .sec-num, .s-num, .nav-links .n { font-variant-numeric: tabular-nums; }
+
+    ::selection { background: var(--blue); color: var(--paper); }
+
+    a { color: inherit; }
+    img { display: block; max-width: 100%; }
+
+    :focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; border-radius: 2px; }
+
+    .js .hero { visibility: hidden; }
+
+    /* ---------- Layout-Raster ---------- */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      column-gap: var(--gap);
+    }
+
+    .label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-3);
     }
 
     /* ---------- Navigation ---------- */
     header {
       position: fixed;
-      top: 0; left: 0;
-      width: 100%;
+      inset: 0 0 auto 0;
       height: var(--nav-h);
-      background: rgba(255, 255, 255, 0.72);
-      backdrop-filter: saturate(180%) blur(20px);
-      -webkit-backdrop-filter: saturate(180%) blur(20px);
-      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-      z-index: 9999;
-    }
-
-    nav {
-      max-width: var(--maxw);
-      height: 100%;
-      margin: 0 auto;
-      padding: 0 22px;
+      z-index: 50;
+      padding: 0 var(--pad);
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 1rem;
+      background: rgba(242, 240, 234, 0);
+      border-bottom: 1px solid transparent;
+      transition: background 0.4s ease, border-color 0.4s ease;
+    }
+    header.scrolled {
+      background: rgba(242, 240, 234, 0.86);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom-color: var(--rule);
     }
 
-    .nav-home {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.45rem;
-      font-size: 14px;
-      font-weight: 600;
+    .brand {
+      font-size: 15px;
+      font-weight: 700;
       letter-spacing: -0.01em;
       text-decoration: none;
-      color: var(--ink);
       white-space: nowrap;
-      opacity: 0.9;
-      transition: opacity 0.2s ease;
     }
-    .nav-home:hover { opacity: 0.55; }
-    .nav-home svg { width: 15px; height: 15px; flex: none; }
+    .brand span { color: var(--ink-3); font-weight: 500; }
 
-    .nav-links { display: flex; align-items: center; gap: 1.5rem; }
-
+    .nav-links { display: flex; gap: clamp(14px, 2.2vw, 30px); }
     .nav-links a {
-      font-size: 12.5px;
-      font-weight: 400;
-      color: var(--ink);
+      font-size: 14px;
       text-decoration: none;
-      opacity: 0.85;
-      cursor: pointer;
-      transition: opacity 0.2s ease;
-      white-space: nowrap;
-    }
-    .nav-links a:hover { opacity: 0.5; }
-
-    .lang {
-      display: inline-flex;
-      align-items: center;
-      border: 1px solid rgba(0,0,0,0.16);
-      border-radius: 980px;
-      overflow: hidden;
-      flex: none;
-    }
-
-    .lang button {
-      appearance: none;
-      border: none;
-      background: transparent;
-      font-family: inherit;
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.04em;
       color: var(--ink-2);
-      padding: 4px 10px;
-      cursor: pointer;
-      transition: background 0.2s ease, color 0.2s ease;
+      display: inline-flex;
+      gap: 0.4em;
+      transition: color 0.25s ease;
     }
-    .lang button.active { background: var(--ink); color: #fff; }
+    .nav-links a .n { font-size: 11px; color: var(--ink-3); padding-top: 0.15em; transition: color 0.25s ease; }
+    .nav-links a:hover, .nav-links a.active { color: var(--ink); }
+    .nav-links a.active .n { color: var(--blue); }
 
-    @media (max-width: 900px) {
-      .nav-links { gap: 0.95rem; overflow-x: auto; scrollbar-width: none; }
-      .nav-links::-webkit-scrollbar { display: none; }
-      .nav-home span { display: none; }
+    .lang { display: flex; align-items: center; gap: 2px; font-size: 13px; }
+    .lang button {
+      appearance: none; border: 0; background: none; cursor: pointer;
+      font: inherit; font-weight: 600; color: var(--ink-3);
+      padding: 6px 6px; transition: color 0.2s ease;
     }
+    .lang button.active { color: var(--ink); }
+    .lang .slash { color: var(--ink-3); }
+
+    @media (max-width: 960px) { .nav-links { display: none; } }
 
     /* ---------- Hero ---------- */
     .hero {
-      margin-top: var(--nav-h);
-      padding: clamp(56px, 8vw, 96px) 22px clamp(48px, 6vw, 72px);
-      background: var(--bg);
-      color: var(--ink);
-      border-bottom: 1px solid var(--line);
+      min-height: 100svh;
+      padding: calc(var(--nav-h) + clamp(24px, 5vh, 56px)) var(--pad) clamp(28px, 4vh, 44px);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: clamp(32px, 6vh, 64px);
     }
 
-    .hero-inner {
-      max-width: var(--maxw);
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr 210px;
-      gap: 3rem;
-      align-items: end;
-    }
+    .hero-kicker { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
 
-    @media (max-width: 720px) {
-      .hero-inner { grid-template-columns: 1fr; gap: 2rem; align-items: start; }
+    .hero-name {
+      font-size: clamp(68px, 15.5vw, 248px);
+      line-height: 0.92;
+      font-weight: 700;
+      letter-spacing: -0.055em;
+      margin-left: -0.04em;
+      will-change: transform;
     }
-
-    .hero img.portrait {
-      width: 100%;
-      max-width: 200px;
-      aspect-ratio: 1 / 1;
-      object-fit: cover;
-      display: block;
+    .hero-name .portrait {
+      display: inline-block;
+      height: 0.9em;
+      width: 0.9em;
+      vertical-align: -0.1em;
+      margin-left: 0.1em;
       border-radius: 50%;
+      object-fit: cover;
     }
 
-    .hero h1 {
-      font-size: clamp(46px, 8vw, 84px);
-      line-height: 1.02;
-      font-weight: 600;
-      letter-spacing: -0.035em;
-      margin-bottom: 1.1rem;
-      color: var(--ink);
+    .meta {
+      position: relative;
+      padding-top: 18px;
+      row-gap: 22px;
     }
+    .meta-rule {
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 1px; background: var(--ink);
+      transform-origin: left center;
+    }
+    .meta > div:not(.meta-rule) { grid-column: span 3; }
+    .meta dt { margin-bottom: 6px; }
+    .meta dd { font-size: clamp(16px, 1.45vw, 21px); font-weight: 500; line-height: 1.3; letter-spacing: -0.01em; }
 
-    .hero .sub {
-      font-size: clamp(18px, 2vw, 22px);
-      font-weight: 400;
+    .hero-foot {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .hero-foot p {
+      max-width: 34ch;
+      font-size: clamp(17px, 1.5vw, 21px);
+      line-height: 1.4;
       color: var(--ink-2);
-      max-width: 460px;
-      margin: 0 0 2.2rem;
-      letter-spacing: 0;
-      line-height: 1.45;
     }
-
-    .cta-row { display: flex; flex-wrap: wrap; gap: 0.8rem; justify-content: flex-start; }
 
     .btn {
-      display: inline-block;
-      font-size: 16px;
-      font-weight: 400;
-      letter-spacing: 0;
-      padding: 12px 24px;
-      border-radius: 980px;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75em;
+      padding: 15px 22px 15px 24px;
+      background: var(--ink);
+      color: var(--paper);
       text-decoration: none;
-      border: 1px solid transparent;
-      cursor: pointer;
-      font-family: inherit;
-      transition: background 0.22s ease, color 0.22s ease, transform 0.22s ease;
-    }
-
-    .btn-primary { background: var(--blue); color: #fff; }
-    .btn-primary:hover { background: #0077ed; transform: translateY(-1px); }
-
-    .btn-ghost { background: transparent; color: var(--blue); border-color: rgba(0, 113, 227, 0.4); }
-    .btn-ghost:hover { background: rgba(0, 113, 227, 0.07); transform: translateY(-1px); }
-
-    /* ---------- Sections ---------- */
-    section.band { padding: clamp(76px, 11vw, 132px) 22px; }
-    section.band.alt { background: var(--bg-alt); }
-
-    .wrap { max-width: var(--maxw); margin: 0 auto; }
-    .wrap.narrow { max-width: 720px; }
-
-    .kicker {
-      font-size: 13px;
+      font-size: 15px;
       font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--accent, var(--ink-2));
-      margin-bottom: 0.7rem;
+      border-radius: 999px;
+      overflow: hidden;
+      position: relative;
+      isolation: isolate;
+    }
+    .btn::before {
+      content: ""; position: absolute; inset: 0; z-index: -1;
+      background: var(--blue);
+      transform: translateY(101%);
+      transition: transform 0.5s var(--ease);
+    }
+    .btn:hover::before { transform: none; }
+    .btn .arrow { transition: transform 0.5s var(--ease); }
+    .btn:hover .arrow { transform: translateX(4px); }
+
+    @media (max-width: 860px) {
+      .meta > div:not(.meta-rule) { grid-column: span 6; }
     }
 
-    h2.title {
-      font-size: clamp(34px, 5.2vw, 56px);
-      line-height: 1.07;
-      font-weight: 600;
-      letter-spacing: -0.028em;
-      margin-bottom: 2.4rem;
-      background: linear-gradient(100deg, var(--g1, #1d1d1f) 0%, var(--g2, #1d1d1f) 100%);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      width: fit-content;
-      max-width: 100%;
+    /* ---------- Sektionen ---------- */
+    .sec {
+      padding: clamp(96px, 13vw, 176px) var(--pad);
+      border-top: 1px solid var(--rule);
     }
 
-    /* Apple-Farbwelt pro Sektion */
-    #ueber    { --g1: #0071e3; --g2: #5e5ce6; --accent: #0071e3; }
-    #staerken { --g1: #8944ab; --g2: #d4145a; --accent: #a53d9c; }
-    #projekt  { --g1: #007d8f; --g2: #0071e3; --accent: #00808f; }
-    #kontakt  { --g1: #00875a; --g2: #007d8f; --accent: #00875a; }
+    .sec-head {
+      grid-column: 1 / 4;
+      align-self: start;
+      position: sticky;
+      top: calc(var(--nav-h) + 28px);
+      display: flex;
+      gap: 0.9rem;
+      align-items: baseline;
+    }
+    .sec-num { font-size: 13px; font-weight: 700; color: var(--blue); }
+
+    .sec-body { grid-column: 4 / 13; }
+
+    .sec-title {
+      font-size: clamp(38px, 5.6vw, 84px);
+      line-height: 1;
+      font-weight: 650;
+      letter-spacing: -0.045em;
+      max-width: 15ch;
+      margin-bottom: clamp(40px, 6vw, 80px);
+      text-wrap: balance;
+    }
+
+    @media (max-width: 860px) {
+      .sec-head { grid-column: 1 / -1; position: static; margin-bottom: 28px; }
+      .sec-body { grid-column: 1 / -1; }
+    }
+
+    /* ---------- Über mich ---------- */
+    .about-cols { display: grid; grid-template-columns: minmax(0, 1fr); }
 
     .prose p {
-      font-size: 19px;
-      line-height: 1.65;
-      letter-spacing: -0.01em;
-      margin-bottom: 1.5rem;
-      color: var(--ink);
-    }
-    .prose p:last-child { margin-bottom: 0; }
-    .prose .lead { font-size: 19px; font-weight: 400; }
-
-    /* Unterschrift */
-    .signature {
-      margin-top: 2.6rem;
-      padding-top: 1.8rem;
-      border-top: 1px solid var(--line);
-    }
-
-    .signature img {
-      display: block;
-      height: 62px;
-      width: auto;
-      opacity: 0.9;
-    }
-
-    /* ---------- Stärken-Karten ---------- */
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1.2rem;
-    }
-
-    .card {
-      background: #fff;
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      padding: 1.8rem 1.7rem;
-    }
-
-    .card .num {
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      color: var(--accent);
-      margin-bottom: 0.9rem;
-    }
-
-    .card h3 {
-      font-size: 20px;
-      font-weight: 600;
-      letter-spacing: -0.02em;
-      margin-bottom: 0.6rem;
-    }
-
-    .card p {
-      font-size: 16px;
-      line-height: 1.6;
+      font-size: clamp(17px, 1.3vw, 19px);
+      line-height: 1.7;
       color: var(--ink-2);
+      max-width: 62ch;
+    }
+    .prose p + p { margin-top: 1.25em; }
+    .prose p strong { color: var(--ink); font-weight: 600; }
+
+    .prose .lead {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: clamp(28px, 3.2vw, 48px);
+      line-height: 1.18;
+      letter-spacing: -0.015em;
+      color: var(--ink);
+      max-width: 26ch;
+      margin-bottom: clamp(36px, 5vw, 64px);
+    }
+    .prose .lead + p { margin-top: 0; }
+
+    .prose-cols {
+      columns: 2 300px;
+      column-gap: clamp(28px, 4vw, 64px);
+    }
+    .prose-cols p { break-inside: avoid; max-width: none; }
+
+    .signature {
+      margin-top: clamp(48px, 6vw, 80px);
+      display: flex;
+      align-items: end;
+      gap: 1.4rem;
+    }
+    .signature img { height: clamp(56px, 6vw, 78px); width: auto; mix-blend-mode: multiply; }
+    .signature .label { padding-bottom: 8px; }
+
+    /* ---------- Praktikum ---------- */
+    .intern-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 1rem 2rem;
+      flex-wrap: wrap;
+      margin-bottom: clamp(40px, 5vw, 64px);
+    }
+    .intern-intro {
+      font-size: clamp(19px, 1.7vw, 24px);
+      line-height: 1.4;
+      letter-spacing: -0.015em;
+      max-width: 36ch;
+    }
+    .intern-when { color: var(--blue); white-space: nowrap; }
+
+    .tasks {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: clamp(40px, 4.5vw, 64px) var(--gap);
+    }
+    @media (max-width: 760px) { .tasks { grid-template-columns: 1fr; } }
+
+    .task-group h3 {
+      font-size: clamp(20px, 1.8vw, 24px);
+      font-weight: 600;
+      letter-spacing: -0.025em;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--ink);
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 1rem;
+    }
+    .task-group h3 small { font-size: 12px; font-weight: 600; color: var(--ink-3); letter-spacing: 0.06em; }
+    .task-group ul { list-style: none; }
+    .task-group li {
+      padding: 13px 0 13px 22px;
+      border-bottom: 1px solid var(--rule);
+      color: var(--ink-2);
+      line-height: 1.5;
+      position: relative;
+    }
+    .task-group li::before {
+      content: "";
+      position: absolute; left: 2px; top: 1.32em;
+      width: 9px; height: 1px;
+      background: var(--blue);
     }
 
-    /* ---------- Projekt ---------- */
-    .proj-grid {
+    .tools {
+      margin-top: clamp(48px, 6vw, 80px);
+      display: flex;
+      align-items: center;
+      gap: 1rem 1.4rem;
+      flex-wrap: wrap;
+    }
+    .tools ul { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; }
+    .tools li {
+      font-size: 14px;
+      font-weight: 500;
+      padding: 7px 14px;
+      border: 1px solid var(--rule);
+      border-radius: 999px;
+    }
+
+    /* ---------- Werdegang ---------- */
+    .weg { list-style: none; position: relative; padding-left: 36px; }
+    .weg-track {
+      position: absolute; left: 5px; top: 10px; bottom: 10px;
+      width: 1px; background: var(--rule);
+    }
+    .weg-fill {
+      position: absolute; inset: 0;
+      background: var(--blue);
+      transform-origin: top center;
+    }
+    .weg-item {
+      position: relative;
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2.5rem;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+      gap: 0.4rem var(--gap);
+      padding: 0 0 clamp(36px, 4.5vw, 56px);
+    }
+    .weg-item:last-child { padding-bottom: 0; }
+    .weg-item .dot {
+      position: absolute; left: -36px; top: 8px;
+      width: 11px; height: 11px; border-radius: 50%;
+      background: var(--paper);
+      border: 1px solid var(--ink-3);
+      transition: background 0.4s ease, border-color 0.4s ease, transform 0.4s var(--ease);
+    }
+    .weg-item.on .dot { background: var(--blue); border-color: var(--blue); }
+    .weg-item.goal .dot { border-style: dashed; }
+    .weg-item.goal.on .dot { background: var(--paper); border: 1px dashed var(--blue); transform: scale(1.5); }
+    .weg-when { grid-column: 1 / -1; color: var(--blue); }
+    .weg-item h3 {
+      font-size: clamp(21px, 2vw, 28px);
+      font-weight: 600;
+      line-height: 1.2;
+      letter-spacing: -0.025em;
+    }
+    .weg-item p { color: var(--ink-2); max-width: 46ch; padding-top: 0.2em; }
+
+    @media (max-width: 640px) { .weg-item { grid-template-columns: 1fr; } }
+
+    /* ---------- Stärken ---------- */
+    .s-list { list-style: none; border-bottom: 1px solid var(--rule); }
+    .s-row {
+      position: relative;
+      display: grid;
+      grid-template-columns: 3.2rem minmax(0, 1fr);
+      column-gap: var(--gap);
+      padding: clamp(28px, 3.4vw, 44px) 0;
+    }
+    .s-body {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr);
+      column-gap: var(--gap);
       align-items: start;
     }
-    @media (max-width: 760px) { .proj-grid { grid-template-columns: 1fr; gap: 1.8rem; } }
-
-    .tech-list { border-top: 1px solid var(--line); }
-
-    .tech-row {
-      display: grid;
-      grid-template-columns: 130px 1fr;
-      gap: 1rem;
-      padding: 0.85rem 0;
-      border-bottom: 1px solid var(--line);
-      font-size: 16px;
+    .s-row .rule {
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 1px; background: var(--rule);
+      transform-origin: left center;
     }
-    .tech-row dt { color: var(--ink-2); font-size: 14px; padding-top: 2px; }
-    @media (max-width: 520px) { .tech-row { grid-template-columns: 1fr; gap: 0.2rem; } }
+    .s-num { font-size: 13px; font-weight: 700; color: var(--ink-3); padding-top: 0.55em; transition: color 0.3s ease; }
+    .s-title {
+      font-size: clamp(26px, 2.8vw, 42px);
+      font-weight: 600;
+      line-height: 1.05;
+      letter-spacing: -0.035em;
+      transition: translate 0.6s var(--ease);
+    }
+    .s-text { color: var(--ink-2); max-width: 52ch; padding-top: 0.3em; }
+    .s-row:hover .s-num { color: var(--blue); }
+    .s-row:hover .s-title { translate: 10px 0; }
+
+    @media (max-width: 900px) {
+      .s-row { grid-template-columns: 2.4rem minmax(0, 1fr); }
+      .s-body { display: block; }
+      .s-title { margin-bottom: 18px; }
+      .s-text { padding-top: 0; }
+    }
+
+    /* ---------- Diese Website ---------- */
+    .proj-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+      gap: clamp(32px, 5vw, 80px);
+      align-items: start;
+    }
+    @media (max-width: 900px) { .proj-grid { grid-template-columns: 1fr; } }
+
+    .spec { border-top: 1px solid var(--ink); }
+    .spec > div {
+      display: grid;
+      grid-template-columns: 9.5rem minmax(0, 1fr);
+      gap: 1rem;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--rule);
+    }
+    .spec dt { padding-top: 3px; }
+    .spec dd { font-weight: 500; }
 
     /* ---------- Kontakt ---------- */
-    .contact-list { border-top: 1px solid var(--line); }
-
-    .contact-row {
-      display: grid;
-      grid-template-columns: 150px 1fr;
-      gap: 1.5rem;
-      align-items: baseline;
-      padding: 1.5rem 0;
-      border-bottom: 1px solid var(--line);
+    .contact {
+      background: var(--ink);
+      color: var(--paper);
+      border-top: 0;
+      padding-bottom: clamp(32px, 4vw, 48px);
+      --rule: rgba(242, 240, 234, 0.16);
     }
+    .contact .label { color: rgba(242, 240, 234, 0.5); }
+    .contact .sec-num { color: #8EA2FF; }
 
-    .contact-row dt {
-      font-size: 11px;
+    .mail-row { display: flex; align-items: baseline; gap: 1rem 1.5rem; flex-wrap: wrap; }
+    .big-link {
+      font-size: clamp(26px, 4.6vw, 72px);
       font-weight: 600;
-      letter-spacing: 0.09em;
-      text-transform: uppercase;
-      color: var(--accent, var(--ink-2));
+      letter-spacing: -0.04em;
+      line-height: 1.1;
+      text-decoration: none;
+      overflow-wrap: anywhere;
+      background: linear-gradient(currentColor, currentColor) left bottom / 0% 2px no-repeat;
+      transition: background-size 0.6s var(--ease);
+      padding-bottom: 0.06em;
     }
+    .big-link:hover { background-size: 100% 2px; }
 
-    .contact-row dd { font-size: 20px; line-height: 1.5; color: var(--ink); }
-    .contact-row dd a { color: inherit; text-decoration: none; }
-    .contact-row dd a:hover { color: var(--blue); }
-    .contact-row dd .note { display: block; font-size: 15px; color: var(--ink-2); margin-top: 0.3rem; }
+    .copy {
+      appearance: none; cursor: pointer;
+      font: inherit; font-size: 13px; font-weight: 600;
+      color: var(--paper);
+      background: transparent;
+      border: 1px solid rgba(242, 240, 234, 0.3);
+      border-radius: 999px;
+      padding: 7px 14px;
+      transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+    }
+    .copy:hover { background: var(--paper); color: var(--ink); border-color: var(--paper); }
 
-    @media (max-width: 600px) { .contact-row { grid-template-columns: 1fr; gap: 0.4rem; } }
+    .phone { margin-top: clamp(18px, 2vw, 28px); }
+    .phone .big-link { font-size: clamp(22px, 2.6vw, 40px); color: rgba(242, 240, 234, 0.72); }
+    .phone .big-link:hover { color: var(--paper); }
 
     footer {
-      background: var(--bg-alt);
-      border-top: 1px solid var(--line);
-      padding: 2.2rem 22px;
-      text-align: center;
-      font-size: 12px;
-      color: var(--ink-2);
+      margin-top: clamp(96px, 12vw, 160px);
+      padding-top: 22px;
+      border-top: 1px solid var(--rule);
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      font-size: 13px;
+      color: rgba(242, 240, 234, 0.5);
     }
-
-    /* ---------- Reveal ---------- */
-    .reveal {
-      opacity: 0;
-      transform: translateY(26px);
-      transition: opacity 0.85s cubic-bezier(0.28, 0.11, 0.32, 1),
-                  transform 0.85s cubic-bezier(0.28, 0.11, 0.32, 1);
-    }
-    .reveal.in { opacity: 1; transform: none; }
+    footer a { text-decoration: none; }
+    footer a:hover { color: var(--paper); }
 
     @media (prefers-reduced-motion: reduce) {
-      .reveal { opacity: 1; transform: none; transition: none; }
-      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition-duration: 0.01ms !important; }
     }
   </style>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/SplitText.min.js" defer></script>
+  <script src="https://unpkg.com/lenis@1.3.4/dist/lenis.min.js" defer></script>
 </head>
 <body>
 
-  <header>
-    <nav>
-      <a class="nav-home" href="#home" aria-label="Home">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M3 10.5 12 3l9 7.5"></path>
-          <path d="M5 9.5V21h14V9.5"></path>
-        </svg>
-        <span>Home</span>
-      </a>
+  <header id="top-bar">
+    <a class="brand" href="#home">Saif Abdullah <span data-de="· Bewerbung 2027" data-en="· Application 2027"></span></a>
 
-      <div class="nav-links">
-        <a href="#ueber"    data-de="Über mich"        data-en="About me"></a>
-        <a href="#staerken" data-de="Was ich mitbringe" data-en="What I bring"></a>
-        <a href="#projekt"  data-de="Diese Website"     data-en="This website"></a>
-        <a href="#kontakt"  data-de="Kontakt"           data-en="Contact"></a>
-      </div>
-
-      <div class="lang" role="group" aria-label="Sprache / Language">
-        <button type="button" id="btn-de" class="active" onclick="setLang('de')">DE</button>
-        <button type="button" id="btn-en" onclick="setLang('en')">EN</button>
-      </div>
+    <nav class="nav-links" aria-label="Sektionen">
+      <a href="#ueber"><span class="n">01</span><span data-de="Über mich" data-en="About"></span></a>
+      <a href="#praktikum"><span class="n">02</span><span data-de="Praktikum" data-en="Internship"></span></a>
+      <a href="#weg"><span class="n">03</span><span data-de="Werdegang" data-en="Path"></span></a>
+      <a href="#staerken"><span class="n">04</span><span data-de="Stärken" data-en="Strengths"></span></a>
+      <a href="#projekt"><span class="n">05</span><span data-de="Website" data-en="Website"></span></a>
+      <a href="#kontakt"><span class="n">06</span><span data-de="Kontakt" data-en="Contact"></span></a>
     </nav>
+
+    <div class="lang" role="group" aria-label="Sprache / Language">
+      <button type="button" id="btn-de" class="active" onclick="setLang('de')" aria-label="Deutsch">DE</button>
+      <span class="slash" aria-hidden="true">/</span>
+      <button type="button" id="btn-en" onclick="setLang('en')" aria-label="English">EN</button>
+    </div>
   </header>
 
-  <!-- HERO -->
-  <section id="home" class="hero">
-    <div class="hero-inner">
+  <main>
+    <!-- HERO -->
+    <section id="home" class="hero">
+      <div class="hero-kicker label">
+        <span data-de="Bewerbung für eine Lehrstelle" data-en="Application for an apprenticeship"></span>
+        <span data-de="Schweiz · 2026" data-en="Switzerland · 2026"></span>
+      </div>
+
+      <h1 class="hero-name">Saif<img src="SaifAbdullah2.png" alt="" class="portrait" width="300" height="300"><br>Abdullah</h1>
+
       <div>
-        <h1>Saif Abdullah</h1>
-        <p class="sub"
-           data-de="Auf der Suche nach einer Lehrstelle als Kaufmann EFZ. Lehrstart Sommer 2027."
-           data-en="Looking for a commercial apprenticeship (Kaufmann EFZ). Starting summer 2027."></p>
-        <div class="cta-row">
-          <a class="btn btn-primary" href="#ueber"   data-de="Mehr über mich" data-en="More about me"></a>
-          <a class="btn btn-ghost"   href="#kontakt" data-de="Kontakt"        data-en="Contact"></a>
-        </div>
-      </div>
-      <img src="SaifAbdullah1.png" alt="Saif Abdullah" class="portrait">
-    </div>
-  </section>
-
-  <!-- ÜBER MICH -->
-  <section id="ueber" class="band">
-    <div class="wrap narrow reveal">
-      <p class="kicker" data-de="Über mich" data-en="About me"></p>
-      <h2 class="title" data-de="Warum KV." data-en="Why a commercial apprenticeship."></h2>
-      <div class="prose" id="text-ueber"></div>
-
-      <div class="signature">
-        <img src="unterschrift.png" alt="Unterschrift Saif Abdullah">
-      </div>
-    </div>
-  </section>
-
-  <!-- WAS ICH MITBRINGE -->
-  <section id="staerken" class="band alt">
-    <div class="wrap reveal">
-      <p class="kicker" data-de="Stärken" data-en="Strengths"></p>
-      <h2 class="title" data-de="Was ich mitbringe." data-en="What I bring."></h2>
-      <div class="cards" id="cards-staerken"></div>
-    </div>
-  </section>
-
-  <!-- DIESE WEBSITE -->
-  <section id="projekt" class="band">
-    <div class="wrap reveal">
-      <p class="kicker" data-de="Projekt" data-en="Project"></p>
-      <h2 class="title" data-de="Diese Website." data-en="This website."></h2>
-
-      <div class="proj-grid">
-        <div class="prose" id="text-projekt"></div>
-
-        <dl class="tech-list">
-          <div class="tech-row">
-            <dt data-de="Gebaut mit" data-en="Built with"></dt>
-            <dd>HTML, CSS, JavaScript</dd>
+        <dl class="meta grid">
+          <span class="meta-rule" aria-hidden="true"></span>
+          <div>
+            <dt class="label" data-de="Gesucht" data-en="Looking for"></dt>
+            <dd data-de="Lehrstelle Kaufmann EFZ" data-en="Apprenticeship, Kaufmann EFZ"></dd>
           </div>
-          <div class="tech-row">
-            <dt data-de="Gehostet auf" data-en="Hosted on"></dt>
-            <dd>GitHub Pages</dd>
+          <div>
+            <dt class="label" data-de="Lehrstart" data-en="Start"></dt>
+            <dd data-de="Sommer 2027" data-en="Summer 2027"></dd>
           </div>
-          <div class="tech-row">
-            <dt data-de="Besonderheiten" data-en="Features"></dt>
-            <dd data-de="Zweisprachig DE / EN, für Handy und Computer"
-                data-en="Bilingual DE / EN, works on mobile and desktop"></dd>
+          <div>
+            <dt class="label" data-de="Aktuell" data-en="Currently"></dt>
+            <dd data-de="KV-Praktikum bei Alferano, Zürich" data-en="Commercial internship at Alferano, Zurich"></dd>
+          </div>
+          <div>
+            <dt class="label" data-de="Sprachen" data-en="Languages"></dt>
+            <dd data-de="Deutsch, Bengalisch, Englisch, Französisch" data-en="German, Bengali, English, French"></dd>
           </div>
         </dl>
       </div>
-    </div>
-  </section>
 
-  <!-- KONTAKT -->
-  <section id="kontakt" class="band alt">
-    <div class="wrap narrow reveal">
-      <p class="kicker" data-de="Kontakt" data-en="Contact"></p>
-      <h2 class="title" data-de="Ich freue mich auf Ihre Rückmeldung." data-en="I look forward to hearing from you."></h2>
+      <div class="hero-foot">
+        <p data-de="Mir gefällt die Mischung aus Kundenkontakt und Organisation. Darum will ich eine kaufmännische Lehre machen."
+           data-en="I enjoy the mix of customer contact and organisation. That is why I want to do a commercial apprenticeship."></p>
+        <a class="btn" href="#kontakt"><span data-de="Kontakt aufnehmen" data-en="Get in touch"></span><span class="arrow" aria-hidden="true">→</span></a>
+      </div>
+    </section>
 
-      <dl class="contact-list">
-        <div class="contact-row">
-          <dt data-de="E-Mail" data-en="Email"></dt>
-          <dd><a href="mailto:saifabdullah2411@gmail.com">saifabdullah2411@gmail.com</a></dd>
+    <!-- 01 ÜBER MICH -->
+    <section id="ueber" class="sec grid">
+      <div class="sec-head">
+        <span class="sec-num">01</span>
+        <span class="label" data-de="Über mich" data-en="About me"></span>
+      </div>
+      <div class="sec-body">
+        <div class="prose" id="text-ueber"></div>
+        <div class="signature">
+          <img src="unterschrift.png" alt="Unterschrift Saif Abdullah" width="263" height="200">
+          <span class="label">Saif Abdullah</span>
         </div>
-        <div class="contact-row">
-          <dt data-de="Telefon" data-en="Phone"></dt>
-          <dd><a href="tel:+41782683822">+41 78 268 38 22</a></dd>
-        </div>
-      </dl>
-    </div>
-  </section>
+      </div>
+    </section>
 
-  <footer>
-    <span data-de="© 2026 Saif Abdullah" data-en="© 2026 Saif Abdullah"></span>
-  </footer>
+    <!-- 02 PRAKTIKUM -->
+    <section id="praktikum" class="sec grid">
+      <div class="sec-head">
+        <span class="sec-num">02</span>
+        <span class="label" data-de="Praktikum" data-en="Internship"></span>
+      </div>
+      <div class="sec-body">
+        <h2 class="sec-title reveal" data-de="Was ich bei Alferano mache." data-en="What I do at Alferano."></h2>
+        <div class="intern-head reveal">
+          <p class="intern-intro" id="text-praktikum"></p>
+          <p class="intern-when label" id="when-praktikum"></p>
+        </div>
+        <div class="tasks" id="tasks-praktikum"></div>
+        <div class="tools reveal">
+          <span class="label" data-de="Tools" data-en="Tools"></span>
+          <ul id="tools-praktikum"></ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 03 WERDEGANG -->
+    <section id="weg" class="sec grid">
+      <div class="sec-head">
+        <span class="sec-num">03</span>
+        <span class="label" data-de="Werdegang" data-en="Path"></span>
+      </div>
+      <div class="sec-body">
+        <h2 class="sec-title reveal" data-de="Vom Schulzimmer in den Betrieb." data-en="From the classroom into a company."></h2>
+        <ol class="weg" id="list-weg"></ol>
+      </div>
+    </section>
+
+    <!-- 04 STÄRKEN -->
+    <section id="staerken" class="sec grid">
+      <div class="sec-head">
+        <span class="sec-num">04</span>
+        <span class="label" data-de="Stärken" data-en="Strengths"></span>
+      </div>
+      <div class="sec-body">
+        <h2 class="sec-title reveal" data-de="Was ich mitbringe." data-en="What I bring."></h2>
+        <ul class="s-list" id="cards-staerken"></ul>
+      </div>
+    </section>
+
+    <!-- 05 DIESE WEBSITE -->
+    <section id="projekt" class="sec grid">
+      <div class="sec-head">
+        <span class="sec-num">05</span>
+        <span class="label" data-de="Projekt" data-en="Project"></span>
+      </div>
+      <div class="sec-body">
+        <h2 class="sec-title reveal" data-de="Diese Website." data-en="This website."></h2>
+        <div class="proj-grid">
+          <div class="prose reveal" id="text-projekt"></div>
+          <dl class="spec reveal">
+            <div><dt class="label" data-de="Gebaut mit" data-en="Built with"></dt><dd>HTML, CSS, JavaScript</dd></div>
+            <div><dt class="label" data-de="Animation" data-en="Animation"></dt><dd>GSAP, Lenis</dd></div>
+            <div><dt class="label" data-de="Gehostet auf" data-en="Hosted on"></dt><dd>GitHub Pages</dd></div>
+            <div><dt class="label" data-de="Besonderheiten" data-en="Features"></dt>
+                 <dd data-de="Zweisprachig DE / EN, für Handy und Computer" data-en="Bilingual DE / EN, works on mobile and desktop"></dd></div>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <!-- 06 KONTAKT -->
+    <section id="kontakt" class="sec contact">
+      <div class="grid">
+        <div class="sec-head">
+          <span class="sec-num">06</span>
+          <span class="label" data-de="Kontakt" data-en="Contact"></span>
+        </div>
+        <div class="sec-body">
+          <h2 class="sec-title reveal" data-de="Ich freue mich auf Ihre Rückmeldung." data-en="I look forward to hearing from you."></h2>
+
+          <div class="mail-row reveal">
+            <a class="big-link" href="mailto:saifabdullah2411@gmail.com">saifabdullah2411@gmail.com</a>
+            <button type="button" class="copy" id="copy-mail" data-de="Kopieren" data-en="Copy"></button>
+          </div>
+          <div class="phone reveal">
+            <a class="big-link" href="tel:+41782683822">+41 78 268 38 22</a>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <span>© 2026 Saif Abdullah</span>
+        <a href="#home" data-de="Nach oben ↑" data-en="Back to top ↑"></a>
+      </footer>
+    </section>
+  </main>
 
 <script>
 /* ==========================================================================
@@ -500,9 +720,9 @@ const TEXTE = {
   /* ---------- ÜBER MICH ---------- */
   ueber: {
     de: [
-      { lead: "Im Praktikum bei dPlan habe ich zum ersten Mal Kunden angerufen und Bestellungen ausgelöst. Da wurde mir klar, dass ich eine kaufmännische Lehre machen will." },
+      { lead: "Seit August 2026 mache ich ein KV-Praktikum bei Alferano am Paradeplatz in Zürich. Ich erfasse Kundenaufträge in SAP, erstelle die Lieferliste und bin am Telefon für die Kunden da." },
 
-      "Meine Aufgabe dort war es, Laptops einzurichten und für den Versand vorzubereiten. Dazu kamen Telefonate mit Kunden, Bestellungen und die Absprache mit dem Team. Diese Mischung aus Kundenkontakt und Organisation gefällt mir.",
+      "Dass ich eine kaufmännische Lehre machen will, wusste ich schon vorher. Im Praktikum bei dPlan habe ich zum ersten Mal Kunden angerufen und Bestellungen ausgelöst. Dazu kamen Laptops einrichten und die Absprache mit dem Team. Diese Mischung aus Kundenkontakt und Organisation gefällt mir.",
 
       "Nach der Sekundarschule habe ich das Berufsvorbereitungsjahr Technik und Informatik besucht. Danach begann ich das Basisjahr der Fachmittelschule. Dort merkte ich, dass mir der schulische Weg zu wenig Praxis bietet. Ich arbeite lieber in einem Betrieb und sehe, wofür meine Arbeit gebraucht wird. Seit März besuche ich deshalb das Brückenangebot JOB PLUS.",
 
@@ -510,9 +730,9 @@ const TEXTE = {
     ],
 
     en: [
-      { lead: "During my internship at dPlan I called customers and placed orders for the first time. That is when I knew I wanted to do a commercial apprenticeship." },
+      { lead: "Since August 2026 I have been doing a commercial internship at Alferano on Paradeplatz in Zurich. I enter customer orders in SAP, put together the delivery list and handle customer calls." },
 
-      "My job there was to set up laptops and prepare them for shipping. I also called customers, took orders and coordinated with the team. I enjoy this mix of customer contact and organisation.",
+      "I already knew before that I wanted to do a commercial apprenticeship. During my internship at dPlan I called customers and placed orders for the first time. I also set up laptops and coordinated with the team. I enjoy this mix of customer contact and organisation.",
 
       "After secondary school I attended the pre-apprenticeship year for technology and IT. I then started the foundation year at the FMS school. There I noticed that a school-based path offers me too little practical work. I would rather work in a company and see what my work is needed for. Since March I have therefore been attending the JOB PLUS bridge-year programme.",
 
@@ -520,34 +740,109 @@ const TEXTE = {
     ]
   },
 
-  /* ---------- WAS ICH MITBRINGE (Karten) ---------- */
+  /* ---------- PRAKTIKUM ----------
+     intro = Satz oben,  zeit = Zeitraum rechts
+     gruppen: t = Überschrift, punkte = Aufgaben                       */
+  praktikum: {
+    tools: ["SAP Business One", "GoCreate", "Excel", "Outlook", "Word"],
+    de: {
+      intro: "KV-Praktikant bei <strong>Alferano</strong> am Paradeplatz in Zürich.",
+      zeit: "August 2026 – Februar 2027",
+      gruppen: [
+        { t: "Aufträge", punkte: [
+          "Kundenaufträge in SAP erfassen und pflegen",
+          "Zahlungen verbuchen"
+        ]},
+        { t: "Lieferungen", punkte: [
+          "Wöchentliche Lieferliste in Excel",
+          "Lieferverzüge prüfen und melden"
+        ]},
+        { t: "Administration", punkte: [
+          "Rechnungen, Ablage, Kostenkontrolle",
+          "Telefon und E-Mails, Deutsch und Englisch"
+        ]},
+        { t: "Projekte", punkte: [
+          "Arbeitsanleitung zu den SAP-Prozessen",
+          "FAQs für eine Partner-Website"
+        ]}
+      ]
+    },
+    en: {
+      intro: "Commercial intern at <strong>Alferano</strong> on Paradeplatz in Zurich.",
+      zeit: "August 2026 – February 2027",
+      gruppen: [
+        { t: "Orders", punkte: [
+          "Entering and maintaining customer orders in SAP",
+          "Booking payments"
+        ]},
+        { t: "Deliveries", punkte: [
+          "Weekly delivery list in Excel",
+          "Checking and reporting delivery delays"
+        ]},
+        { t: "Administration", punkte: [
+          "Invoices, filing, cost checks",
+          "Phone and emails, German and English"
+        ]},
+        { t: "Projects", punkte: [
+          "A manual for the SAP processes",
+          "FAQs for a partner website"
+        ]}
+      ]
+    }
+  },
+
+  /* ---------- WERDEGANG ----------
+     w = kleine blaue Zeile oben (darf leer sein: "")
+     t = Titel,  p = Text
+     jetzt: true  → aktueller Schritt (blauer Punkt)
+     ziel:  true  → Ziel (gestrichelter Punkt)                         */
+  weg: {
+    de: [
+      { w: "", t: "Sekundarschule", p: "Abschluss der obligatorischen Schulzeit." },
+      { w: "", t: "Berufsvorbereitungsjahr Technik und Informatik", p: "Hier habe ich mit HTML und CSS angefangen." },
+      { w: "", t: "Basisjahr Fachmittelschule", p: "Ich habe gemerkt, dass mir der schulische Weg zu wenig Praxis bietet." },
+      { w: "Seit März", t: "Brückenangebot JOB PLUS", p: "Ich arbeite gezielt auf eine Lehrstelle hin." },
+      { w: "August 2026 – Februar 2027", t: "KV-Praktikum bei Alferano, Zürich", p: "Auftragsbearbeitung in SAP, Lieferungen, Administration und Kundenkontakt.", jetzt: true },
+      { w: "Sommer 2027", t: "Lehre als Kaufmann EFZ", p: "Mein Ziel. Dafür suche ich einen Lehrbetrieb.", ziel: true }
+    ],
+    en: [
+      { w: "", t: "Secondary school", p: "Completed compulsory schooling." },
+      { w: "", t: "Pre-apprenticeship year, technology and IT", p: "This is where I started with HTML and CSS." },
+      { w: "", t: "Foundation year, FMS school", p: "I noticed that a school-based path offers me too little practical work." },
+      { w: "Since March", t: "JOB PLUS bridge year", p: "I am working towards an apprenticeship." },
+      { w: "August 2026 – February 2027", t: "Commercial internship at Alferano, Zurich", p: "Order processing in SAP, deliveries, administration and customer contact.", jetzt: true },
+      { w: "Summer 2027", t: "Apprenticeship, Kaufmann EFZ", p: "My goal. I am looking for a company to train with.", ziel: true }
+    ]
+  },
+
+  /* ---------- WAS ICH MITBRINGE ---------- */
   staerken: {
     de: [
       { t: "Kundenkontakt",
-        p: "Im Praktikum bei dPlan habe ich Kunden telefonisch betreut, Bestellungen aufgenommen und selbstständig ausgelöst. Bei Dosenbach im ShopVille habe ich beraten, verkauft und die Ware bewirtschaftet." },
+        p: "Bei Alferano telefoniere ich mit Kunden und vereinbare Termine. Vorher habe ich bei dPlan Kunden am Telefon betreut und bei Dosenbach im ShopVille beraten und verkauft." },
 
       { t: "Sorgfalt",
-        p: "Vor dem Versand habe ich Laptops eingerichtet, Updates eingespielt und geprüft, ob alles vollständig ist. Bei solchen Aufgaben fällt jeder Fehler beim Kunden auf. Genau arbeiten ist für mich deshalb selbstverständlich." },
+        p: "Ich verbuche Zahlungen und kontrolliere Kosten. Ein Fehler in einem Auftrag landet am Ende beim Kunden. Genau arbeiten ist für mich deshalb selbstverständlich." },
 
       { t: "Selbstständigkeit",
-        p: "Wenn ich etwas erreichen will, fange ich selber an. Auf die BMS-Aufnahmeprüfung bereite ich mich in meiner Freizeit vor, meine Bewerbungsunterlagen gestalte ich selbst und diese Website habe ich zu Hause von Grund auf geschrieben." },
+        p: "Wenn ich etwas erreichen will, fange ich selber an. Bei Alferano schreibe ich eine Arbeitsanleitung zu den SAP- und Büroprozessen. Auf die BMS-Aufnahmeprüfung bereite ich mich in meiner Freizeit vor, meine Bewerbungsunterlagen gestalte ich selbst und diese Website habe ich von Grund auf geschrieben." },
 
       { t: "Sprachen",
-        p: "Deutsch als Erstsprache, Bengalisch und Englisch als Muttersprachen, Französisch in Grundkenntnissen. Im Kundenkontakt hilft mir das täglich." }
+        p: "Deutsch als Erstsprache, Bengalisch und Englisch als Muttersprachen, Französisch in Grundkenntnissen. Im Praktikum schreibe ich E-Mails auf Deutsch und Englisch, zum Beispiel an Lieferanten." }
     ],
 
     en: [
       { t: "Customer contact",
-        p: "During my internship at dPlan I looked after customers by phone, took orders and placed them independently. At Dosenbach in ShopVille I advised customers, sold products and managed stock." },
+        p: "At Alferano I call customers and book appointments. Before that I looked after customers by phone at dPlan and advised and sold at Dosenbach in ShopVille." },
 
       { t: "Accuracy",
-        p: "Before shipping, I set up laptops, installed updates and checked whether everything was complete. With tasks like these, every mistake shows up at the customer. Working carefully is therefore a given for me." },
+        p: "I book payments and check costs. A mistake in an order ends up with the customer. Working carefully is therefore a given for me." },
 
       { t: "Working independently",
-        p: "When I want to achieve something, I start on my own. I am preparing for the BMS entrance exam in my free time, I design my application documents myself, and I wrote this website from scratch at home." },
+        p: "When I want to achieve something, I start on my own. At Alferano I am writing a manual for the SAP and office processes. I am preparing for the BMS entrance exam in my free time, I design my application documents myself, and I wrote this website from scratch." },
 
       { t: "Languages",
-        p: "German as my first language, Bengali and English as mother tongues, and basic French. In customer contact this helps me every day." }
+        p: "German as my first language, Bengali and English as mother tongues, and basic French. In my internship I write emails in German and English, for example to suppliers." }
     ]
   },
 
@@ -575,53 +870,228 @@ const TEXTE = {
    Ab hier nichts mehr ändern.
    ========================================================================== */
 
-function baueText(absaetze) {
-  return absaetze.map(a => {
-    if (typeof a === "string") return "<p>" + a + "</p>";
-    if (a.lead !== undefined)  return '<p class="lead">' + a.lead + "</p>";
-    return "";
-  }).join("");
+let currentLang = "de";
+
+function baueText(absaetze, spalten) {
+  const lead = absaetze.filter(a => typeof a === "object" && a.lead !== undefined)
+                       .map(a => '<p class="lead">' + a.lead + "</p>").join("");
+  const rest = absaetze.filter(a => typeof a === "string").map(a => "<p>" + a + "</p>").join("");
+  return lead + (spalten ? '<div class="prose-cols">' + rest + "</div>" : rest);
 }
 
-function baueKarten(karten) {
-  return karten.map((k, i) =>
-    '<div class="card"><div class="num">' + String(i + 1).padStart(2, "0") + '</div>'
-    + "<h3>" + k.t + "</h3><p>" + k.p + "</p></div>"
+function baueStaerken(liste) {
+  return liste.map((k, i) =>
+    '<li class="s-row"><span class="rule" aria-hidden="true"></span>'
+    + '<span class="s-num">' + String(i + 1).padStart(2, "0") + "</span>"
+    + '<div class="s-body"><h3 class="s-title">' + k.t + '</h3><p class="s-text">' + k.p + "</p></div></li>"
+  ).join("");
+}
+
+function baueWeg(liste) {
+  return '<span class="weg-track" aria-hidden="true"><span class="weg-fill"></span></span>'
+    + liste.map(s =>
+      '<li class="weg-item' + (s.jetzt ? " now" : "") + (s.ziel ? " goal" : "") + '">'
+      + '<span class="dot" aria-hidden="true"></span>'
+      + (s.w ? '<p class="weg-when label">' + s.w + "</p>" : "")
+      + "<h3>" + s.t + "</h3><p>" + s.p + "</p></li>"
+    ).join("");
+}
+
+function baueAufgaben(gruppen) {
+  return gruppen.map(g =>
+    '<div class="task-group"><h3>' + g.t + "<small>" + String(g.punkte.length).padStart(2, "0") + "</small></h3><ul>"
+    + g.punkte.map(p => "<li>" + p + "</li>").join("") + "</ul></div>"
   ).join("");
 }
 
 function setLang(lang) {
+  currentLang = lang;
+  if (window.Motion) Motion.beforeContent();
+
   document.documentElement.lang = lang;
-  document.title = "Saif Abdullah";
 
   document.querySelectorAll("[data-de][data-en]").forEach(el => {
     const val = el.getAttribute("data-" + lang);
     if (val !== null) el.innerHTML = val;
   });
 
-  document.getElementById("text-ueber").innerHTML     = baueText(TEXTE.ueber[lang]);
-  document.getElementById("text-projekt").innerHTML   = baueText(TEXTE.projekt[lang]);
-  document.getElementById("cards-staerken").innerHTML = baueKarten(TEXTE.staerken[lang]);
+  document.getElementById("text-ueber").innerHTML     = baueText(TEXTE.ueber[lang], true);
+  document.getElementById("text-projekt").innerHTML   = baueText(TEXTE.projekt[lang], false);
+  document.getElementById("cards-staerken").innerHTML = baueStaerken(TEXTE.staerken[lang]);
+  document.getElementById("list-weg").innerHTML       = baueWeg(TEXTE.weg[lang]);
+
+  const pr = TEXTE.praktikum[lang];
+  document.getElementById("text-praktikum").innerHTML  = pr.intro;
+  document.getElementById("when-praktikum").innerHTML  = pr.zeit;
+  document.getElementById("tasks-praktikum").innerHTML = baueAufgaben(pr.gruppen);
+  document.getElementById("tools-praktikum").innerHTML = TEXTE.praktikum.tools.map(t => "<li>" + t + "</li>").join("");
 
   document.getElementById("btn-de").classList.toggle("active", lang === "de");
   document.getElementById("btn-en").classList.toggle("active", lang === "en");
+
+  if (window.Motion) Motion.afterContent();
 }
 
 setLang("de");
 
+/* E-Mail kopieren */
+document.getElementById("copy-mail").addEventListener("click", function () {
+  const btn = this;
+  navigator.clipboard && navigator.clipboard.writeText("saifabdullah2411@gmail.com").then(() => {
+    btn.textContent = currentLang === "de" ? "Kopiert ✓" : "Copied ✓";
+    setTimeout(() => { btn.textContent = btn.getAttribute("data-" + currentLang); }, 1800);
+  });
+});
+
+/* Kopfzeile beim Scrollen */
 (function () {
-  const els = document.querySelectorAll(".reveal");
-  if (!("IntersectionObserver" in window)) {
-    els.forEach(el => el.classList.add("in"));
+  const bar = document.getElementById("top-bar");
+  const onScroll = () => bar.classList.toggle("scrolled", window.scrollY > 12);
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+})();
+
+/* ==========================================================================
+   Bewegung: GSAP + ScrollTrigger + SplitText, Lenis für weiches Scrollen
+   ========================================================================== */
+window.addEventListener("DOMContentLoaded", function () {
+  const root = document.documentElement;
+  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (!window.gsap || !window.ScrollTrigger || !window.SplitText || reduced) {
+    root.classList.remove("js");
+    bindAnchors(null);
     return;
   }
-  const io = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
+
+  gsap.registerPlugin(ScrollTrigger, SplitText);
+
+  /* Lenis an den GSAP-Takt hängen, damit ScrollTrigger synchron bleibt */
+  let lenis = null;
+  if (window.Lenis) {
+    lenis = new Lenis({ lerp: 0.09, wheelMultiplier: 1 });
+    lenis.on("scroll", ScrollTrigger.update);
+    gsap.ticker.add(t => lenis.raf(t * 1000));
+    gsap.ticker.lagSmoothing(0);
+  }
+  bindAnchors(lenis);
+
+  let dynamicCtx = null;
+
+  /* Teile, die bei jedem Sprachwechsel neu gebaut werden */
+  function buildDynamic() {
+    dynamicCtx = gsap.context(() => {
+      // Lead-Absatz: Wörter füllen sich beim Scrollen mit Tinte
+      const lead = document.querySelector("#text-ueber .lead");
+      if (lead) {
+        const split = SplitText.create(lead, { type: "words" });
+        gsap.fromTo(split.words, { opacity: 0.16 }, {
+          opacity: 1, ease: "none", stagger: 0.1,
+          scrollTrigger: { trigger: lead, start: "top 82%", end: "bottom 50%", scrub: true }
+        });
+      }
+
+      // Werdegang: Linie füllt sich, Punkte gehen an
+      const weg = document.getElementById("list-weg");
+      gsap.fromTo(weg.querySelector(".weg-fill"), { scaleY: 0 }, {
+        scaleY: 1, ease: "none",
+        scrollTrigger: { trigger: weg, start: "top 65%", end: "bottom 65%", scrub: true }
+      });
+      weg.querySelectorAll(".weg-item").forEach(item => {
+        ScrollTrigger.create({ trigger: item, start: "top 65%", endTrigger: "html", end: "bottom bottom", toggleClass: { targets: item, className: "on" } });
+      });
     });
-  }, { threshold: 0.12, rootMargin: "0px 0px -60px 0px" });
-  els.forEach(el => io.observe(el));
-})();
+  }
+
+  window.Motion = {
+    beforeContent() { if (dynamicCtx) dynamicCtx.revert(); },
+    afterContent()  { buildDynamic(); ScrollTrigger.refresh(); }
+  };
+
+  document.fonts.ready.then(() => {
+    root.classList.remove("js");
+    gsap.set(".hero", { visibility: "visible" });
+
+    /* ---- Intro ---- */
+    const name = SplitText.create(".hero-name", { type: "lines", mask: "lines" });
+    gsap.timeline({ defaults: { ease: "expo.out" } })
+      .from(name.lines, { yPercent: 105, duration: 1.5, stagger: 0.12 })
+      .from(".hero-name .portrait", { scale: 0, rotate: -40, duration: 1.4, ease: "back.out(1.4)" }, 0.35)
+      .from(".hero-kicker > *", { y: 14, autoAlpha: 0, duration: 1, stagger: 0.08 }, 0.2)
+      .from(".meta-rule", { scaleX: 0, duration: 1.6, ease: "expo.inOut" }, 0.3)
+      .from(".meta > div", { y: 22, autoAlpha: 0, duration: 1.1, stagger: 0.07 }, 0.75)
+      .from(".hero-foot > *", { y: 22, autoAlpha: 0, duration: 1.1, stagger: 0.1 }, 0.9);
+
+    /* Name schiebt sich beim Wegscrollen leicht nach oben */
+    gsap.to(".hero-name", {
+      yPercent: -18, ease: "none",
+      scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true }
+    });
+
+    /* ---- Einblenden ---- */
+    gsap.utils.toArray(".reveal").forEach(el => {
+      gsap.from(el, {
+        y: 40, autoAlpha: 0, duration: 1.2, ease: "expo.out",
+        scrollTrigger: { trigger: el, start: "top 88%", once: true }
+      });
+    });
+
+    gsap.utils.toArray(".prose-cols p").forEach(p => {
+      gsap.from(p, {
+        y: 28, autoAlpha: 0, duration: 1.1, ease: "expo.out",
+        scrollTrigger: { trigger: p, start: "top 90%", once: true }
+      });
+    });
+
+    /* Stärken: Linien zeichnen sich, Zeilen steigen auf */
+    gsap.utils.toArray(".s-row").forEach(row => {
+      gsap.timeline({ scrollTrigger: { trigger: row, start: "top 86%", once: true } })
+        .from(row.querySelector(".rule"), { scaleX: 0, duration: 1.3, ease: "expo.inOut" })
+        .from(row.querySelectorAll(".s-num, .s-title, .s-text"),
+              { y: 26, autoAlpha: 0, duration: 1, ease: "expo.out", stagger: 0.07 }, 0.25);
+    });
+
+    /* Praktikum: Aufgabengruppen und Punkte */
+    gsap.utils.toArray(".task-group").forEach(g => {
+      gsap.timeline({ scrollTrigger: { trigger: g, start: "top 86%", once: true } })
+        .from(g.querySelector("h3"), { y: 24, autoAlpha: 0, duration: 1, ease: "expo.out" })
+        .from(g.querySelectorAll("li"), { y: 16, autoAlpha: 0, duration: 0.9, ease: "expo.out", stagger: 0.06 }, 0.15);
+    });
+
+    /* Unterschrift wird von links nach rechts "geschrieben" */
+    gsap.fromTo(".signature img", { clipPath: "inset(0 100% 0 0)" }, {
+      clipPath: "inset(0 0% 0 0)", duration: 1.8, ease: "power2.inOut",
+      scrollTrigger: { trigger: ".signature", start: "top 88%", once: true }
+    });
+
+    /* Aktiver Menüpunkt */
+    const links = document.querySelectorAll(".nav-links a");
+    ["ueber", "praktikum", "weg", "staerken", "projekt", "kontakt"].forEach(id => {
+      ScrollTrigger.create({
+        trigger: "#" + id, start: "top 50%", end: "bottom 50%",
+        onToggle: self => {
+          if (self.isActive) links.forEach(a => a.classList.toggle("active", a.getAttribute("href") === "#" + id));
+          else if (id === "ueber" && self.direction < 0) links.forEach(a => a.classList.remove("active"));
+        }
+      });
+    });
+
+    buildDynamic();
+    ScrollTrigger.refresh();
+  });
+
+  function bindAnchors(lenis) {
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener("click", e => {
+        const target = document.querySelector(a.getAttribute("href"));
+        if (!target) return;
+        e.preventDefault();
+        if (lenis) lenis.scrollTo(target, { offset: target.id === "home" ? 0 : -8, duration: 1.4 });
+        else target.scrollIntoView({ behavior: reduced ? "auto" : "smooth" });
+      });
+    });
+  }
+});
 </script>
 </body>
 </html>
